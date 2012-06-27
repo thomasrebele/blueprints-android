@@ -9,7 +9,6 @@ import com.tinkerpop.blueprints.IndexableGraph;
 import com.tinkerpop.blueprints.Parameter;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.neo4j.Neo4jGraph;
-import com.tinkerpop.blueprints.util.PropertyFilteredIterable;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLReader;
 import org.neo4j.index.impl.lucene.LowerCaseKeywordAnalyzer;
 
@@ -187,16 +186,24 @@ public class Neo4jBatchGraphTest extends BaseTest {
 
         assertEquals(count(graph.getVertices()), 10);
 
-        assertTrue(graph.getVertices("nothing", 0) instanceof PropertyFilteredIterable);
-        assertTrue(graph.getVertices("blah", "blop") instanceof PropertyFilteredIterable);
-        assertFalse(graph.getVertices("name", "marko") instanceof PropertyFilteredIterable); // key index used
-        assertFalse(graph.getVertices("age", 32) instanceof PropertyFilteredIterable); // key indexed used
+        try {
+            graph.getVertices("nothing", 0);
+            fail();
+        } catch (IllegalStateException e) {
+        }
+
+        try {
+            graph.getVertices("blah", "blop");
+            fail();
+        } catch (IllegalStateException e) {
+
+        }
+        graph.getVertices("name", "marko");
+        graph.getVertices("age", 32);
 
         for (final Vertex vertex : graph.getVertices()) {
             int age = (Integer) vertex.getProperty("age");
             assertEquals(vertex.getProperty("name"), (age / 10) + "");
-
-            assertTrue(graph.getVertices("nothing", 0).iterator().hasNext());
             assertEquals(count(graph.getVertices("age", age)), 1);
             assertEquals(graph.getVertices("age", age).iterator().next(), vertex);
             assertEquals(count(graph.getVertices("name", (age / 10) + "")), 1);

@@ -60,9 +60,7 @@ public class ExceptionFactory {
         return new IllegalArgumentException("Class is not indexable: " + clazz);
     }
 
-    // TransactionalGraph related exceptions
-
-    public static IllegalStateException transactionAlreadyStarted() {
-        return new IllegalStateException("Stop the current transaction before starting another");
+    public static IllegalStateException keyIndexDoesNotExist(final String key, final Class clazz) {
+        return new IllegalStateException("A " + clazz.getSimpleName() + " " + key + " index does not exist");
     }
 }

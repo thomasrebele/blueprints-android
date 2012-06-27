@@ -54,7 +54,6 @@ public interface Graph {
     /**
      * Return an iterable to all the vertices in the graph that have a particular key/value property.
      * If this is not possible for the implementation, then an UnsupportedOperationException can be thrown.
-     * The graph implementation should use indexing structures to make this efficient else a full vertex-filter scan is required.
      *
      * @param key   the key of vertex
      * @param value the value of the vertex
@@ -101,7 +100,6 @@ public interface Graph {
     /**
      * Return an iterable to all the edges in the graph that have a particular key/value property.
      * If this is not possible for the implementation, then an UnsupportedOperationException can be thrown.
-     * The graph implementation should use indexing structures to make this efficient else a full edge-filter scan is required.
      *
      * @param key   the key of the edge
      * @param value the value of the edge

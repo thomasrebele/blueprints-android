@@ -170,10 +170,15 @@ public class DexGraphTest extends GraphTest {
         }
         assertTrue(result.size() == 0);
 
-        // table scan
+        // no table scan
         v1.setProperty("age", 99);
         ((DexGraph) graph).label.set("people");
-        assertTrue(graph.getVertices("age", 99).iterator().next().equals(v1));
+        try {
+            graph.getVertices("age", 99);
+            fail();
+        } catch (IllegalStateException e) {
+
+        }
 
         printTestPerformance("Dex specific #testKeyIndex", this.stopWatch());
         graph.shutdown();

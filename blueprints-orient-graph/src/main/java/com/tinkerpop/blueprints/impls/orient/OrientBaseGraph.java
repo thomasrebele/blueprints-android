@@ -1,11 +1,5 @@
 package com.tinkerpop.blueprints.impls.orient;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.orientechnologies.orient.core.db.graph.OGraphDatabase;
 import com.orientechnologies.orient.core.id.ORID;
 import com.orientechnologies.orient.core.id.ORecordId;
@@ -25,8 +19,13 @@ import com.tinkerpop.blueprints.Parameter;
 import com.tinkerpop.blueprints.TransactionalGraph.Conclusion;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.util.ExceptionFactory;
-import com.tinkerpop.blueprints.util.PropertyFilteredIterable;
 import com.tinkerpop.blueprints.util.StringFactory;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * A Blueprints implementation of the graph database OrientDB (http://www.orientechnologies.com)
@@ -229,9 +228,11 @@ public abstract class OrientBaseGraph implements IndexableGraph, MetaGraph<OGrap
             if (value != null && !(value instanceof String))
                 value = value.toString();
 
-            return (Iterable<Vertex>) new OrientElementIterable<Vertex>(this, (Iterable<?>) idx.get(value));
+            return new OrientElementIterable<Vertex>(this, (Iterable<?>) idx.get(value));
+        } else {
+            throw ExceptionFactory.keyIndexDoesNotExist(key, Vertex.class);
         }
-        return new PropertyFilteredIterable<Vertex>(key, value, this.getVertices());
+
     }
 
     private Iterable<Vertex> getVertices(final boolean polymorphic) {
@@ -248,9 +249,10 @@ public abstract class OrientBaseGraph implements IndexableGraph, MetaGraph<OGrap
             if (value != null && !(value instanceof String))
                 value = value.toString();
 
-            return (Iterable<Edge>) new OrientElementIterable<Edge>(this, (Iterable<?>) idx.get(value));
+            return new OrientElementIterable<Edge>(this, (Iterable<?>) idx.get(value));
+        } else {
+            throw ExceptionFactory.keyIndexDoesNotExist(key, Edge.class);
         }
-        return new PropertyFilteredIterable<Edge>(key, value, this.getEdges());
     }
 
     private Iterable<Edge> getEdges(final boolean polymorphic) {

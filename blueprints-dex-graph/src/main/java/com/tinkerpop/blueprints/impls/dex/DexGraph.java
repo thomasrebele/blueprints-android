@@ -11,7 +11,6 @@ import com.tinkerpop.blueprints.MetaGraph;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.util.ExceptionFactory;
 import com.tinkerpop.blueprints.util.MultiIterable;
-import com.tinkerpop.blueprints.util.PropertyFilteredIterable;
 import com.tinkerpop.blueprints.util.StringFactory;
 
 import java.io.File;
@@ -46,7 +45,7 @@ import java.util.Set;
  * {@link CloseableIterable#close()} the collection to free resources.
  * Otherwise, all those collections will automatically be closed when the
  * database is stopped ( {@link #shutdown()}).
- * 
+ *
  * @author <a href="http://www.sparsity-technologies.com">Sparsity
  *         Technologies</a>
  */
@@ -319,8 +318,7 @@ public class DexGraph implements MetaGraph<com.sparsity.dex.gdb.Graph>, KeyIndex
                 if (com.sparsity.dex.gdb.Attribute.InvalidAttribute != attr) {
                     com.sparsity.dex.gdb.Attribute adata = this.getRawGraph().getAttribute(attr);
                     if (adata.getKind() == AttributeKind.Basic) { // "table" scan
-                        com.sparsity.dex.gdb.Objects objs = this.getRawGraph().select(type);
-                        vertices.add(new PropertyFilteredIterable<Vertex>(key, value, new DexIterable<Vertex>(this, objs, Vertex.class)));
+                        throw ExceptionFactory.keyIndexDoesNotExist(key, Vertex.class);
                     } else { // use the index
                         vertices.add(new DexIterable<Vertex>(this, this.rawGet(adata, value), Vertex.class));
                     }
@@ -351,8 +349,7 @@ public class DexGraph implements MetaGraph<com.sparsity.dex.gdb.Graph>, KeyIndex
 
             com.sparsity.dex.gdb.Attribute adata = this.getRawGraph().getAttribute(attr);
             if (adata.getKind() == AttributeKind.Basic) { // "table" scan
-                com.sparsity.dex.gdb.Objects objs = this.getRawGraph().select(type);
-                return new PropertyFilteredIterable<Vertex>(key, value, new DexIterable<Vertex>(this, objs, Vertex.class));
+                throw ExceptionFactory.keyIndexDoesNotExist(key, Vertex.class);
             } else { // use the index
                 return new DexIterable<Vertex>(this, this.rawGet(adata, value), Vertex.class);
             }
@@ -476,8 +473,7 @@ public class DexGraph implements MetaGraph<com.sparsity.dex.gdb.Graph>, KeyIndex
                 if (com.sparsity.dex.gdb.Attribute.InvalidAttribute != attr) {
                     com.sparsity.dex.gdb.Attribute adata = this.getRawGraph().getAttribute(attr);
                     if (adata.getKind() == AttributeKind.Basic) { // "table" scan
-                        com.sparsity.dex.gdb.Objects objs = this.getRawGraph().select(type);
-                        edges.add(new PropertyFilteredIterable<Edge>(key, value, new DexIterable<Edge>(this, objs, Edge.class)));
+                        throw ExceptionFactory.keyIndexDoesNotExist(key, Edge.class);
                     } else { // use the index
                         edges.add(new DexIterable<Edge>(this, this.rawGet(adata, value), Edge.class));
                     }
@@ -508,8 +504,7 @@ public class DexGraph implements MetaGraph<com.sparsity.dex.gdb.Graph>, KeyIndex
 
             com.sparsity.dex.gdb.Attribute adata = this.getRawGraph().getAttribute(attr);
             if (adata.getKind() == AttributeKind.Basic) { // "table" scan
-                com.sparsity.dex.gdb.Objects objs = this.getRawGraph().select(type);
-                return new PropertyFilteredIterable<Edge>(key, value, new DexIterable<Edge>(this, objs, Edge.class));
+                throw ExceptionFactory.keyIndexDoesNotExist(key, Edge.class);
             } else { // use the index
                 return new DexIterable<Edge>(this, this.rawGet(adata, value), Edge.class);
             }

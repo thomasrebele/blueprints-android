@@ -111,7 +111,7 @@ public class GraphTestSuite extends TestSuite {
             v2.setProperty("name", "stephen");
             v2.setProperty("location", "everywhere");
 
-            if (graph.getFeatures().supportsVertexIteration) {
+            if (graph.getFeatures().supportsVertexIteration && !(graph instanceof KeyIndexableGraph) && !graph.getFeatures().isWrapper) {
                 assertEquals(count(graph.getVertices("location", "everywhere")), 2);
                 assertEquals(count(graph.getVertices("name", "marko")), 1);
                 assertEquals(count(graph.getVertices("name", "stephen")), 1);
@@ -128,7 +128,7 @@ public class GraphTestSuite extends TestSuite {
             e2.setProperty("name", "stephen");
             e2.setProperty("location", "everywhere");
 
-            if (graph.getFeatures().supportsEdgeIteration) {
+            if (graph.getFeatures().supportsEdgeIteration && !(graph instanceof KeyIndexableGraph) && !graph.getFeatures().isWrapper) {
                 assertEquals(count(graph.getEdges("location", "everywhere")), 2);
                 assertEquals(count(graph.getEdges("name", "marko")), 1);
                 assertEquals(count(graph.getEdges("name", "stephen")), 1);

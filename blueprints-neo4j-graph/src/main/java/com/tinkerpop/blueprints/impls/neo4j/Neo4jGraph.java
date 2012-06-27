@@ -13,7 +13,6 @@ import com.tinkerpop.blueprints.TransactionalGraph;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.util.ExceptionFactory;
 import com.tinkerpop.blueprints.util.KeyIndexableGraphHelper;
-import com.tinkerpop.blueprints.util.PropertyFilteredIterable;
 import com.tinkerpop.blueprints.util.StringFactory;
 import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -344,7 +343,7 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
         if (this.rawGraph.index().getNodeAutoIndexer().isEnabled() && this.rawGraph.index().getNodeAutoIndexer().getAutoIndexedProperties().contains(key))
             return new Neo4jVertexIterable(this.rawGraph.index().getNodeAutoIndexer().getAutoIndex().get(key, value), this);
         else
-            return new PropertyFilteredIterable<Vertex>(key, value, this.getVertices());
+            throw ExceptionFactory.keyIndexDoesNotExist(key, Vertex.class);
     }
 
     /**
@@ -364,7 +363,7 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
         if (this.rawGraph.index().getRelationshipAutoIndexer().isEnabled() && this.rawGraph.index().getRelationshipAutoIndexer().getAutoIndexedProperties().contains(key))
             return new Neo4jEdgeIterable(this.rawGraph.index().getRelationshipAutoIndexer().getAutoIndex().get(key, value), this);
         else
-            return new PropertyFilteredIterable<Edge>(key, value, this.getEdges());
+            throw ExceptionFactory.keyIndexDoesNotExist(key, Edge.class);
     }
 
     public <T extends Element> void dropKeyIndex(final String key, final Class<T> elementClass) {

@@ -12,7 +12,6 @@ import com.tinkerpop.blueprints.Parameter;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.util.ExceptionFactory;
 import com.tinkerpop.blueprints.util.KeyIndexableGraphHelper;
-import com.tinkerpop.blueprints.util.PropertyFilteredIterable;
 import com.tinkerpop.blueprints.util.StringFactory;
 
 import java.io.File;
@@ -120,17 +119,15 @@ public class TinkerGraph implements IndexableGraph, KeyIndexableGraph, Serializa
     public Iterable<Vertex> getVertices(final String key, final Object value) {
         if (vertexKeyIndex.getIndexedKeys().contains(key)) {
             return (Iterable) vertexKeyIndex.get(key, value);
-        } else {
-            return new PropertyFilteredIterable<Vertex>(key, value, this.getVertices());
-        }
+        } else
+            throw ExceptionFactory.keyIndexDoesNotExist(key, Vertex.class);
     }
 
     public Iterable<Edge> getEdges(final String key, final Object value) {
         if (edgeKeyIndex.getIndexedKeys().contains(key)) {
             return (Iterable) edgeKeyIndex.get(key, value);
-        } else {
-            return new PropertyFilteredIterable<Edge>(key, value, this.getEdges());
-        }
+        } else
+            throw ExceptionFactory.keyIndexDoesNotExist(key, Edge.class);
     }
 
     public <T extends Element> void createKeyIndex(final String key, final Class<T> elementClass) {

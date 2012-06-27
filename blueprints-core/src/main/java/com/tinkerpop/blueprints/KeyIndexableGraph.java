@@ -37,4 +37,24 @@ public interface KeyIndexableGraph extends Graph {
      * @return the indexed keys as a Set
      */
     public <T extends Element> Set<String> getIndexedKeys(Class<T> elementClass);
+
+    /**
+     * Return an iterable to all the vertices in the graph that have a particular key/value property.
+     * If a particular key index is not provided, then an InvalidStateException should be thrown.
+     *
+     * @param key   the key of vertex
+     * @param value the value of the vertex
+     * @return an iterable of vertices with provided key and value
+     */
+    public Iterable<Vertex> getVertices(String key, Object value);
+
+    /**
+     * Return an iterable to all the edges in the graph that have a particular key/value property.
+     * If a particular key index is not provided, then an InvalidStateException should be thrown.
+     *
+     * @param key   the key of the edge
+     * @param value the value of the edge
+     * @return an iterable of edges with provided key and value
+     */
+    public Iterable<Edge> getEdges(String key, Object value);
 }

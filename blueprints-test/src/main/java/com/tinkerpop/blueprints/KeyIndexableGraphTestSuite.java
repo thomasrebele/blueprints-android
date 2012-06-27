@@ -1,7 +1,6 @@
 package com.tinkerpop.blueprints;
 
 import com.tinkerpop.blueprints.impls.GraphTest;
-import com.tinkerpop.blueprints.util.PropertyFilteredIterable;
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
@@ -119,9 +118,9 @@ public class KeyIndexableGraphTestSuite extends TestSuite {
             } catch (Exception e) {
             }
 
-            assertFalse(graph.getVertices("name", "marko") instanceof PropertyFilteredIterable);
-            assertFalse(graph.getVertices("name", "rodriguez") instanceof PropertyFilteredIterable);
-            assertFalse(graph.getVertices("name", 768) instanceof PropertyFilteredIterable);
+            graph.getVertices("name", "marko");
+            graph.getVertices("name", "rodriguez");
+            graph.getVertices("name", 768);
         }
 
         if (graph.getFeatures().supportsEdgeIteration && graph.getFeatures().supportsEdgeKeyIndex) {

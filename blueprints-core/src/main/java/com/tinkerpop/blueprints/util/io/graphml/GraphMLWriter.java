@@ -1,15 +1,5 @@
 package com.tinkerpop.blueprints.util.io.graphml;
 
-import com.tinkerpop.blueprints.Direction;
-import com.tinkerpop.blueprints.Edge;
-import com.tinkerpop.blueprints.Graph;
-import com.tinkerpop.blueprints.Vertex;
-import com.tinkerpop.blueprints.util.io.LexicographicalElementComparator;
-
-import javax.xml.XMLConstants;
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -18,6 +8,18 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.XMLConstants;
+
+import org.xmlpull.v1.XmlSerializer;
+
+import android.util.Xml;
+
+import com.tinkerpop.blueprints.Direction;
+import com.tinkerpop.blueprints.Edge;
+import com.tinkerpop.blueprints.Graph;
+import com.tinkerpop.blueprints.Vertex;
+import com.tinkerpop.blueprints.util.io.LexicographicalElementComparator;
 
 /**
  * GraphMLWriter writes a Graph to a GraphML OutputStream.
@@ -127,171 +129,164 @@ public class GraphMLWriter {
         if (null != this.edgeLabelKey && null != this.edgeKeyTypes && null == this.edgeKeyTypes.get(this.edgeLabelKey))
             this.edgeKeyTypes.put(this.edgeLabelKey, GraphMLTokens.STRING);
 
-        final XMLOutputFactory inputFactory = XMLOutputFactory.newInstance();
-        try {
-            XMLStreamWriter writer = inputFactory.createXMLStreamWriter(graphMLOutputStream, "UTF8");
-            if (normalize) {
-                writer = new GraphMLWriterHelper.IndentingXMLStreamWriter(writer);
-                ((GraphMLWriterHelper.IndentingXMLStreamWriter) writer).setIndentStep("    ");
+        XmlSerializer serializer = Xml.newSerializer();
+        serializer.setOutput(graphMLOutputStream, "UTF8");
+
+        serializer.startDocument("UTF-8", true);
+        serializer.startTag("", GraphMLTokens.GRAPHML);
+        serializer.attribute("", GraphMLTokens.XMLNS, GraphMLTokens.GRAPHML_XMLNS);
+
+        //XML Schema instance namespace definition (xsi)
+        serializer.attribute("", XMLConstants.XMLNS_ATTRIBUTE + ":" + GraphMLTokens.XML_SCHEMA_NAMESPACE_TAG,
+                XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI);
+        //XML Schema location
+        serializer.attribute("", GraphMLTokens.XML_SCHEMA_NAMESPACE_TAG + ":" + GraphMLTokens.XML_SCHEMA_LOCATION_ATTRIBUTE,
+                GraphMLTokens.GRAPHML_XMLNS + " " + (this.xmlSchemaLocation == null ?
+                        GraphMLTokens.DEFAULT_GRAPHML_SCHEMA_LOCATION : this.xmlSchemaLocation));
+
+        // <key id="weight" for="edge" attr.name="weight" attr.type="float"/>
+        Collection<String> keyset;
+
+        if (normalize) {
+            keyset = new ArrayList<String>();
+            keyset.addAll(vertexKeyTypes.keySet());
+            Collections.sort((List<String>) keyset);
+        } else {
+            keyset = vertexKeyTypes.keySet();
+        }
+        for (String key : keyset) {
+            serializer.startTag("", GraphMLTokens.KEY);
+            serializer.attribute("", GraphMLTokens.ID, key);
+            serializer.attribute("", GraphMLTokens.FOR, GraphMLTokens.NODE);
+            serializer.attribute("", GraphMLTokens.ATTR_NAME, key);
+            serializer.attribute("", GraphMLTokens.ATTR_TYPE, vertexKeyTypes.get(key));
+            serializer.endTag("", GraphMLTokens.KEY);
+        }
+
+        if (normalize) {
+            keyset = new ArrayList<String>();
+            keyset.addAll(edgeKeyTypes.keySet());
+            Collections.sort((List<String>) keyset);
+        } else {
+            keyset = edgeKeyTypes.keySet();
+        }
+        for (String key : keyset) {
+            serializer.startTag("", GraphMLTokens.KEY);
+            serializer.attribute("", GraphMLTokens.ID, key);
+            serializer.attribute("", GraphMLTokens.FOR, GraphMLTokens.EDGE);
+            serializer.attribute("", GraphMLTokens.ATTR_NAME, key);
+            serializer.attribute("", GraphMLTokens.ATTR_TYPE, edgeKeyTypes.get(key));
+            serializer.endTag("", GraphMLTokens.KEY);
+        }
+
+        serializer.startTag("", GraphMLTokens.GRAPH);
+        serializer.attribute("", GraphMLTokens.ID, GraphMLTokens.G);
+        serializer.attribute("", GraphMLTokens.EDGEDEFAULT, GraphMLTokens.DIRECTED);
+
+        Iterable<Vertex> vertices;
+        if (normalize) {
+            vertices = new ArrayList<Vertex>();
+            for (Vertex v : graph.getVertices()) {
+                ((Collection<Vertex>) vertices).add(v);
             }
-
-            writer.writeStartDocument();
-            writer.writeStartElement(GraphMLTokens.GRAPHML);
-            writer.writeAttribute(GraphMLTokens.XMLNS, GraphMLTokens.GRAPHML_XMLNS);
-
-            //XML Schema instance namespace definition (xsi)
-            writer.writeAttribute(XMLConstants.XMLNS_ATTRIBUTE + ":" + GraphMLTokens.XML_SCHEMA_NAMESPACE_TAG,
-                    XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI);
-            //XML Schema location
-            writer.writeAttribute(GraphMLTokens.XML_SCHEMA_NAMESPACE_TAG + ":" + GraphMLTokens.XML_SCHEMA_LOCATION_ATTRIBUTE,
-                    GraphMLTokens.GRAPHML_XMLNS + " " + (this.xmlSchemaLocation == null ?
-                            GraphMLTokens.DEFAULT_GRAPHML_SCHEMA_LOCATION : this.xmlSchemaLocation));
-
-            // <key id="weight" for="edge" attr.name="weight" attr.type="float"/>
-            Collection<String> keyset;
-
+            Collections.sort((List<Vertex>) vertices, new LexicographicalElementComparator());
+        } else {
+            vertices = graph.getVertices();
+        }
+        for (Vertex vertex : vertices) {
+            serializer.startTag("", GraphMLTokens.NODE);
+            serializer.attribute("", GraphMLTokens.ID, vertex.getId().toString());
+            Collection<String> keys;
             if (normalize) {
-                keyset = new ArrayList<String>();
-                keyset.addAll(vertexKeyTypes.keySet());
-                Collections.sort((List<String>) keyset);
+                keys = new ArrayList<String>();
+                keys.addAll(vertex.getPropertyKeys());
+                Collections.sort((List<String>) keys);
             } else {
-                keyset = vertexKeyTypes.keySet();
+                keys = vertex.getPropertyKeys();
             }
-            for (String key : keyset) {
-                writer.writeStartElement(GraphMLTokens.KEY);
-                writer.writeAttribute(GraphMLTokens.ID, key);
-                writer.writeAttribute(GraphMLTokens.FOR, GraphMLTokens.NODE);
-                writer.writeAttribute(GraphMLTokens.ATTR_NAME, key);
-                writer.writeAttribute(GraphMLTokens.ATTR_TYPE, vertexKeyTypes.get(key));
-                writer.writeEndElement();
-            }
-
-            if (normalize) {
-                keyset = new ArrayList<String>();
-                keyset.addAll(edgeKeyTypes.keySet());
-                Collections.sort((List<String>) keyset);
-            } else {
-                keyset = edgeKeyTypes.keySet();
-            }
-            for (String key : keyset) {
-                writer.writeStartElement(GraphMLTokens.KEY);
-                writer.writeAttribute(GraphMLTokens.ID, key);
-                writer.writeAttribute(GraphMLTokens.FOR, GraphMLTokens.EDGE);
-                writer.writeAttribute(GraphMLTokens.ATTR_NAME, key);
-                writer.writeAttribute(GraphMLTokens.ATTR_TYPE, edgeKeyTypes.get(key));
-                writer.writeEndElement();
-            }
-
-            writer.writeStartElement(GraphMLTokens.GRAPH);
-            writer.writeAttribute(GraphMLTokens.ID, GraphMLTokens.G);
-            writer.writeAttribute(GraphMLTokens.EDGEDEFAULT, GraphMLTokens.DIRECTED);
-
-            Iterable<Vertex> vertices;
-            if (normalize) {
-                vertices = new ArrayList<Vertex>();
-                for (Vertex v : graph.getVertices()) {
-                    ((Collection<Vertex>) vertices).add(v);
+            for (String key : keys) {
+                serializer.startTag("", GraphMLTokens.DATA);
+                serializer.attribute("", GraphMLTokens.KEY, key);
+                Object value = vertex.getProperty(key);
+                if (null != value) {
+                    serializer.text(value.toString());
                 }
-                Collections.sort((List<Vertex>) vertices, new LexicographicalElementComparator());
-            } else {
-                vertices = graph.getVertices();
+                serializer.endTag("", GraphMLTokens.DATA);
             }
-            for (Vertex vertex : vertices) {
-                writer.writeStartElement(GraphMLTokens.NODE);
-                writer.writeAttribute(GraphMLTokens.ID, vertex.getId().toString());
-                Collection<String> keys;
-                if (normalize) {
-                    keys = new ArrayList<String>();
-                    keys.addAll(vertex.getPropertyKeys());
-                    Collections.sort((List<String>) keys);
+            serializer.endTag("", GraphMLTokens.NODE);
+        }
+
+        if (normalize) {
+            List<Edge> edges = new ArrayList<Edge>();
+            for (Vertex vertex : graph.getVertices()) {
+                for (Edge edge : vertex.getEdges(Direction.OUT)) {
+                    edges.add(edge);
+                }
+            }
+            Collections.sort(edges, new LexicographicalElementComparator());
+
+            for (Edge edge : edges) {
+                serializer.startTag("", GraphMLTokens.EDGE);
+                serializer.attribute("", GraphMLTokens.ID, edge.getId().toString());
+                serializer.attribute("", GraphMLTokens.SOURCE, edge.getVertex(Direction.OUT).getId().toString());
+                serializer.attribute("", GraphMLTokens.TARGET, edge.getVertex(Direction.IN).getId().toString());
+
+                if (this.edgeLabelKey == null) {
+                    // this will not comply with the graphml schema but is here so that the label is not
+                    // mixed up with properties.
+                    serializer.attribute("", GraphMLTokens.LABEL, edge.getLabel());
                 } else {
-                    keys = vertex.getPropertyKeys();
+                    serializer.startTag("", GraphMLTokens.DATA);
+                    serializer.attribute("", GraphMLTokens.KEY, this.edgeLabelKey);
+                    serializer.text(edge.getLabel());
+                    serializer.endTag("", GraphMLTokens.DATA);
                 }
+
+                final List<String> keys = new ArrayList<String>();
+                keys.addAll(edge.getPropertyKeys());
+                Collections.sort(keys);
+
                 for (String key : keys) {
-                    writer.writeStartElement(GraphMLTokens.DATA);
-                    writer.writeAttribute(GraphMLTokens.KEY, key);
-                    Object value = vertex.getProperty(key);
+                    serializer.startTag("", GraphMLTokens.DATA);
+                    serializer.attribute("", GraphMLTokens.KEY, key);
+                    Object value = edge.getProperty(key);
                     if (null != value) {
-                        writer.writeCharacters(value.toString());
+                        serializer.text(value.toString());
                     }
-                    writer.writeEndElement();
+                    serializer.endTag("", GraphMLTokens.DATA);
                 }
-                writer.writeEndElement();
+                serializer.endTag("", GraphMLTokens.EDGE);
             }
+        } else {
+            for (Vertex vertex : graph.getVertices()) {
+                for (Edge edge : vertex.getEdges(Direction.OUT)) {
+                    serializer.startTag("", GraphMLTokens.EDGE);
+                    serializer.attribute("", GraphMLTokens.ID, edge.getId().toString());
+                    serializer.attribute("", GraphMLTokens.SOURCE, edge.getVertex(Direction.OUT).getId().toString());
+                    serializer.attribute("", GraphMLTokens.TARGET, edge.getVertex(Direction.IN).getId().toString());
+                    serializer.attribute("", GraphMLTokens.LABEL, edge.getLabel());
 
-            if (normalize) {
-                List<Edge> edges = new ArrayList<Edge>();
-                for (Vertex vertex : graph.getVertices()) {
-                    for (Edge edge : vertex.getEdges(Direction.OUT)) {
-                        edges.add(edge);
-                    }
-                }
-                Collections.sort(edges, new LexicographicalElementComparator());
-
-                for (Edge edge : edges) {
-                    writer.writeStartElement(GraphMLTokens.EDGE);
-                    writer.writeAttribute(GraphMLTokens.ID, edge.getId().toString());
-                    writer.writeAttribute(GraphMLTokens.SOURCE, edge.getVertex(Direction.OUT).getId().toString());
-                    writer.writeAttribute(GraphMLTokens.TARGET, edge.getVertex(Direction.IN).getId().toString());
-
-                    if (this.edgeLabelKey == null) {
-                        // this will not comply with the graphml schema but is here so that the label is not
-                        // mixed up with properties.
-                        writer.writeAttribute(GraphMLTokens.LABEL, edge.getLabel());
-                    } else {
-                        writer.writeStartElement(GraphMLTokens.DATA);
-                        writer.writeAttribute(GraphMLTokens.KEY, this.edgeLabelKey);
-                        writer.writeCharacters(edge.getLabel());
-                        writer.writeEndElement();
-                    }
-
-                    final List<String> keys = new ArrayList<String>();
-                    keys.addAll(edge.getPropertyKeys());
-                    Collections.sort(keys);
-
-                    for (String key : keys) {
-                        writer.writeStartElement(GraphMLTokens.DATA);
-                        writer.writeAttribute(GraphMLTokens.KEY, key);
+                    for (String key : edge.getPropertyKeys()) {
+                        serializer.startTag("", GraphMLTokens.DATA);
+                        serializer.attribute("", GraphMLTokens.KEY, key);
                         Object value = edge.getProperty(key);
                         if (null != value) {
-                            writer.writeCharacters(value.toString());
+                            serializer.text(value.toString());
                         }
-                        writer.writeEndElement();
+                        serializer.endTag("", GraphMLTokens.DATA);
                     }
-                    writer.writeEndElement();
-                }
-            } else {
-                for (Vertex vertex : graph.getVertices()) {
-                    for (Edge edge : vertex.getEdges(Direction.OUT)) {
-                        writer.writeStartElement(GraphMLTokens.EDGE);
-                        writer.writeAttribute(GraphMLTokens.ID, edge.getId().toString());
-                        writer.writeAttribute(GraphMLTokens.SOURCE, edge.getVertex(Direction.OUT).getId().toString());
-                        writer.writeAttribute(GraphMLTokens.TARGET, edge.getVertex(Direction.IN).getId().toString());
-                        writer.writeAttribute(GraphMLTokens.LABEL, edge.getLabel());
-
-                        for (String key : edge.getPropertyKeys()) {
-                            writer.writeStartElement(GraphMLTokens.DATA);
-                            writer.writeAttribute(GraphMLTokens.KEY, key);
-                            Object value = edge.getProperty(key);
-                            if (null != value) {
-                                writer.writeCharacters(value.toString());
-                            }
-                            writer.writeEndElement();
-                        }
-                        writer.writeEndElement();
-                    }
+                    serializer.endTag("", GraphMLTokens.EDGE);
                 }
             }
-
-            writer.writeEndElement(); // graph
-            writer.writeEndElement(); // graphml
-            writer.writeEndDocument();
-
-            writer.flush();
-            writer.close();
-        } catch (XMLStreamException xse) {
-            throw new IOException(xse);
         }
+
+        serializer.endTag("", GraphMLTokens.GRAPH); // graph
+        serializer.endTag("", GraphMLTokens.GRAPHML); // graphml
+        serializer.endDocument();
+
+        serializer.flush();
+        graphMLOutputStream.flush();
+        graphMLOutputStream.close();
     }
 
     /**

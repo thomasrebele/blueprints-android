@@ -2,7 +2,6 @@ package com.tinkerpop.blueprints.util.io.graphml;
 
 import com.tinkerpop.blueprints.Graph;
 
-import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
@@ -19,10 +18,9 @@ public class GraphMigrator {
      *
      * @param fromGraph the graph to take data from
      * @param toGraph   the graph to take data to
-     * @throws XMLStreamException thrown if the serialization process causes an exception
      * @throws IOException        thrown if there is an error in steam between the two graphs
      */
-    public static void migrateGraph(final Graph fromGraph, final Graph toGraph) throws XMLStreamException, IOException {
+    public static void migrateGraph(final Graph fromGraph, final Graph toGraph) throws IOException {
 
         final PipedInputStream inPipe = new PipedInputStream() {
             // Default is 1024

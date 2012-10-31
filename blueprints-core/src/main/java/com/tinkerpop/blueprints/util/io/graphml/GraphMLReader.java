@@ -1,20 +1,21 @@
 package com.tinkerpop.blueprints.util.io.graphml;
 
-import com.tinkerpop.blueprints.Edge;
-import com.tinkerpop.blueprints.Graph;
-import com.tinkerpop.blueprints.TransactionalGraph;
-import com.tinkerpop.blueprints.Vertex;
-import com.tinkerpop.blueprints.util.wrappers.batch.BatchGraph;
-
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.events.XMLEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import android.util.Xml;
+
+import com.tinkerpop.blueprints.Edge;
+import com.tinkerpop.blueprints.Graph;
+import com.tinkerpop.blueprints.TransactionalGraph;
+import com.tinkerpop.blueprints.Vertex;
+import com.tinkerpop.blueprints.util.wrappers.batch.BatchGraph;
 
 /**
  * GraphMLReader writes the data from a GraphML stream to a graph.
@@ -107,10 +108,9 @@ public class GraphMLReader {
      */
     public static void inputGraph(final Graph inputGraph, final InputStream graphMLInputStream, int bufferSize, String vertexIdKey, String edgeIdKey, String edgeLabelKey) throws IOException {
 
-        XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-
         try {
-            XMLStreamReader reader = inputFactory.createXMLStreamReader(graphMLInputStream);
+            XmlPullParser parser = Xml.newPullParser();
+            parser.setInput(graphMLInputStream, "UTF8");
 
             final BatchGraph graph = BatchGraph.wrap(inputGraph, bufferSize);
 
@@ -133,34 +133,34 @@ public class GraphMLReader {
             Map<String, Object> edgeProps = null;
             boolean inEdge = false;
 
-            while (reader.hasNext()) {
+            int eventType = parser.getEventType();
+            while (eventType != XmlPullParser.END_DOCUMENT) {
 
-                Integer eventType = reader.next();
-                if (eventType.equals(XMLEvent.START_ELEMENT)) {
-                    String elementName = reader.getName().getLocalPart();
+                if (eventType == (XmlPullParser.START_TAG)) {
+                    String elementName = parser.getName();
 
                     if (elementName.equals(GraphMLTokens.KEY)) {
-                        String id = reader.getAttributeValue(null, GraphMLTokens.ID);
-                        String attributeName = reader.getAttributeValue(null, GraphMLTokens.ATTR_NAME);
-                        String attributeType = reader.getAttributeValue(null, GraphMLTokens.ATTR_TYPE);
+                        String id = parser.getAttributeValue(null, GraphMLTokens.ID);
+                        String attributeName = parser.getAttributeValue(null, GraphMLTokens.ATTR_NAME);
+                        String attributeType = parser.getAttributeValue(null, GraphMLTokens.ATTR_TYPE);
                         keyIdMap.put(id, attributeName);
                         keyTypesMaps.put(attributeName, attributeType);
 
                     } else if (elementName.equals(GraphMLTokens.NODE)) {
-                        vertexId = reader.getAttributeValue(null, GraphMLTokens.ID);
+                        vertexId = parser.getAttributeValue(null, GraphMLTokens.ID);
                         if (vertexIdKey != null)
                             vertexMappedIdMap.put(vertexId, vertexId);
                         inVertex = true;
                         vertexProps = new HashMap<String, Object>();
 
                     } else if (elementName.equals(GraphMLTokens.EDGE)) {
-                        edgeId = reader.getAttributeValue(null, GraphMLTokens.ID);
-                        edgeLabel = reader.getAttributeValue(null, GraphMLTokens.LABEL);
+                        edgeId = parser.getAttributeValue(null, GraphMLTokens.ID);
+                        edgeLabel = parser.getAttributeValue(null, GraphMLTokens.LABEL);
                         edgeLabel = edgeLabel == null ? GraphMLTokens._DEFAULT : edgeLabel;
 
                         String[] vertexIds = new String[2];
-                        vertexIds[0] = reader.getAttributeValue(null, GraphMLTokens.SOURCE);
-                        vertexIds[1] = reader.getAttributeValue(null, GraphMLTokens.TARGET);
+                        vertexIds[0] = parser.getAttributeValue(null, GraphMLTokens.SOURCE);
+                        vertexIds[1] = parser.getAttributeValue(null, GraphMLTokens.TARGET);
                         edgeEndVertices = new Vertex[2];
 
                         for (int i = 0; i < 2; i++) { //i=0 => outVertex, i=1 => inVertex
@@ -183,11 +183,11 @@ public class GraphMLReader {
                         edgeProps = new HashMap<String, Object>();
 
                     } else if (elementName.equals(GraphMLTokens.DATA)) {
-                        String key = reader.getAttributeValue(null, GraphMLTokens.KEY);
+                        String key = parser.getAttributeValue(null, GraphMLTokens.KEY);
                         String attributeName = keyIdMap.get(key);
 
                         if (attributeName != null) {
-                            String value = reader.getElementText();
+                            String value = parser.nextText();
 
                             if (inVertex == true) {
                                 if ((vertexIdKey != null) && (key.equals(vertexIdKey))) {
@@ -208,8 +208,8 @@ public class GraphMLReader {
                         }
 
                     }
-                } else if (eventType.equals(XMLEvent.END_ELEMENT)) {
-                    String elementName = reader.getName().getLocalPart();
+                } else if (eventType == (XmlPullParser.END_TAG)) {
+                    String elementName = parser.getName();
 
                     if (elementName.equals(GraphMLTokens.NODE)) {
                         Vertex currentVertex = graph.getVertex(vertexId);
@@ -239,13 +239,12 @@ public class GraphMLReader {
                     }
 
                 }
+                eventType = parser.next();
             }
 
-            reader.close();
-
             graph.stopTransaction(TransactionalGraph.Conclusion.SUCCESS);
-        } catch (XMLStreamException xse) {
-            throw new IOException(xse);
+        } catch (XmlPullParserException xpe) {
+            throw new IOException(xpe);
         }
     }
 

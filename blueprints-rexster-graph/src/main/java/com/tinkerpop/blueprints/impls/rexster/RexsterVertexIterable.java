@@ -1,10 +1,11 @@
 package com.tinkerpop.blueprints.impls.rexster;
 
-import com.tinkerpop.blueprints.Vertex;
-import org.codehaus.jettison.json.JSONArray;
-import org.codehaus.jettison.json.JSONObject;
-
 import java.util.Queue;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.tinkerpop.blueprints.Vertex;
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)

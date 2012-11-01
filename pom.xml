@@ -12,8 +12,8 @@
     <artifactId>blueprints-android</artifactId>
     <version>2.1.0</version>
     <packaging>pom</packaging>
-    <url>http://blueprints.tinkerpop.com</url>
-    <name>Blueprints: A Property Graph Model Interface</name>
+    <url>http://wuman.github.com/blueprints-android/</url>
+    <name>Blueprints-Android: Android Port of A Property Graph Model Interface</name>
     <description>Blueprints is a property graph model interface. It provides implementations, ouplementations, test
         suites, and supporting utilities.
     </description>
@@ -32,11 +32,31 @@
             <url>http://www.opensource.org/licenses/BSD-3-Clause</url>
         </license>
     </licenses>
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/wuman/blueprints-android/issues</url>
+    </issueManagement>
     <scm>
-        <connection>scm:git:git@github.com:tinkerpop/blueprints.git</connection>
-        <developerConnection>scm:git:git@github.com:tinkerpop/blueprints.git</developerConnection>
-        <url>git@github.com:tinkerpop/blueprints.git</url>
+        <connection>scm:git:git://github.com/wuman/blueprints-android.git</connection>
+        <developerConnection>scm:git:git@github.com:wuman/blueprints-android.git</developerConnection>
+        <url>https://github.com/wuman/blueprints-android.git</url>
     </scm>
+    <organization>
+        <name>David Wu</name>
+        <url>http://blog.wu-man.com</url>
+    </organization>
+    <developers>
+        <developer>
+            <name>David Wu</name>
+            <email>david@wu-man.com</email>
+            <id>wuman</id>
+            <url>http://blog.wu-man.com</url>
+            <timezone>+8</timezone>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
     <contributors>
         <contributor>
             <name>Marko A. Rodriguez</name>
@@ -121,20 +141,36 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--<plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.4</version>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+                    <releaseProfiles>release-sign-artifacts</releaseProfiles>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>downloads-maven-plugin</artifactId>
+                <version>0.6</version>
+                <configuration>
+                    <description>${project.version} release of
+                        ${project.name}</description>
+                    <override>true</override>
+                    <includeAttached>true</includeAttached>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
                         <goals>
-                            <goal>sign</goal>
+                            <goal>upload</goal>
                         </goals>
+                        <phase>deploy</phase>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
+
         </plugins>
         <pluginManagement>
             <plugins>
@@ -154,6 +190,14 @@
                         <runOrder>random</runOrder>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-eclipse-plugin</artifactId>
+                    <version>2.9</version>
+                    <configuration>
+                        <downloadJavadocs>true</downloadJavadocs>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -169,4 +213,51 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus snapshot repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>Sonatype Nexus release repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.4</version>
+                        <configuration>
+                            <passphrase>${gpg.passphrase}</passphrase>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>

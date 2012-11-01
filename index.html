@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>blueprints-android by wuman</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>blueprints-android</h1>
+        <p>Android Port of Blueprints: A Property Graph Model Interface</p>
+        <p class="view"><a href="https://github.com/wuman/blueprints-android">View the Project on GitHub <small>wuman/blueprints-android</small></a></p>
+        <ul>
+          <li><a href="https://github.com/wuman/blueprints-android/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/wuman/blueprints-android/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/wuman/blueprints-android">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>BLUEPRINTS-ANDROID</h1>
+
+<p><img src="https://github.com/wuman/blueprints-android/raw/master/doc/images/blueprints-android-logo.png" alt="Feature Image"></p>
+
+<p>Blueprints-android is an Android port/fork of Blueprints. It replaces the 
+<a href="http://jettison.codehaus.org/">Jettison</a> and <a href="http://stax.codehaus.org/">StAX</a> 
+libraries with native Android <a href="http://developer.android.com/reference/org/json/package-summary.html">JSON</a> 
+and <a href="http://developer.android.com/reference/android/util/Xml.html">XML</a> parsers 
+and serializers.</p>
+
+<p>The current release version is 2.1.0, which is consistent with version 2.1.0 of 
+Blueprints. The project is built using Maven and passes all the original unit
+tests. However, I have only personally used the <code>blueprints-android-core</code> and
+<code>blueprints-android-orient-graph</code> submodules in practice.</p>
+
+<h2>Including in Your Project</h2>
+
+<p>There are two ways to include blueprints-android in your projects:</p>
+
+<ol>
+<li>You can download the released jar file in the <a href="https://github.com/wuman/blueprints-android/downloads">Downloads section</a>.</li>
+<li>
+<p>If you use Maven to build your project you can simply add a dependency to 
+the desired component of the library.</p>
+
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.wu-man&lt;/groupId&gt;
+    &lt;artifactId&gt;blueprints-android-*&lt;/artifactId&gt;
+    &lt;version&gt;2.1.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+</li>
+</ol><h2>Blueprints</h2>
+
+<p>Blueprints is a <a href="http://github.com/tinkerpop/gremlin/wiki/Defining-a-Property-Graph">property graph model interface</a>. 
+It provides implementations, test suites, and supporting extensions. Graph 
+databases and frameworks that implement the Blueprints interfaces automatically 
+support Blueprints-enabled applications. Likewise, Blueprints-enabled 
+applications can plug-and-play different Blueprints-enabled graph backends.</p>
+
+<ul>
+<li>Implementations:
+
+<ul>
+<li><a href="http://wiki.github.com/tinkerpop/gremlin/tinkergraph%20in-memory%20graph">TinkerGraph</a></li>
+<li>
+<a href="http://neo4j.org/%20graph%20database">Neo4j</a>
+
+<ul>
+<li>
+<a href="http://docs.neo4j.org/chunked/stable/ha-setup-tutorial.html">Neo4j High Availability</a> support</li>
+<li>
+<a href="http://docs.neo4j.org/chunked/stable/indexing-batchinsert.html">Neo4j Batch Inserter</a> support</li>
+</ul>
+</li>
+<li>
+<a href="http://www.orientechnologies.com/">OrientDB</a> graph database</li>
+<li>
+<a href="http://www.sparsity-technologies.com/dex">DEX</a> graph database</li>
+<li>
+<a href="http://www.infinitegraph.com/">InfiniteGraph</a> 
+(available <a href="http://wiki.infinitegraph.com/2.1/w/index.php?title=InfiniteGraph_Tinkerpop_Blueprints_Implementation">here</a>)</li>
+<li>
+<a href="http://thinkaurelius.github.com/titan/">Titan</a> 
+(available <a href="http://thinkaurelius.github.com/titan/">here</a>)</li>
+<li>
+<a href="http://rexster.tinkerpop.com">Rexster</a> graph server</li>
+<li>
+<a href="http://www.openrdf.org">Sesame 2.0</a> compliant RDF stores
+
+<ul>
+<li>
+<a href="http://www.openrdf.org/doc/sesame2/users/ch08.html#d0e705">MemoryStore</a>, 
+<a href="http://www.openrdf.org/doc/sesame2/users/ch08.html#d0e746">NativeStore</a>, 
+<a href="http://code.google.com/p/ripple/wiki/LinkedDataSail">LinkedDataSail</a>, 
+<a href="http://www.openrdf.org/doc/sesame2/api/org/openrdf/repository/sparql/SPARQLRepository.html">SPARQLRepository</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Ouplementations:
+
+<ul>
+<li>
+<a href="http://jung.sourceforge.net/">Java Universal/Graph</a> interface</li>
+<li>
+<a href="http://www.openrdf.org">Sesame 2.0</a> Sail interface</li>
+</ul>
+</li>
+<li>Supporting utilities:
+
+<ul>
+<li>
+<a href="http://www.fim.uni-passau.de/en/fim/faculty/chairs/theoretische-informatik/projects.html">GML</a> Reader/Writer utility</li>
+<li>
+<a href="http://graphml.graphdrawing.org/%20Reader/Writer">GraphML</a> utility</li>
+<li>
+<a href="https://github.com/tinkerpop/blueprints/wiki/GraphSON-Reader-and-Writer-Library">GraphSON</a> Reader/Writer utility</li>
+<li>
+<code>BatchGraph</code> wrapper</li>
+<li>
+<code>ReadOnlyGraph</code> wrapper</li>
+<li>
+<code>EventGraph</code> wrapper</li>
+<li>
+<code>PartitionGraph</code> wrapper</li>
+<li>
+<code>IdGraph</code> wrapper</li>
+<li>Various helper utilities</li>
+</ul>
+</li>
+</ul><p>The documentation for Blueprints can be found at this 
+<a href="http://blueprints.tinkerpop.com">location</a>. Finally, please visit 
+<a href="http://tinkerpop.com">TinkerPop</a> for other software products.</p>
+
+<h2>Contribute</h2>
+
+<p>If you would like to contribute code you can do so through GitHub by forking 
+the repository and sending a pull request.</p>
+
+<h2>Developed By</h2>
+
+<ul>
+<li>Android porting contributor
+
+<ul>
+<li>David Wu - <a href="mailto:david@wu-man.com">david@wu-man.com</a> - <a href="http://blog.wu-man.com">http://blog.wu-man.com</a>
+</li>
+</ul>
+</li>
+<li>Original contributors to Blueprints
+
+<ul>
+<li>Marko A. Rodriguez - <a href="mailto:marko@markorodriguez.com">marko@markorodriguez.com</a> - <a href="http://markorodriguez.com">http://markorodriguez.com</a>
+</li>
+<li>Stephen Mallette - <a href="mailto:spmva@genoprime.com">spmva@genoprime.com</a> - <a href="http://stephen.genoprime.com">http://stephen.genoprime.com</a>
+</li>
+<li>Joshua Shinavier - <a href="mailto:josh@fortytwo.net">josh@fortytwo.net</a> - <a href="http://fortytwo.net">http://fortytwo.net</a>
+</li>
+<li>Luca Garulli - <a href="mailto:l.garulli@orientechnologies.com">l.garulli@orientechnologies.com</a> - <a href="http://zion-city.blogspot.com">http://zion-city.blogspot.com</a>
+</li>
+<li>Darrick Wiebe - <a href="mailto:darrick@innatesoftware.com">darrick@innatesoftware.com</a> - <a href="http://github.com/pangloss">http://github.com/pangloss</a>
+</li>
+<li>Matthias Broecheler - <a href="mailto:me@matthiasb.com">me@matthiasb.com</a> - <a href="http://matthiasb.com">http://matthiasb.com</a>
+</li>
+</ul>
+</li>
+</ul>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/wuman">wuman</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-4156099-13");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>

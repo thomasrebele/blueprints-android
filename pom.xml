@@ -8,7 +8,7 @@
     </parent>
     <groupId>com.wu-man</groupId>
     <artifactId>blueprints-android</artifactId>
-    <version>2.1.0</version>
+    <version>2.1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <url>http://wuman.github.com/blueprints-android/</url>
     <name>Blueprints-Android: Android Port of A Property Graph Model Interface</name>
@@ -38,7 +38,7 @@
         <url>https://github.com/wuman/blueprints-android</url>
         <connection>scm:git:git://github.com/wuman/blueprints-android.git</connection>
         <developerConnection>scm:git:git@github.com:wuman/blueprints-android.git</developerConnection>
-      <tag>blueprints-android-2.1.0</tag>
+      <tag>HEAD</tag>
   </scm>
     <organization>
         <name>David Wu</name>

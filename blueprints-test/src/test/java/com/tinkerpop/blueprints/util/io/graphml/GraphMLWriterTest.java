@@ -1,10 +1,5 @@
 package com.tinkerpop.blueprints.util.io.graphml;
 
-import com.tinkerpop.blueprints.Graph;
-import com.tinkerpop.blueprints.Vertex;
-import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
-import junit.framework.TestCase;
-
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -18,10 +13,15 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 
+import com.tinkerpop.blueprints.BaseTest;
+import com.tinkerpop.blueprints.Graph;
+import com.tinkerpop.blueprints.Vertex;
+import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
+
 /**
  * @author Joshua Shinavier (http://fortytwo.net)
  */
-public class GraphMLWriterTest extends TestCase {
+public class GraphMLWriterTest extends BaseTest {
     public void testNormal() throws Exception {
         TinkerGraph g = new TinkerGraph();
         GraphMLReader.inputGraph(g, GraphMLReader.class.getResourceAsStream("graph-example-1.xml"));

@@ -8,8 +8,8 @@
         <artifactId>oss-parent</artifactId>
         <version>7</version>
     </parent>
-    <groupId>com.tinkerpop.blueprints</groupId>
-    <artifactId>blueprints</artifactId>
+    <groupId>com.wu-man</groupId>
+    <artifactId>blueprints-android</artifactId>
     <version>2.1.0</version>
     <packaging>pom</packaging>
     <url>http://blueprints.tinkerpop.com</url>
@@ -17,6 +17,14 @@
     <description>Blueprints is a property graph model interface. It provides implementations, ouplementations, test
         suites, and supporting utilities.
     </description>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+            <version>4.1.1.4</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
     <inceptionYear>2010</inceptionYear>
     <licenses>
         <license>

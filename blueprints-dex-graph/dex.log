@@ -1,0 +1,823 @@
+2012-11-01 16:11:28.805|DEX[INFO] ** START ** 2012-11-01 16:11:28.804 Software version: 4.6.0
+2012-11-01 16:11:28.805|DEX[INFO] No license code
+2012-11-01 16:11:28.805|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:29.008|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:29.009|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:29.009|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:29.009
+2012-11-01 16:11:29.010|DEX[INFO] ** START ** 2012-11-01 16:11:29.010 Software version: 4.6.0
+2012-11-01 16:11:29.011|DEX[INFO] No license code
+2012-11-01 16:11:29.011|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:29.215|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:29.215|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:29.215|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:29.215
+2012-11-01 16:11:29.216|DEX[INFO] ** START ** 2012-11-01 16:11:29.216 Software version: 4.6.0
+2012-11-01 16:11:29.216|DEX[INFO] No license code
+2012-11-01 16:11:29.217|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:29.420|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:29.420|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:29.421|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:29.420
+2012-11-01 16:11:29.422|DEX[INFO] ** START ** 2012-11-01 16:11:29.422 Software version: 4.6.0
+2012-11-01 16:11:29.422|DEX[INFO] No license code
+2012-11-01 16:11:29.423|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:29.626|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:29.626|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:29.626|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:29.626
+2012-11-01 16:11:29.627|DEX[INFO] ** START ** 2012-11-01 16:11:29.627 Software version: 4.6.0
+2012-11-01 16:11:29.627|DEX[INFO] No license code
+2012-11-01 16:11:29.628|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:29.831|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:29.831|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:29.832|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:29.832
+2012-11-01 16:11:29.833|DEX[INFO] ** START ** 2012-11-01 16:11:29.833 Software version: 4.6.0
+2012-11-01 16:11:29.833|DEX[INFO] No license code
+2012-11-01 16:11:29.834|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:30.037|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:30.037|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:30.037|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:30.037
+2012-11-01 16:11:30.039|DEX[INFO] ** START ** 2012-11-01 16:11:30.039 Software version: 4.6.0
+2012-11-01 16:11:30.039|DEX[INFO] No license code
+2012-11-01 16:11:30.040|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:30.041|Graph[SEVERE] Can not get the object (12) type because it is invalid.
+2012-11-01 16:11:30.041|Graph[SEVERE] Check object failed because the object 12 is not valid.
+2012-11-01 16:11:30.243|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:30.243|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:30.243|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:30.243
+2012-11-01 16:11:30.245|DEX[INFO] ** START ** 2012-11-01 16:11:30.245 Software version: 4.6.0
+2012-11-01 16:11:30.245|DEX[INFO] No license code
+2012-11-01 16:11:30.246|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:30.448|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:30.448|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:30.448|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:30.448
+2012-11-01 16:11:30.450|DEX[INFO] ** START ** 2012-11-01 16:11:30.449 Software version: 4.6.0
+2012-11-01 16:11:30.450|DEX[INFO] No license code
+2012-11-01 16:11:30.451|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:30.654|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:30.654|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:30.654|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:30.654
+2012-11-01 16:11:30.655|DEX[INFO] ** START ** 2012-11-01 16:11:30.655 Software version: 4.6.0
+2012-11-01 16:11:30.655|DEX[INFO] No license code
+2012-11-01 16:11:30.656|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:30.859|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:30.859|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:30.859|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:30.859
+2012-11-01 16:11:30.860|DEX[INFO] ** START ** 2012-11-01 16:11:30.860 Software version: 4.6.0
+2012-11-01 16:11:30.860|DEX[INFO] No license code
+2012-11-01 16:11:30.861|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:31.064|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:31.064|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:31.064|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:31.064
+2012-11-01 16:11:31.066|DEX[INFO] ** START ** 2012-11-01 16:11:31.066 Software version: 4.6.0
+2012-11-01 16:11:31.066|DEX[INFO] No license code
+2012-11-01 16:11:31.067|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:31.671|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:31.671|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:31.671|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:31.671
+2012-11-01 16:11:31.674|DEX[INFO] ** START ** 2012-11-01 16:11:31.674 Software version: 4.6.0
+2012-11-01 16:11:31.674|DEX[INFO] No license code
+2012-11-01 16:11:31.675|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:31.878|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:31.878|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:31.878|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:31.878
+2012-11-01 16:11:31.880|DEX[INFO] ** START ** 2012-11-01 16:11:31.880 Software version: 4.6.0
+2012-11-01 16:11:31.880|DEX[INFO] No license code
+2012-11-01 16:11:31.881|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:32.084|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:32.084|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:32.084|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:32.084
+2012-11-01 16:11:32.085|DEX[INFO] ** START ** 2012-11-01 16:11:32.085 Software version: 4.6.0
+2012-11-01 16:11:32.085|DEX[INFO] No license code
+2012-11-01 16:11:32.086|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:32.289|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:32.289|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:32.289|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:32.289
+2012-11-01 16:11:32.291|DEX[INFO] ** START ** 2012-11-01 16:11:32.291 Software version: 4.6.0
+2012-11-01 16:11:32.291|DEX[INFO] No license code
+2012-11-01 16:11:32.292|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:32.495|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:32.495|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:32.495|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:32.495
+2012-11-01 16:11:32.496|DEX[INFO] ** START ** 2012-11-01 16:11:32.496 Software version: 4.6.0
+2012-11-01 16:11:32.497|DEX[INFO] No license code
+2012-11-01 16:11:32.497|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:32.701|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:32.701|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:32.701|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:32.701
+2012-11-01 16:11:32.706|DEX[INFO] ** START ** 2012-11-01 16:11:32.706 Software version: 4.6.0
+2012-11-01 16:11:32.706|DEX[INFO] No license code
+2012-11-01 16:11:32.707|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:32.910|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:32.910|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:32.910|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:32.910
+2012-11-01 16:11:32.911|DEX[INFO] ** START ** 2012-11-01 16:11:32.911 Software version: 4.6.0
+2012-11-01 16:11:32.911|DEX[INFO] No license code
+2012-11-01 16:11:32.912|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:33.115|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:33.115|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:33.115|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:33.115
+2012-11-01 16:11:33.116|DEX[INFO] ** START ** 2012-11-01 16:11:33.116 Software version: 4.6.0
+2012-11-01 16:11:33.116|DEX[INFO] No license code
+2012-11-01 16:11:33.116|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:33.319|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:33.320|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:33.320|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:33.320
+2012-11-01 16:11:33.321|DEX[INFO] ** START ** 2012-11-01 16:11:33.321 Software version: 4.6.0
+2012-11-01 16:11:33.321|DEX[INFO] No license code
+2012-11-01 16:11:33.322|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:33.525|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:33.526|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:33.526|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:33.526
+2012-11-01 16:11:33.527|DEX[INFO] ** START ** 2012-11-01 16:11:33.527 Software version: 4.6.0
+2012-11-01 16:11:33.527|DEX[INFO] No license code
+2012-11-01 16:11:33.528|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:34.933|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:34.933|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:34.933|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:34.933
+2012-11-01 16:11:34.935|DEX[INFO] ** START ** 2012-11-01 16:11:34.935 Software version: 4.6.0
+2012-11-01 16:11:34.935|DEX[INFO] No license code
+2012-11-01 16:11:34.936|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:35.139|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:35.139|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:35.140|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:35.140
+2012-11-01 16:11:35.141|DEX[INFO] ** START ** 2012-11-01 16:11:35.141 Software version: 4.6.0
+2012-11-01 16:11:35.141|DEX[INFO] No license code
+2012-11-01 16:11:35.142|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:35.142|Graph[SEVERE] Can not get the object (12) type because it is invalid.
+2012-11-01 16:11:35.142|Graph[SEVERE] Check object failed because the object 12 is not valid.
+2012-11-01 16:11:35.344|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:35.345|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:35.345|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:35.345
+2012-11-01 16:11:35.345|DEX[INFO] ** START ** 2012-11-01 16:11:35.345 Software version: 4.6.0
+2012-11-01 16:11:35.345|DEX[INFO] No license code
+2012-11-01 16:11:35.346|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:35.547|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:35.547|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:35.547|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:35.547
+2012-11-01 16:11:35.549|DEX[INFO] ** START ** 2012-11-01 16:11:35.549 Software version: 4.6.0
+2012-11-01 16:11:35.549|DEX[INFO] No license code
+2012-11-01 16:11:35.550|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:35.752|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:35.752|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:35.752|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:35.752
+2012-11-01 16:11:35.753|DEX[INFO] ** START ** 2012-11-01 16:11:35.753 Software version: 4.6.0
+2012-11-01 16:11:35.753|DEX[INFO] No license code
+2012-11-01 16:11:35.754|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:35.956|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:35.956|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:35.956|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:35.956
+2012-11-01 16:11:35.957|DEX[INFO] ** START ** 2012-11-01 16:11:35.957 Software version: 4.6.0
+2012-11-01 16:11:35.957|DEX[INFO] No license code
+2012-11-01 16:11:35.958|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:36.162|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:36.162|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:36.162|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:36.162
+2012-11-01 16:11:36.163|DEX[INFO] ** START ** 2012-11-01 16:11:36.163 Software version: 4.6.0
+2012-11-01 16:11:36.163|DEX[INFO] No license code
+2012-11-01 16:11:36.164|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:36.366|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:36.366|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:36.366|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:36.366
+2012-11-01 16:11:36.367|DEX[INFO] ** START ** 2012-11-01 16:11:36.367 Software version: 4.6.0
+2012-11-01 16:11:36.367|DEX[INFO] No license code
+2012-11-01 16:11:36.368|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:36.569|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:36.569|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:36.570|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:36.570
+2012-11-01 16:11:36.571|DEX[INFO] ** START ** 2012-11-01 16:11:36.571 Software version: 4.6.0
+2012-11-01 16:11:36.571|DEX[INFO] No license code
+2012-11-01 16:11:36.572|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:36.773|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:36.774|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:36.774|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:36.774
+2012-11-01 16:11:36.775|DEX[INFO] ** START ** 2012-11-01 16:11:36.775 Software version: 4.6.0
+2012-11-01 16:11:36.775|DEX[INFO] No license code
+2012-11-01 16:11:36.776|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:36.977|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:36.977|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:36.977|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:36.977
+2012-11-01 16:11:36.978|DEX[INFO] ** START ** 2012-11-01 16:11:36.978 Software version: 4.6.0
+2012-11-01 16:11:36.978|DEX[INFO] No license code
+2012-11-01 16:11:36.979|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:37.181|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:37.181|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:37.181|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:37.181
+2012-11-01 16:11:37.251|DEX[INFO] ** START ** 2012-11-01 16:11:37.251 Software version: 4.6.0
+2012-11-01 16:11:37.252|DEX[INFO] No license code
+2012-11-01 16:11:37.252|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:37.454|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:37.454|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:37.454|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:37.454
+2012-11-01 16:11:37.454|DEX[INFO] ** START ** 2012-11-01 16:11:37.454 Software version: 4.6.0
+2012-11-01 16:11:37.454|DEX[INFO] No license code
+2012-11-01 16:11:37.455|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:37.657|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:37.657|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:37.657|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:37.657
+2012-11-01 16:11:37.658|DEX[INFO] ** START ** 2012-11-01 16:11:37.658 Software version: 4.6.0
+2012-11-01 16:11:37.658|DEX[INFO] No license code
+2012-11-01 16:11:37.659|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:37.861|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:37.861|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:37.861|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:37.861
+2012-11-01 16:11:37.863|DEX[INFO] ** START ** 2012-11-01 16:11:37.862 Software version: 4.6.0
+2012-11-01 16:11:37.863|DEX[INFO] No license code
+2012-11-01 16:11:37.864|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:38.065|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:38.066|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:38.066|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:38.066
+2012-11-01 16:11:38.067|DEX[INFO] ** START ** 2012-11-01 16:11:38.067 Software version: 4.6.0
+2012-11-01 16:11:38.067|DEX[INFO] No license code
+2012-11-01 16:11:38.068|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:38.270|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:38.270|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:38.270|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:38.270
+2012-11-01 16:11:38.271|DEX[INFO] ** START ** 2012-11-01 16:11:38.271 Software version: 4.6.0
+2012-11-01 16:11:38.271|DEX[INFO] No license code
+2012-11-01 16:11:38.272|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:38.474|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:38.474|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:38.474|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:38.474
+2012-11-01 16:11:38.475|DEX[INFO] ** START ** 2012-11-01 16:11:38.475 Software version: 4.6.0
+2012-11-01 16:11:38.475|DEX[INFO] No license code
+2012-11-01 16:11:38.476|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:38.477|Graph[SEVERE] Check object failed because the object 2048 is not valid.
+2012-11-01 16:11:38.678|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:38.678|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:38.678|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:38.678
+2012-11-01 16:11:38.680|DEX[INFO] ** START ** 2012-11-01 16:11:38.680 Software version: 4.6.0
+2012-11-01 16:11:38.680|DEX[INFO] No license code
+2012-11-01 16:11:38.681|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:38.882|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:38.882|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:38.882|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:38.882
+2012-11-01 16:11:38.884|DEX[INFO] ** START ** 2012-11-01 16:11:38.884 Software version: 4.6.0
+2012-11-01 16:11:38.884|DEX[INFO] No license code
+2012-11-01 16:11:38.885|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:39.086|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:39.086|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:39.087|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:39.087
+2012-11-01 16:11:39.088|DEX[INFO] ** START ** 2012-11-01 16:11:39.088 Software version: 4.6.0
+2012-11-01 16:11:39.088|DEX[INFO] No license code
+2012-11-01 16:11:39.089|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:39.290|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:39.291|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:39.291|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:39.291
+2012-11-01 16:11:39.292|DEX[INFO] ** START ** 2012-11-01 16:11:39.292 Software version: 4.6.0
+2012-11-01 16:11:39.292|DEX[INFO] No license code
+2012-11-01 16:11:39.293|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:40.097|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:40.098|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:40.098|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:40.098
+2012-11-01 16:11:40.101|DEX[INFO] ** START ** 2012-11-01 16:11:40.101 Software version: 4.6.0
+2012-11-01 16:11:40.101|DEX[INFO] No license code
+2012-11-01 16:11:40.102|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:41.909|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:41.909|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:41.910|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:41.910
+2012-11-01 16:11:41.912|DEX[INFO] ** START ** 2012-11-01 16:11:41.912 Software version: 4.6.0
+2012-11-01 16:11:41.913|DEX[INFO] No license code
+2012-11-01 16:11:41.913|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:42.116|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:42.117|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:42.117|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:42.117
+2012-11-01 16:11:42.118|DEX[INFO] ** START ** 2012-11-01 16:11:42.118 Software version: 4.6.0
+2012-11-01 16:11:42.118|DEX[INFO] No license code
+2012-11-01 16:11:42.119|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:42.322|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:42.322|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:42.322|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:42.322
+2012-11-01 16:11:42.324|DEX[INFO] ** START ** 2012-11-01 16:11:42.324 Software version: 4.6.0
+2012-11-01 16:11:42.324|DEX[INFO] No license code
+2012-11-01 16:11:42.325|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:42.528|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:42.528|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:42.528|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:42.528
+2012-11-01 16:11:42.529|DEX[INFO] ** START ** 2012-11-01 16:11:42.529 Software version: 4.6.0
+2012-11-01 16:11:42.529|DEX[INFO] No license code
+2012-11-01 16:11:42.530|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:42.732|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:42.732|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:42.732|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:42.732
+2012-11-01 16:11:42.734|DEX[INFO] ** START ** 2012-11-01 16:11:42.734 Software version: 4.6.0
+2012-11-01 16:11:42.734|DEX[INFO] No license code
+2012-11-01 16:11:42.734|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:42.938|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:42.938|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:42.938|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:42.938
+2012-11-01 16:11:42.939|DEX[INFO] ** START ** 2012-11-01 16:11:42.939 Software version: 4.6.0
+2012-11-01 16:11:42.939|DEX[INFO] No license code
+2012-11-01 16:11:42.940|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:43.143|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:43.143|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:43.143|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:43.143
+2012-11-01 16:11:43.144|DEX[INFO] ** START ** 2012-11-01 16:11:43.144 Software version: 4.6.0
+2012-11-01 16:11:43.144|DEX[INFO] No license code
+2012-11-01 16:11:43.146|DEX[INFO] GraphPool 'blueprints_test.dex' has been opened at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:43.349|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:43.349|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:43.349|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:43.349
+2012-11-01 16:11:43.352|DEX[INFO] ** START ** 2012-11-01 16:11:43.352 Software version: 4.6.0
+2012-11-01 16:11:43.352|DEX[INFO] No license code
+2012-11-01 16:11:43.353|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:43.556|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:43.556|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:43.556|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:43.556
+2012-11-01 16:11:43.560|DEX[INFO] ** START ** 2012-11-01 16:11:43.560 Software version: 4.6.0
+2012-11-01 16:11:43.560|DEX[INFO] No license code
+2012-11-01 16:11:43.561|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:43.764|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:43.764|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:43.765|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:43.765
+2012-11-01 16:11:43.766|DEX[INFO] ** START ** 2012-11-01 16:11:43.766 Software version: 4.6.0
+2012-11-01 16:11:43.766|DEX[INFO] No license code
+2012-11-01 16:11:43.767|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:43.970|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:43.970|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:43.970|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:43.970
+2012-11-01 16:11:43.971|DEX[INFO] ** START ** 2012-11-01 16:11:43.971 Software version: 4.6.0
+2012-11-01 16:11:43.972|DEX[INFO] No license code
+2012-11-01 16:11:43.972|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:44.175|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:44.175|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:44.175|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:44.175
+2012-11-01 16:11:44.176|DEX[INFO] ** START ** 2012-11-01 16:11:44.176 Software version: 4.6.0
+2012-11-01 16:11:44.176|DEX[INFO] No license code
+2012-11-01 16:11:44.177|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:44.379|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:44.380|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:44.380|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:44.380
+2012-11-01 16:11:44.381|DEX[INFO] ** START ** 2012-11-01 16:11:44.381 Software version: 4.6.0
+2012-11-01 16:11:44.381|DEX[INFO] No license code
+2012-11-01 16:11:44.382|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:44.585|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:44.585|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:44.586|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:44.586
+2012-11-01 16:11:44.587|DEX[INFO] ** START ** 2012-11-01 16:11:44.587 Software version: 4.6.0
+2012-11-01 16:11:44.587|DEX[INFO] No license code
+2012-11-01 16:11:44.588|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:44.791|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:44.791|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:44.791|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:44.791
+2012-11-01 16:11:44.792|DEX[INFO] ** START ** 2012-11-01 16:11:44.792 Software version: 4.6.0
+2012-11-01 16:11:44.792|DEX[INFO] No license code
+2012-11-01 16:11:44.793|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:44.996|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:44.996|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:44.996|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:44.996
+2012-11-01 16:11:44.998|DEX[INFO] ** START ** 2012-11-01 16:11:44.998 Software version: 4.6.0
+2012-11-01 16:11:44.998|DEX[INFO] No license code
+2012-11-01 16:11:44.999|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:45.202|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:45.202|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:45.202|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:45.202
+2012-11-01 16:11:45.203|DEX[INFO] ** START ** 2012-11-01 16:11:45.203 Software version: 4.6.0
+2012-11-01 16:11:45.203|DEX[INFO] No license code
+2012-11-01 16:11:45.204|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:45.407|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:45.407|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:45.408|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:45.407
+2012-11-01 16:11:45.409|DEX[INFO] ** START ** 2012-11-01 16:11:45.409 Software version: 4.6.0
+2012-11-01 16:11:45.409|DEX[INFO] No license code
+2012-11-01 16:11:45.410|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:45.613|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:45.613|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:45.613|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:45.613
+2012-11-01 16:11:45.617|DEX[INFO] ** START ** 2012-11-01 16:11:45.617 Software version: 4.6.0
+2012-11-01 16:11:45.617|DEX[INFO] No license code
+2012-11-01 16:11:45.617|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:45.820|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:45.820|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:11:45.820|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:11:45.820
+2012-11-01 16:11:45.821|DEX[INFO] ** START ** 2012-11-01 16:11:45.821 Software version: 4.6.0
+2012-11-01 16:11:45.821|DEX[INFO] No license code
+2012-11-01 16:11:45.822|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:11:46.084|DEX[INFO] ** START ** 2012-11-01 16:11:46.084 Software version: 4.6.0
+2012-11-01 16:11:46.084|DEX[INFO] No license code
+2012-11-01 16:11:46.084|GraphPool[SEVERE] The temporary storage can not be created.
+2012-11-01 16:11:46.087|DEX[INFO] ** START ** 2012-11-01 16:11:46.087 Software version: 4.6.0
+2012-11-01 16:11:46.087|DEX[INFO] No license code
+2012-11-01 16:11:46.087|GraphPool[SEVERE] The temporary storage can not be created.
+2012-11-01 16:17:29.006|DEX[INFO] ** START ** 2012-11-01 16:17:29.006 Software version: 4.6.0
+2012-11-01 16:17:29.006|DEX[INFO] No license code
+2012-11-01 16:17:29.008|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:29.211|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:29.211|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:29.211|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:29.211
+2012-11-01 16:17:29.212|DEX[INFO] ** START ** 2012-11-01 16:17:29.212 Software version: 4.6.0
+2012-11-01 16:17:29.212|DEX[INFO] No license code
+2012-11-01 16:17:29.213|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:29.418|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:29.419|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:29.419|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:29.419
+2012-11-01 16:17:29.423|DEX[INFO] ** START ** 2012-11-01 16:17:29.423 Software version: 4.6.0
+2012-11-01 16:17:29.423|DEX[INFO] No license code
+2012-11-01 16:17:29.431|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:29.650|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:29.650|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:29.650|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:29.650
+2012-11-01 16:17:29.651|DEX[INFO] ** START ** 2012-11-01 16:17:29.651 Software version: 4.6.0
+2012-11-01 16:17:29.651|DEX[INFO] No license code
+2012-11-01 16:17:29.652|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:29.878|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:29.878|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:29.878|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:29.878
+2012-11-01 16:17:29.879|DEX[INFO] ** START ** 2012-11-01 16:17:29.879 Software version: 4.6.0
+2012-11-01 16:17:29.879|DEX[INFO] No license code
+2012-11-01 16:17:29.885|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:30.100|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:30.100|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:30.100|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:30.100
+2012-11-01 16:17:30.102|DEX[INFO] ** START ** 2012-11-01 16:17:30.102 Software version: 4.6.0
+2012-11-01 16:17:30.102|DEX[INFO] No license code
+2012-11-01 16:17:30.103|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:30.304|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:30.304|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:30.304|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:30.304
+2012-11-01 16:17:30.305|DEX[INFO] ** START ** 2012-11-01 16:17:30.305 Software version: 4.6.0
+2012-11-01 16:17:30.305|DEX[INFO] No license code
+2012-11-01 16:17:30.306|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:30.307|Graph[SEVERE] Can not get the object (12) type because it is invalid.
+2012-11-01 16:17:30.307|Graph[SEVERE] Check object failed because the object 12 is not valid.
+2012-11-01 16:17:30.507|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:30.508|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:30.508|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:30.508
+2012-11-01 16:17:30.509|DEX[INFO] ** START ** 2012-11-01 16:17:30.508 Software version: 4.6.0
+2012-11-01 16:17:30.509|DEX[INFO] No license code
+2012-11-01 16:17:30.509|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:30.711|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:30.711|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:30.711|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:30.711
+2012-11-01 16:17:30.712|DEX[INFO] ** START ** 2012-11-01 16:17:30.712 Software version: 4.6.0
+2012-11-01 16:17:30.712|DEX[INFO] No license code
+2012-11-01 16:17:30.712|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:30.915|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:30.915|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:30.915|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:30.915
+2012-11-01 16:17:30.917|DEX[INFO] ** START ** 2012-11-01 16:17:30.917 Software version: 4.6.0
+2012-11-01 16:17:30.917|DEX[INFO] No license code
+2012-11-01 16:17:30.917|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:31.119|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:31.119|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:31.119|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:31.119
+2012-11-01 16:17:31.120|DEX[INFO] ** START ** 2012-11-01 16:17:31.120 Software version: 4.6.0
+2012-11-01 16:17:31.120|DEX[INFO] No license code
+2012-11-01 16:17:31.120|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:31.321|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:31.322|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:31.322|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:31.322
+2012-11-01 16:17:31.323|DEX[INFO] ** START ** 2012-11-01 16:17:31.323 Software version: 4.6.0
+2012-11-01 16:17:31.323|DEX[INFO] No license code
+2012-11-01 16:17:31.323|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:31.924|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:31.925|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:31.925|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:31.925
+2012-11-01 16:17:31.927|DEX[INFO] ** START ** 2012-11-01 16:17:31.927 Software version: 4.6.0
+2012-11-01 16:17:31.927|DEX[INFO] No license code
+2012-11-01 16:17:31.927|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:32.128|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:32.128|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:32.128|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:32.128
+2012-11-01 16:17:32.129|DEX[INFO] ** START ** 2012-11-01 16:17:32.129 Software version: 4.6.0
+2012-11-01 16:17:32.129|DEX[INFO] No license code
+2012-11-01 16:17:32.130|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:32.331|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:32.331|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:32.331|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:32.331
+2012-11-01 16:17:32.332|DEX[INFO] ** START ** 2012-11-01 16:17:32.332 Software version: 4.6.0
+2012-11-01 16:17:32.332|DEX[INFO] No license code
+2012-11-01 16:17:32.333|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:32.534|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:32.534|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:32.534|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:32.534
+2012-11-01 16:17:32.535|DEX[INFO] ** START ** 2012-11-01 16:17:32.535 Software version: 4.6.0
+2012-11-01 16:17:32.535|DEX[INFO] No license code
+2012-11-01 16:17:32.536|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:32.736|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:32.737|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:32.737|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:32.737
+2012-11-01 16:17:32.738|DEX[INFO] ** START ** 2012-11-01 16:17:32.738 Software version: 4.6.0
+2012-11-01 16:17:32.738|DEX[INFO] No license code
+2012-11-01 16:17:32.738|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:32.940|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:32.940|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:32.940|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:32.940
+2012-11-01 16:17:32.945|DEX[INFO] ** START ** 2012-11-01 16:17:32.945 Software version: 4.6.0
+2012-11-01 16:17:32.945|DEX[INFO] No license code
+2012-11-01 16:17:32.946|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:33.147|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:33.147|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:33.147|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:33.147
+2012-11-01 16:17:33.148|DEX[INFO] ** START ** 2012-11-01 16:17:33.148 Software version: 4.6.0
+2012-11-01 16:17:33.148|DEX[INFO] No license code
+2012-11-01 16:17:33.148|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:33.350|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:33.350|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:33.350|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:33.350
+2012-11-01 16:17:33.352|DEX[INFO] ** START ** 2012-11-01 16:17:33.352 Software version: 4.6.0
+2012-11-01 16:17:33.352|DEX[INFO] No license code
+2012-11-01 16:17:33.352|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:33.554|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:33.554|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:33.554|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:33.554
+2012-11-01 16:17:33.555|DEX[INFO] ** START ** 2012-11-01 16:17:33.555 Software version: 4.6.0
+2012-11-01 16:17:33.555|DEX[INFO] No license code
+2012-11-01 16:17:33.556|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:33.756|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:33.756|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:33.756|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:33.756
+2012-11-01 16:17:33.758|DEX[INFO] ** START ** 2012-11-01 16:17:33.758 Software version: 4.6.0
+2012-11-01 16:17:33.758|DEX[INFO] No license code
+2012-11-01 16:17:33.759|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:35.366|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:35.367|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:35.367|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:35.367
+2012-11-01 16:17:35.369|DEX[INFO] ** START ** 2012-11-01 16:17:35.369 Software version: 4.6.0
+2012-11-01 16:17:35.369|DEX[INFO] No license code
+2012-11-01 16:17:35.370|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:35.572|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:35.572|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:35.572|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:35.572
+2012-11-01 16:17:35.574|DEX[INFO] ** START ** 2012-11-01 16:17:35.574 Software version: 4.6.0
+2012-11-01 16:17:35.574|DEX[INFO] No license code
+2012-11-01 16:17:35.574|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:35.575|Graph[SEVERE] Can not get the object (12) type because it is invalid.
+2012-11-01 16:17:35.575|Graph[SEVERE] Check object failed because the object 12 is not valid.
+2012-11-01 16:17:35.776|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:35.776|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:35.776|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:35.776
+2012-11-01 16:17:35.777|DEX[INFO] ** START ** 2012-11-01 16:17:35.777 Software version: 4.6.0
+2012-11-01 16:17:35.777|DEX[INFO] No license code
+2012-11-01 16:17:35.778|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:35.980|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:35.980|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:35.980|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:35.980
+2012-11-01 16:17:35.982|DEX[INFO] ** START ** 2012-11-01 16:17:35.982 Software version: 4.6.0
+2012-11-01 16:17:35.982|DEX[INFO] No license code
+2012-11-01 16:17:35.983|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:36.183|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:36.183|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:36.183|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:36.183
+2012-11-01 16:17:36.185|DEX[INFO] ** START ** 2012-11-01 16:17:36.185 Software version: 4.6.0
+2012-11-01 16:17:36.185|DEX[INFO] No license code
+2012-11-01 16:17:36.186|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:36.387|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:36.388|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:36.388|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:36.388
+2012-11-01 16:17:36.389|DEX[INFO] ** START ** 2012-11-01 16:17:36.389 Software version: 4.6.0
+2012-11-01 16:17:36.389|DEX[INFO] No license code
+2012-11-01 16:17:36.390|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:36.591|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:36.591|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:36.591|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:36.591
+2012-11-01 16:17:36.592|DEX[INFO] ** START ** 2012-11-01 16:17:36.592 Software version: 4.6.0
+2012-11-01 16:17:36.592|DEX[INFO] No license code
+2012-11-01 16:17:36.593|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:36.793|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:36.793|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:36.793|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:36.793
+2012-11-01 16:17:36.794|DEX[INFO] ** START ** 2012-11-01 16:17:36.794 Software version: 4.6.0
+2012-11-01 16:17:36.794|DEX[INFO] No license code
+2012-11-01 16:17:36.795|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:36.996|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:36.996|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:36.996|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:36.996
+2012-11-01 16:17:36.998|DEX[INFO] ** START ** 2012-11-01 16:17:36.998 Software version: 4.6.0
+2012-11-01 16:17:36.998|DEX[INFO] No license code
+2012-11-01 16:17:36.999|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:37.201|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:37.201|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:37.201|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:37.201
+2012-11-01 16:17:37.202|DEX[INFO] ** START ** 2012-11-01 16:17:37.202 Software version: 4.6.0
+2012-11-01 16:17:37.202|DEX[INFO] No license code
+2012-11-01 16:17:37.203|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:37.404|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:37.404|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:37.404|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:37.404
+2012-11-01 16:17:37.405|DEX[INFO] ** START ** 2012-11-01 16:17:37.405 Software version: 4.6.0
+2012-11-01 16:17:37.405|DEX[INFO] No license code
+2012-11-01 16:17:37.406|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:37.607|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:37.607|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:37.607|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:37.607
+2012-11-01 16:17:37.610|DEX[INFO] ** START ** 2012-11-01 16:17:37.610 Software version: 4.6.0
+2012-11-01 16:17:37.610|DEX[INFO] No license code
+2012-11-01 16:17:37.610|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:37.812|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:37.812|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:37.812|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:37.812
+2012-11-01 16:17:37.813|DEX[INFO] ** START ** 2012-11-01 16:17:37.813 Software version: 4.6.0
+2012-11-01 16:17:37.814|DEX[INFO] No license code
+2012-11-01 16:17:37.814|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:38.016|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:38.016|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:38.016|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:38.016
+2012-11-01 16:17:38.017|DEX[INFO] ** START ** 2012-11-01 16:17:38.017 Software version: 4.6.0
+2012-11-01 16:17:38.018|DEX[INFO] No license code
+2012-11-01 16:17:38.018|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:38.219|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:38.219|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:38.219|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:38.219
+2012-11-01 16:17:38.220|DEX[INFO] ** START ** 2012-11-01 16:17:38.220 Software version: 4.6.0
+2012-11-01 16:17:38.220|DEX[INFO] No license code
+2012-11-01 16:17:38.220|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:38.422|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:38.423|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:38.423|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:38.423
+2012-11-01 16:17:38.424|DEX[INFO] ** START ** 2012-11-01 16:17:38.424 Software version: 4.6.0
+2012-11-01 16:17:38.424|DEX[INFO] No license code
+2012-11-01 16:17:38.425|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:38.627|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:38.627|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:38.627|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:38.627
+2012-11-01 16:17:38.629|DEX[INFO] ** START ** 2012-11-01 16:17:38.629 Software version: 4.6.0
+2012-11-01 16:17:38.629|DEX[INFO] No license code
+2012-11-01 16:17:38.630|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:38.831|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:38.832|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:38.832|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:38.832
+2012-11-01 16:17:38.833|DEX[INFO] ** START ** 2012-11-01 16:17:38.833 Software version: 4.6.0
+2012-11-01 16:17:38.833|DEX[INFO] No license code
+2012-11-01 16:17:38.834|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:38.835|Graph[SEVERE] Check object failed because the object 2048 is not valid.
+2012-11-01 16:17:39.035|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:39.036|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:39.036|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:39.036
+2012-11-01 16:17:39.037|DEX[INFO] ** START ** 2012-11-01 16:17:39.037 Software version: 4.6.0
+2012-11-01 16:17:39.037|DEX[INFO] No license code
+2012-11-01 16:17:39.038|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:39.239|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:39.239|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:39.239|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:39.239
+2012-11-01 16:17:39.240|DEX[INFO] ** START ** 2012-11-01 16:17:39.240 Software version: 4.6.0
+2012-11-01 16:17:39.240|DEX[INFO] No license code
+2012-11-01 16:17:39.241|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:39.442|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:39.442|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:39.442|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:39.442
+2012-11-01 16:17:39.443|DEX[INFO] ** START ** 2012-11-01 16:17:39.443 Software version: 4.6.0
+2012-11-01 16:17:39.443|DEX[INFO] No license code
+2012-11-01 16:17:39.444|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:39.645|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:39.645|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:39.645|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:39.645
+2012-11-01 16:17:39.647|DEX[INFO] ** START ** 2012-11-01 16:17:39.647 Software version: 4.6.0
+2012-11-01 16:17:39.647|DEX[INFO] No license code
+2012-11-01 16:17:39.648|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:40.653|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:40.654|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:40.654|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:40.654
+2012-11-01 16:17:40.657|DEX[INFO] ** START ** 2012-11-01 16:17:40.657 Software version: 4.6.0
+2012-11-01 16:17:40.657|DEX[INFO] No license code
+2012-11-01 16:17:40.657|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:42.464|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:42.464|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:42.464|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:42.464
+2012-11-01 16:17:42.468|DEX[INFO] ** START ** 2012-11-01 16:17:42.468 Software version: 4.6.0
+2012-11-01 16:17:42.468|DEX[INFO] No license code
+2012-11-01 16:17:42.468|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:42.670|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:42.670|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:42.670|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:42.670
+2012-11-01 16:17:42.671|DEX[INFO] ** START ** 2012-11-01 16:17:42.671 Software version: 4.6.0
+2012-11-01 16:17:42.671|DEX[INFO] No license code
+2012-11-01 16:17:42.672|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:42.873|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:42.873|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:42.873|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:42.873
+2012-11-01 16:17:42.875|DEX[INFO] ** START ** 2012-11-01 16:17:42.875 Software version: 4.6.0
+2012-11-01 16:17:42.875|DEX[INFO] No license code
+2012-11-01 16:17:42.876|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:43.077|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:43.077|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:43.078|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:43.078
+2012-11-01 16:17:43.079|DEX[INFO] ** START ** 2012-11-01 16:17:43.079 Software version: 4.6.0
+2012-11-01 16:17:43.079|DEX[INFO] No license code
+2012-11-01 16:17:43.080|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:43.281|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:43.282|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:43.282|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:43.282
+2012-11-01 16:17:43.283|DEX[INFO] ** START ** 2012-11-01 16:17:43.283 Software version: 4.6.0
+2012-11-01 16:17:43.283|DEX[INFO] No license code
+2012-11-01 16:17:43.284|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:43.486|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:43.486|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:43.486|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:43.486
+2012-11-01 16:17:43.487|DEX[INFO] ** START ** 2012-11-01 16:17:43.487 Software version: 4.6.0
+2012-11-01 16:17:43.487|DEX[INFO] No license code
+2012-11-01 16:17:43.488|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:43.689|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:43.689|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:43.689|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:43.689
+2012-11-01 16:17:43.690|DEX[INFO] ** START ** 2012-11-01 16:17:43.690 Software version: 4.6.0
+2012-11-01 16:17:43.690|DEX[INFO] No license code
+2012-11-01 16:17:43.692|DEX[INFO] GraphPool 'blueprints_test.dex' has been opened at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:43.893|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:43.893|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:43.893|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:43.893
+2012-11-01 16:17:43.896|DEX[INFO] ** START ** 2012-11-01 16:17:43.896 Software version: 4.6.0
+2012-11-01 16:17:43.896|DEX[INFO] No license code
+2012-11-01 16:17:43.897|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:44.098|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:44.098|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:44.099|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:44.099
+2012-11-01 16:17:44.103|DEX[INFO] ** START ** 2012-11-01 16:17:44.103 Software version: 4.6.0
+2012-11-01 16:17:44.103|DEX[INFO] No license code
+2012-11-01 16:17:44.104|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:44.305|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:44.306|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:44.306|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:44.306
+2012-11-01 16:17:44.307|DEX[INFO] ** START ** 2012-11-01 16:17:44.307 Software version: 4.6.0
+2012-11-01 16:17:44.307|DEX[INFO] No license code
+2012-11-01 16:17:44.308|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:44.510|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:44.510|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:44.510|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:44.510
+2012-11-01 16:17:44.511|DEX[INFO] ** START ** 2012-11-01 16:17:44.511 Software version: 4.6.0
+2012-11-01 16:17:44.511|DEX[INFO] No license code
+2012-11-01 16:17:44.512|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:44.713|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:44.713|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:44.713|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:44.713
+2012-11-01 16:17:44.715|DEX[INFO] ** START ** 2012-11-01 16:17:44.715 Software version: 4.6.0
+2012-11-01 16:17:44.715|DEX[INFO] No license code
+2012-11-01 16:17:44.716|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:44.916|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:44.916|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:44.916|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:44.916
+2012-11-01 16:17:44.917|DEX[INFO] ** START ** 2012-11-01 16:17:44.917 Software version: 4.6.0
+2012-11-01 16:17:44.917|DEX[INFO] No license code
+2012-11-01 16:17:44.918|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:45.119|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:45.119|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:45.119|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:45.119
+2012-11-01 16:17:45.120|DEX[INFO] ** START ** 2012-11-01 16:17:45.120 Software version: 4.6.0
+2012-11-01 16:17:45.120|DEX[INFO] No license code
+2012-11-01 16:17:45.121|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:45.323|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:45.323|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:45.323|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:45.323
+2012-11-01 16:17:45.324|DEX[INFO] ** START ** 2012-11-01 16:17:45.324 Software version: 4.6.0
+2012-11-01 16:17:45.324|DEX[INFO] No license code
+2012-11-01 16:17:45.325|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:45.526|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:45.527|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:45.527|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:45.527
+2012-11-01 16:17:45.528|DEX[INFO] ** START ** 2012-11-01 16:17:45.528 Software version: 4.6.0
+2012-11-01 16:17:45.528|DEX[INFO] No license code
+2012-11-01 16:17:45.529|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:45.732|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:45.732|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:45.732|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:45.732
+2012-11-01 16:17:45.732|DEX[INFO] ** START ** 2012-11-01 16:17:45.732 Software version: 4.6.0
+2012-11-01 16:17:45.733|DEX[INFO] No license code
+2012-11-01 16:17:45.733|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:45.936|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:45.936|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:45.936|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:45.936
+2012-11-01 16:17:45.938|DEX[INFO] ** START ** 2012-11-01 16:17:45.937 Software version: 4.6.0
+2012-11-01 16:17:45.938|DEX[INFO] No license code
+2012-11-01 16:17:45.939|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:46.141|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:46.141|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:46.142|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:46.141
+2012-11-01 16:17:46.144|DEX[INFO] ** START ** 2012-11-01 16:17:46.144 Software version: 4.6.0
+2012-11-01 16:17:46.144|DEX[INFO] No license code
+2012-11-01 16:17:46.144|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:46.347|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:46.347|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:46.347|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:46.347
+2012-11-01 16:17:46.348|DEX[INFO] ** START ** 2012-11-01 16:17:46.348 Software version: 4.6.0
+2012-11-01 16:17:46.348|DEX[INFO] No license code
+2012-11-01 16:17:46.349|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:46.750|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:46.750|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:46.750|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:46.750
+2012-11-01 16:17:46.751|DEX[INFO] ** START ** 2012-11-01 16:17:46.751 Software version: 4.6.0
+2012-11-01 16:17:46.751|DEX[INFO] No license code
+2012-11-01 16:17:46.751|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:46.954|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:46.954|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:46.954|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:46.954
+2012-11-01 16:17:46.955|DEX[INFO] ** START ** 2012-11-01 16:17:46.955 Software version: 4.6.0
+2012-11-01 16:17:46.955|DEX[INFO] No license code
+2012-11-01 16:17:46.955|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:47.158|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:47.158|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:47.158|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:47.158
+2012-11-01 16:17:47.159|DEX[INFO] ** START ** 2012-11-01 16:17:47.159 Software version: 4.6.0
+2012-11-01 16:17:47.159|DEX[INFO] No license code
+2012-11-01 16:17:47.160|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:47.361|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:47.361|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:47.361|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:47.361
+2012-11-01 16:17:47.363|DEX[INFO] ** START ** 2012-11-01 16:17:47.363 Software version: 4.6.0
+2012-11-01 16:17:47.363|DEX[INFO] No license code
+2012-11-01 16:17:47.364|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:47.567|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:47.567|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:47.568|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:47.568
+2012-11-01 16:17:47.570|DEX[INFO] ** START ** 2012-11-01 16:17:47.570 Software version: 4.6.0
+2012-11-01 16:17:47.570|DEX[INFO] No license code
+2012-11-01 16:17:47.572|DEX[INFO] GraphPool 'blueprints_test.dex' has been created at /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:47.775|GraphPool[INFO] Closed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex
+2012-11-01 16:17:47.775|GraphPool[WARNING] Removed /Users/wuman/Projects/wuman/blueprints-android/blueprints-dex-graph/target/test-data/blueprints_test.dex.tmp
+2012-11-01 16:17:47.775|DEX[INFO] ** SHUTDOWN ** 2012-11-01 16:17:47.775

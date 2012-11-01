@@ -9,8 +9,6 @@ import java.util.Map.Entry;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.util.Xml;
-
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Graph;
 import com.tinkerpop.blueprints.TransactionalGraph;
@@ -109,7 +107,7 @@ public class GraphMLReader {
     public static void inputGraph(final Graph inputGraph, final InputStream graphMLInputStream, int bufferSize, String vertexIdKey, String edgeIdKey, String edgeLabelKey) throws IOException {
 
         try {
-            XmlPullParser parser = Xml.newPullParser();
+            XmlPullParser parser = AndroidXmlFactory.newPullParser();
             parser.setInput(graphMLInputStream, "UTF8");
 
             final BatchGraph graph = BatchGraph.wrap(inputGraph, bufferSize);

@@ -1,28 +1,49 @@
 package com.tinkerpop.blueprints;
 
-import junit.framework.TestCase;
-
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import junit.framework.TestCase;
+
+import org.kxml2.io.KXmlParser;
+import org.kxml2.io.KXmlSerializer;
+
+import com.tinkerpop.blueprints.util.io.graphml.AndroidXmlFactory;
+
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  */
 public abstract class BaseTest extends TestCase {
 
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        AndroidXmlFactory.parser = new KXmlParser();
+        AndroidXmlFactory.serializer = new KXmlSerializer();
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        AndroidXmlFactory.parser = null;
+        AndroidXmlFactory.serializer = null;
+        super.tearDown();
+    }
+
     double timer = -1.0d;
-    
-    public static<T> T getOnlyElement(final Iterator<T> iterator) {
-        if (!iterator.hasNext()) return null;
+
+    public static <T> T getOnlyElement(final Iterator<T> iterator) {
+        if (!iterator.hasNext())
+            return null;
         T element = iterator.next();
-        if (iterator.hasNext()) throw new IllegalArgumentException("Iterator has multiple elmenets");
+        if (iterator.hasNext())
+            throw new IllegalArgumentException("Iterator has multiple elmenets");
         return element;
     }
 
-    public static<T> T getOnlyElement(final Iterable<T> iterable) {
+    public static <T> T getOnlyElement(final Iterable<T> iterable) {
         return getOnlyElement(iterable.iterator());
     }
 
@@ -63,15 +84,20 @@ public abstract class BaseTest extends TestCase {
         }
     }
 
-    public static void printPerformance(String name, Integer events, String eventName, double timeInMilliseconds) {
+    public static void printPerformance(String name, Integer events,
+            String eventName, double timeInMilliseconds) {
         if (null != events)
-            System.out.println("\t" + name + ": " + events + " " + eventName + " in " + timeInMilliseconds + "ms");
+            System.out.println("\t" + name + ": " + events + " " + eventName
+                    + " in " + timeInMilliseconds + "ms");
         else
-            System.out.println("\t" + name + ": " + eventName + " in " + timeInMilliseconds + "ms");
+            System.out.println("\t" + name + ": " + eventName + " in "
+                    + timeInMilliseconds + "ms");
     }
 
-    public static void printTestPerformance(String testName, double timeInMilliseconds) {
-        System.out.println("*** TOTAL TIME [" + testName + "]: " + timeInMilliseconds + " ***");
+    public static void printTestPerformance(String testName,
+            double timeInMilliseconds) {
+        System.out.println("*** TOTAL TIME [" + testName + "]: "
+                + timeInMilliseconds + " ***");
     }
 
     protected static void deleteDirectory(final File directory) {
@@ -88,12 +114,13 @@ public abstract class BaseTest extends TestCase {
     }
 
     public File computeTestDataRoot() {
-        final String clsUri = this.getClass().getName().replace('.','/') + ".class";
+        final String clsUri = this.getClass().getName().replace('.', '/')
+                + ".class";
         final URL url = this.getClass().getClassLoader().getResource(clsUri);
         final String clsPath = url.getPath();
-        final File root = new File(clsPath.substring(0, clsPath.length() - clsUri.length()));
+        final File root = new File(clsPath.substring(0, clsPath.length()
+                - clsUri.length()));
         return new File(root.getParentFile(), "test-data");
     }
-
 
 }

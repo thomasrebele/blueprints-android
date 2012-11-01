@@ -4,22 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.tinkerpop.blueprints</groupId>
-        <artifactId>blueprints</artifactId>
+        <groupId>com.wu-man</groupId>
+        <artifactId>blueprints-android</artifactId>
         <version>2.1.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>blueprints-core</artifactId>
+    <artifactId>blueprints-android-core</artifactId>
     <url>http://blueprints.tinkerpop.com</url>
     <name>Blueprints-Core</name>
     <description>Core interfaces and utilities for Blueprints</description>
     <dependencies>
-        <dependency>
-            <groupId>com.google.android</groupId>
-            <artifactId>android</artifactId>
-            <version>4.1.1.4</version>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-core-asl</artifactId>

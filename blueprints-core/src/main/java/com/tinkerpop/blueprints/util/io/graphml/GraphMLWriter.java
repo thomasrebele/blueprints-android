@@ -13,8 +13,6 @@ import javax.xml.XMLConstants;
 
 import org.xmlpull.v1.XmlSerializer;
 
-import android.util.Xml;
-
 import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Graph;
@@ -129,10 +127,14 @@ public class GraphMLWriter {
         if (null != this.edgeLabelKey && null != this.edgeKeyTypes && null == this.edgeKeyTypes.get(this.edgeLabelKey))
             this.edgeKeyTypes.put(this.edgeLabelKey, GraphMLTokens.STRING);
 
-        XmlSerializer serializer = Xml.newSerializer();
+        XmlSerializer serializer = AndroidXmlFactory.newSerializer();
         serializer.setOutput(graphMLOutputStream, "UTF8");
+        
+        if ( this.normalize ) {
+            serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+        }
 
-        serializer.startDocument("UTF-8", true);
+        serializer.startDocument("UTF-8", null);
         serializer.startTag("", GraphMLTokens.GRAPHML);
         serializer.attribute("", GraphMLTokens.XMLNS, GraphMLTokens.GRAPHML_XMLNS);
 
@@ -160,7 +162,7 @@ public class GraphMLWriter {
             serializer.attribute("", GraphMLTokens.FOR, GraphMLTokens.NODE);
             serializer.attribute("", GraphMLTokens.ATTR_NAME, key);
             serializer.attribute("", GraphMLTokens.ATTR_TYPE, vertexKeyTypes.get(key));
-            serializer.endTag("", GraphMLTokens.KEY);
+            serializer.text("").endTag("", GraphMLTokens.KEY);
         }
 
         if (normalize) {
@@ -176,7 +178,7 @@ public class GraphMLWriter {
             serializer.attribute("", GraphMLTokens.FOR, GraphMLTokens.EDGE);
             serializer.attribute("", GraphMLTokens.ATTR_NAME, key);
             serializer.attribute("", GraphMLTokens.ATTR_TYPE, edgeKeyTypes.get(key));
-            serializer.endTag("", GraphMLTokens.KEY);
+            serializer.text("").endTag("", GraphMLTokens.KEY);
         }
 
         serializer.startTag("", GraphMLTokens.GRAPH);

@@ -178,7 +178,18 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <downloadJavadocs>true</downloadJavadocs>
+                    <additionalProjectnatures>
+                        <projectnature>com.android.ide.eclipse.adt.AndroidNature</projectnature>
+                        <projectnature>org.eclipse.jdt.core.javanature</projectnature>
+                    </additionalProjectnatures>
+                </configuration>
+            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
@@ -188,14 +199,6 @@
                     <version>2.11</version>
                     <configuration>
                         <runOrder>random</runOrder>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-eclipse-plugin</artifactId>
-                    <version>2.9</version>
-                    <configuration>
-                        <downloadJavadocs>true</downloadJavadocs>
                     </configuration>
                 </plugin>
             </plugins>

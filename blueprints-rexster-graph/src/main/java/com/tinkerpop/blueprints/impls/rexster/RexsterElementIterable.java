@@ -1,13 +1,12 @@
 package com.tinkerpop.blueprints.impls.rexster;
 
-import com.tinkerpop.blueprints.CloseableIterable;
-import com.tinkerpop.blueprints.Element;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Queue;
+
+import com.tinkerpop.blueprints.CloseableIterable;
+import com.tinkerpop.blueprints.Element;
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
@@ -44,7 +43,7 @@ abstract class RexsterElementIterable<T extends Element> implements CloseableIte
 
 
             public void remove() {
-                throw new NotImplementedException();
+                throw new UnsupportedOperationException();
             }
 
             public T next() {

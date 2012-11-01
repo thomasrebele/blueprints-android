@@ -39,3 +39,4 @@ build.xml
 ant.properties
 local.properties
 
+*.log

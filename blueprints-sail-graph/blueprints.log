@@ -1,8 +1,0 @@
-2012-11-01 16:18:54,909 [Finalizer] WARN SailConnectionBase - Rolling back transaction due to connection close
-java.lang.Throwable
-	at org.openrdf.sail.helpers.SailConnectionBase.close(SailConnectionBase.java:161)
-	at org.openrdf.sail.helpers.SailConnectionBase.finalize(SailConnectionBase.java:198)
-	at java.lang.ref.Finalizer.invokeFinalizeMethod(Native Method)
-	at java.lang.ref.Finalizer.runFinalizer(Finalizer.java:83)
-	at java.lang.ref.Finalizer.access$100(Finalizer.java:14)
-	at java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:160)

@@ -37,9 +37,9 @@
         <url>https://github.com/wuman/blueprints-android/issues</url>
     </issueManagement>
     <scm>
+        <url>https://github.com/wuman/blueprints-android</url>
         <connection>scm:git:git://github.com/wuman/blueprints-android.git</connection>
         <developerConnection>scm:git:git@github.com:wuman/blueprints-android.git</developerConnection>
-        <url>https://github.com/wuman/blueprints-android.git</url>
     </scm>
     <organization>
         <name>David Wu</name>
@@ -110,11 +110,20 @@
         <junit.version>4.5</junit.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <github.global.server>github</github.global.server>
     </properties>
 
     <build>
         <directory>${basedir}/target</directory>
         <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -174,14 +183,6 @@
         </plugins>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.5.1</version>
-                    <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
-                    </configuration>
-                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>

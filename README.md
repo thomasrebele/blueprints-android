@@ -14,7 +14,9 @@ The current release version is 2.1.0.1, which is in line with version 2.1.0
 of Blueprints. The project is built using Maven and passes all the original unit
 tests. However, I have only personally used the `blueprints-android-core` and
 `blueprints-android-orient-graph` submodules in practice. So use these libraries
-at your own risk.
+at your own risk. If you wish to use blueprints-android in conjunction with
+a database implementation other than OrientDB, you will have to include an
+Android port of that database implementation yourself.
 
 
 Including in Your Project

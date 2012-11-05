@@ -39,7 +39,7 @@
         <connection>scm:git:git://github.com/wuman/blueprints-android.git</connection>
         <developerConnection>scm:git:git@github.com:wuman/blueprints-android.git</developerConnection>
       <tag>HEAD</tag>
-  </scm>
+    </scm>
     <organization>
         <name>David Wu</name>
         <url>http://blog.wu-man.com</url>

@@ -10,16 +10,17 @@ libraries with native Android [JSON](http://developer.android.com/reference/org/
 and [XML](http://developer.android.com/reference/android/util/Xml.html) parsers 
 and serializers.
 
-The current release version is 2.1.0, which is consistent with version 2.1.0 of 
-Blueprints. The project is built using Maven and passes all the original unit
+The current release version is 2.1.0.1, which is in line with version 2.1.0 
+of Blueprints. The project is built using Maven and passes all the original unit
 tests. However, I have only personally used the `blueprints-android-core` and
-`blueprints-android-orient-graph` submodules in practice.
+`blueprints-android-orient-graph` submodules in practice. So use these libraries
+at your own risk.
 
 
 Including in Your Project
 -------------------------
 
-There are two ways to include blueprints-android in your projects:
+There are two ways to include the library in your projects:
 
 1. You can download the released jar file in the [Downloads section](https://github.com/wuman/blueprints-android/downloads).
 2. If you use Maven to build your project you can simply add a dependency to 
@@ -28,7 +29,7 @@ There are two ways to include blueprints-android in your projects:
         <dependency>
             <groupId>com.wu-man</groupId>
             <artifactId>blueprints-android-*</artifactId>
-            <version>2.1.0</version>
+            <version>2.1.0.1</version>
         </dependency>
 
 

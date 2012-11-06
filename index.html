@@ -35,20 +35,24 @@
 
 <p><img src="https://github.com/wuman/blueprints-android/raw/master/doc/images/blueprints-android-logo.png" alt="Feature Image"></p>
 
-<p>Blueprints-android is an Android port/fork of Blueprints. It replaces the 
+<p>Blueprints-android is an Android port/fork of 
+<a href="https://github.com/tinkerpop/blueprints/wiki">Blueprints</a>. It replaces the 
 <a href="http://jettison.codehaus.org/">Jettison</a> and <a href="http://stax.codehaus.org/">StAX</a> 
 libraries with native Android <a href="http://developer.android.com/reference/org/json/package-summary.html">JSON</a> 
 and <a href="http://developer.android.com/reference/android/util/Xml.html">XML</a> parsers 
 and serializers.</p>
 
-<p>The current release version is 2.1.0, which is consistent with version 2.1.0 of 
-Blueprints. The project is built using Maven and passes all the original unit
+<p>The current release version is 2.1.0.1, which is in line with version 2.1.0 
+of Blueprints. The project is built using Maven and passes all the original unit
 tests. However, I have only personally used the <code>blueprints-android-core</code> and
-<code>blueprints-android-orient-graph</code> submodules in practice.</p>
+<code>blueprints-android-orient-graph</code> submodules in practice. So use these libraries
+at your own risk. If you wish to use blueprints-android in conjunction with
+a database implementation other than OrientDB, you will have to include an
+Android port of that database implementation yourself.</p>
 
 <h2>Including in Your Project</h2>
 
-<p>There are two ways to include blueprints-android in your projects:</p>
+<p>There are two ways to include the library in your projects:</p>
 
 <ol>
 <li>You can download the released jar file in the <a href="https://github.com/wuman/blueprints-android/downloads">Downloads section</a>.</li>
@@ -59,7 +63,7 @@ the desired component of the library.</p>
 <pre><code>&lt;dependency&gt;
     &lt;groupId&gt;com.wu-man&lt;/groupId&gt;
     &lt;artifactId&gt;blueprints-android-*&lt;/artifactId&gt;
-    &lt;version&gt;2.1.0&lt;/version&gt;
+    &lt;version&gt;2.1.0.1&lt;/version&gt;
 &lt;/dependency&gt;
 </code></pre>
 </li>
@@ -179,7 +183,34 @@ the repository and sending a pull request.</p>
 </li>
 </ul>
 </li>
-</ul>
+</ul><h2>License</h2>
+
+<pre><code>Copyright 2012, David Wu
+Copyright (c) 2009-2012, TinkerPop [http://tinkerpop.com]
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the TinkerPop nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL TINKERPOP BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</code></pre>
       </section>
     </div>
 

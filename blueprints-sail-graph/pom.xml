@@ -40,17 +40,17 @@
         <dependency>
             <groupId>net.fortytwo</groupId>
             <artifactId>linked-data-sail</artifactId>
-            <version>0.7</version>
+            <version>1.1</version>
         </dependency>
         <dependency>
-            <groupId>net.fortytwo.sesametools</groupId>
-            <artifactId>nquads</artifactId>
-            <version>${sesametools.version}</version>
-        </dependency>
+		    <groupId>net.fortytwo.sesametools</groupId>
+		    <artifactId>nquads</artifactId>
+		    <version>1.7</version>
+		</dependency>
         <dependency>
             <groupId>net.fortytwo.sesametools</groupId>
-            <artifactId>reposail</artifactId>
-            <version>${sesametools.version}</version>
+            <artifactId>repository-sail</artifactId>
+            <version>1.8</version>
         </dependency>
         <!-- TESTING -->
         <dependency>
@@ -65,15 +65,23 @@
             <id>aduna-repo</id>
             <name>Aduna repository</name>
             <url>http://repo.aduna-software.org/maven2/releases</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
             <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
+                <enabled>false</enabled>
             </snapshots>
         </repository>
         <repository>
             <id>fortytwo</id>
             <name>fortytwo.net Maven repository</name>
             <url>http://fortytwo.net/maven2</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
     <build>

@@ -104,8 +104,8 @@
 
     <properties>
         <blueprints.version>2.1.0</blueprints.version>
-        <sesame.version>2.6.4</sesame.version>
-        <sesametools.version>1.6</sesametools.version>
+        <sesame.version>2.7.11</sesame.version>
+        <sesametools.version>1.8</sesametools.version>
         <junit.version>4.5</junit.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

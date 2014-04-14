@@ -96,15 +96,23 @@
             <id>aduna-repo</id>
             <name>Aduna repository</name>
             <url>http://repo.aduna-software.org/maven2/releases</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
             <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
+                <enabled>false</enabled>
             </snapshots>
         </repository>
         <repository>
             <id>fortytwo</id>
             <name>fortytwo.net Maven repository</name>
             <url>http://fortytwo.net/maven2</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
     <build>

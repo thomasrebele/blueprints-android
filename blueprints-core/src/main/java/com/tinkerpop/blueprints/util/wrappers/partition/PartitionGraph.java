@@ -1,11 +1,14 @@
 package com.tinkerpop.blueprints.util.wrappers.partition;
 
+import com.tinkerpop.blueprints.Contains;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Element;
 import com.tinkerpop.blueprints.Features;
 import com.tinkerpop.blueprints.Graph;
+import com.tinkerpop.blueprints.GraphQuery;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.util.StringFactory;
+import com.tinkerpop.blueprints.util.wrappers.WrappedGraphQuery;
 import com.tinkerpop.blueprints.util.wrappers.WrapperGraph;
 
 import java.util.Arrays;
@@ -70,7 +73,7 @@ public class PartitionGraph<T extends Graph> implements Graph, WrapperGraph<T> {
         if (element instanceof PartitionElement)
             writePartition = ((PartitionElement) element).getPartition();
         else
-            writePartition = (String) element.getProperty(this.partitionKey);
+            writePartition = element.getProperty(this.partitionKey);
         return (null == writePartition || this.readPartitions.contains(writePartition));
     }
 
@@ -145,5 +148,20 @@ public class PartitionGraph<T extends Graph> implements Graph, WrapperGraph<T> {
 
     public Features getFeatures() {
         return this.features;
+    }
+
+    public GraphQuery query() {
+        final PartitionGraph partitionGraph = this;
+        return new WrappedGraphQuery(this.baseGraph.query()) {
+            @Override
+            public Iterable<Edge> edges() {
+                return new PartitionEdgeIterable(this.query.has(partitionKey, Contains.IN, readPartitions).edges(), partitionGraph);
+            }
+
+            @Override
+            public Iterable<Vertex> vertices() {
+                return new PartitionVertexIterable(this.query.has(partitionKey, Contains.IN, readPartitions).vertices(), partitionGraph);
+            }
+        };
     }
 }

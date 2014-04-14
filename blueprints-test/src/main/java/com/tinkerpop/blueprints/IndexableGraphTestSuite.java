@@ -67,6 +67,7 @@ public class IndexableGraphTestSuite extends TestSuite {
             assertEquals(count(graph.getIndices()), 0);
             printPerformance(graph.toString(), 10, "indices created and then dropped", this.stopWatch());
 
+            this.stopWatch();
             Index<Vertex> index1 = graph.createIndex("index1", Vertex.class);
             Index<Vertex> index2 = graph.createIndex("index2", Vertex.class);
             printPerformance(graph.toString(), 2, "indices created", this.stopWatch());
@@ -220,48 +221,4 @@ public class IndexableGraphTestSuite extends TestSuite {
         }
         graph.shutdown();
     }
-
-
-    /*public void testAutomaticTransactionsOnIndices() {
-        IndexableGraph graph = (IndexableGraph) this.graphTest.generateGraph();
-        if (graphTest.supportsTransactions && graph instanceof TransactionalGraph) {
-            TransactionalGraph txGraph = (TransactionalGraph) graph;
-            assertEquals(txGraph.getMutationCounter(), 0);
-            txGraph.setBufferSize(5);
-            assertEquals(txGraph.getMutationCounter(), 0);
-            Index<Vertex> index = graph.createIndex("aManualIndex", Vertex.class);
-            assertEquals(txGraph.getMutationCounter(), 0);
-
-            Vertex v = graph.addVertex(null);
-            assertEquals(txGraph.getMutationCounter(), 1);
-            index.put("key", "value", v);
-            assertEquals(txGraph.getMutationCounter(), 2);
-            assertEquals(count(index.get("key", "value")), 1);
-            assertEquals(index.get("key", "value").iterator().next(), v);
-            txGraph.stopTransaction(TransactionalGraph.Conclusion.FAILURE);
-            assertEquals(txGraph.getMutationCounter(), 0);
-            assertEquals(count(index.get("key", "value")), 0);
-            assertEquals(count(graph.getVertices()), 0);
-
-            assertEquals(txGraph.getMutationCounter(), 0);
-            txGraph.setBufferSize(2);
-            assertEquals(txGraph.getMutationCounter(), 0);
-            v = graph.addVertex(null);
-            assertEquals(txGraph.getMutationCounter(), 1);
-            index.put("key", "value", v);
-            assertEquals(txGraph.getMutationCounter(), 0);
-            assertEquals(count(index.get("key", "value")), 1);
-            assertEquals(txGraph.getMutationCounter(), 0);
-            index.remove("key", "value", v);
-            assertEquals(txGraph.getMutationCounter(), 1);
-            assertEquals(count(index.get("key", "value")), 0);
-            txGraph.stopTransaction(TransactionalGraph.Conclusion.FAILURE);
-            assertEquals(txGraph.getMutationCounter(), 0);
-            assertEquals(txGraph.getBufferSize(), 2);
-            assertEquals(count(index.get("key", "value")), 1);
-        }
-
-        graph.shutdown();
-    }*/
-
 }

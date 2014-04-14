@@ -5,21 +5,20 @@ import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Element;
 import com.tinkerpop.blueprints.Features;
+import com.tinkerpop.blueprints.GraphQuery;
 import com.tinkerpop.blueprints.Index;
 import com.tinkerpop.blueprints.IndexableGraph;
 import com.tinkerpop.blueprints.KeyIndexableGraph;
 import com.tinkerpop.blueprints.Parameter;
 import com.tinkerpop.blueprints.Vertex;
+import com.tinkerpop.blueprints.util.DefaultGraphQuery;
 import com.tinkerpop.blueprints.util.ExceptionFactory;
 import com.tinkerpop.blueprints.util.KeyIndexableGraphHelper;
 import com.tinkerpop.blueprints.util.PropertyFilteredIterable;
 import com.tinkerpop.blueprints.util.StringFactory;
+import org.apache.commons.configuration.Configuration;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,7 +36,7 @@ import java.util.Set;
  */
 public class TinkerGraph implements IndexableGraph, KeyIndexableGraph, Serializable {
 
-    private Long currentId = 0l;
+    protected Long currentId = 0l;
     protected Map<String, Vertex> vertices = new HashMap<String, Vertex>();
     protected Map<String, Edge> edges = new HashMap<String, Edge>();
     protected Map<String, TinkerIndex> indices = new HashMap<String, TinkerIndex>();
@@ -46,7 +45,7 @@ public class TinkerGraph implements IndexableGraph, KeyIndexableGraph, Serializa
     protected TinkerKeyIndex<TinkerEdge> edgeKeyIndex = new TinkerKeyIndex<TinkerEdge>(TinkerEdge.class, this);
 
     private final String directory;
-    private static final String GRAPH_FILE = "/tinkergraph.dat";
+    private final FileType fileType;
 
     private static final Features FEATURES = new Features();
     private static final Features PERSISTENT_FEATURES;
@@ -68,7 +67,6 @@ public class TinkerGraph implements IndexableGraph, KeyIndexableGraph, Serializa
 
         FEATURES.ignoresSuppliedIds = false;
         FEATURES.isPersistent = false;
-        FEATURES.isRDFModel = false;
         FEATURES.isWrapper = false;
 
         FEATURES.supportsIndices = true;
@@ -89,8 +87,42 @@ public class TinkerGraph implements IndexableGraph, KeyIndexableGraph, Serializa
         PERSISTENT_FEATURES.isPersistent = true;
     }
 
-    public TinkerGraph(final String directory) {
+    public enum FileType {
+        JAVA,
+        GML,
+        GRAPHML,
+        GRAPHSON
+    }
+
+    public TinkerGraph(final Configuration configuration) {
+        if (configuration == null) {
+            throw new IllegalArgumentException("configuration cannot be null");
+        }
+
+        this.directory = configuration.getString("blueprints.tg.directory", null);
+        this.fileType = FileType.valueOf(configuration.getString("blueprints.tg.file-type", "JAVA"));
+
+        if (directory != null) {
+            this.init();
+        }
+    }
+
+    public TinkerGraph(final String directory, final FileType fileType) {
         this.directory = directory;
+        this.fileType = fileType;
+        this.init();
+    }
+
+    public TinkerGraph(final String directory) {
+        this(directory, FileType.JAVA);
+    }
+
+    public TinkerGraph() {
+        this.directory = null;
+        this.fileType = FileType.JAVA;
+    }
+
+    private void init() {
         try {
             final File file = new File(directory);
             if (!file.exists()) {
@@ -98,23 +130,19 @@ public class TinkerGraph implements IndexableGraph, KeyIndexableGraph, Serializa
                     throw new RuntimeException("Could not create directory");
                 }
             } else {
-                ObjectInputStream input = new ObjectInputStream(new FileInputStream(directory + GRAPH_FILE));
-                TinkerGraph temp = (TinkerGraph) input.readObject();
-                input.close();
-                this.currentId = temp.currentId;
-                this.vertices = temp.vertices;
-                this.edges = temp.edges;
-                this.indices = temp.indices;
-                this.vertexKeyIndex = temp.vertexKeyIndex;
-                this.edgeKeyIndex = temp.edgeKeyIndex;
+                final TinkerStorage tinkerStorage = TinkerStorageFactory.getInstance().getTinkerStorage(fileType);
+                final TinkerGraph graph = tinkerStorage.load(directory);
+
+                this.vertices = graph.vertices;
+                this.edges = graph.edges;
+                this.currentId = graph.currentId;
+                this.indices = graph.indices;
+                this.vertexKeyIndex = graph.vertexKeyIndex;
+                this.edgeKeyIndex = graph.edgeKeyIndex;
             }
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e);
         }
-    }
-
-    public TinkerGraph() {
-        this.directory = null;
     }
 
     public Iterable<Vertex> getVertices(final String key, final Object value) {
@@ -133,7 +161,10 @@ public class TinkerGraph implements IndexableGraph, KeyIndexableGraph, Serializa
         }
     }
 
-    public <T extends Element> void createKeyIndex(final String key, final Class<T> elementClass) {
+    public <T extends Element> void createKeyIndex(final String key, final Class<T> elementClass, final Parameter... indexParameters) {
+        if (elementClass == null)
+            throw ExceptionFactory.classForElementCannotBeNull();
+
         if (Vertex.class.isAssignableFrom(elementClass)) {
             this.vertexKeyIndex.createKeyIndex(key);
         } else if (Edge.class.isAssignableFrom(elementClass)) {
@@ -144,6 +175,9 @@ public class TinkerGraph implements IndexableGraph, KeyIndexableGraph, Serializa
     }
 
     public <T extends Element> void dropKeyIndex(final String key, final Class<T> elementClass) {
+        if (elementClass == null)
+            throw ExceptionFactory.classForElementCannotBeNull();
+
         if (Vertex.class.isAssignableFrom(elementClass)) {
             this.vertexKeyIndex.dropKeyIndex(key);
         } else if (Edge.class.isAssignableFrom(elementClass)) {
@@ -154,6 +188,9 @@ public class TinkerGraph implements IndexableGraph, KeyIndexableGraph, Serializa
     }
 
     public <T extends Element> Set<String> getIndexedKeys(final Class<T> elementClass) {
+        if (elementClass == null)
+            throw ExceptionFactory.classForElementCannotBeNull();
+
         if (Vertex.class.isAssignableFrom(elementClass)) {
             return this.vertexKeyIndex.getIndexedKeys();
         } else if (Edge.class.isAssignableFrom(elementClass)) {
@@ -246,6 +283,9 @@ public class TinkerGraph implements IndexableGraph, KeyIndexableGraph, Serializa
     }
 
     public void removeVertex(final Vertex vertex) {
+        if (!this.vertices.containsKey(vertex.getId().toString()))
+            throw ExceptionFactory.vertexWithIdDoesNotExist(vertex.getId());
+
         for (Edge edge : vertex.getEdges(Direction.BOTH)) {
             this.removeEdge(edge);
         }
@@ -262,6 +302,9 @@ public class TinkerGraph implements IndexableGraph, KeyIndexableGraph, Serializa
     }
 
     public Edge addEdge(final Object id, final Vertex outVertex, final Vertex inVertex, final String label) {
+        if (label == null)
+            throw ExceptionFactory.edgeLabelCanNotBeNull();
+
         String idString = null;
         Edge edge;
         if (null != id) {
@@ -316,6 +359,10 @@ public class TinkerGraph implements IndexableGraph, KeyIndexableGraph, Serializa
         this.edges.remove(edge.getId().toString());
     }
 
+    public GraphQuery query() {
+        return new DefaultGraphQuery(this);
+    }
+
 
     public String toString() {
         if (null == this.directory)
@@ -336,13 +383,8 @@ public class TinkerGraph implements IndexableGraph, KeyIndexableGraph, Serializa
     public void shutdown() {
         if (null != this.directory) {
             try {
-                final File file = new File(this.directory + GRAPH_FILE);
-                if (file.exists()) {
-                    file.delete();
-                }
-                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(this.directory + GRAPH_FILE));
-                out.writeObject(this);
-                out.close();
+                final TinkerStorage tinkerStorage = TinkerStorageFactory.getInstance().getTinkerStorage(this.fileType);
+                tinkerStorage.save(this, this.directory);
             } catch (Exception e) {
                 throw new RuntimeException(e.getMessage(), e);
             }

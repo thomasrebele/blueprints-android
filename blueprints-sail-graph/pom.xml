@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.wu-man</groupId>
-        <artifactId>blueprints-android</artifactId>
-        <version>2.1.0.3-SNAPSHOT</version>
+        <groupId>com.tinkerpop.blueprints</groupId>
+        <artifactId>blueprints</artifactId>
+        <version>2.5.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>blueprints-android-sail-graph</artifactId>
@@ -37,20 +37,53 @@
             <artifactId>sesame-sail-nativerdf</artifactId>
             <version>${sesame.version}</version>
         </dependency>
+        <!-- note: the LinkedDataSail dependency also includes RDF writers and parsers -->
         <dependency>
             <groupId>net.fortytwo</groupId>
             <artifactId>linked-data-sail</artifactId>
-            <version>1.1</version>
+            <version>${ripple.version}</version>
+            <exclusions>
+                <!-- conflict with blueprints-core -->
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <!-- conflict with Sesame -->
+                <exclusion>
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
+                </exclusion>
+                <!-- temporary; latest Ripple no longer has its own slf4j dependency -->
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <!-- temporary; latest Ripple resolves these two conflicts -->
+                <exclusion>
+                    <groupId>org.openrdf.sesame</groupId>
+                    <artifactId>sesame-model</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.openrdf.sesame</groupId>
+                    <artifactId>sesame-rio-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-        <dependency>
-		    <groupId>net.fortytwo.sesametools</groupId>
-		    <artifactId>nquads</artifactId>
-		    <version>1.7</version>
-		</dependency>
         <dependency>
             <groupId>net.fortytwo.sesametools</groupId>
             <artifactId>repository-sail</artifactId>
-            <version>1.8</version>
+            <version>${sesametools.version}</version>
+            <exclusions>
+                <!-- temporary; latest Ripple no longer has its own slf4j dependency -->
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- TESTING -->
         <dependency>

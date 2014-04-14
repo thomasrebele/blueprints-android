@@ -41,7 +41,7 @@ public abstract class GraphSailTest extends SailTest {
         uniqueStatements = true;
 
         graph = createGraph();
-        GraphSail g = new GraphSail(graph);
+        GraphSail<KeyIndexableGraph> g = new GraphSail<KeyIndexableGraph>(graph);
         g.enforceUniqueStatements(uniqueStatements);
 
         return g;
@@ -79,6 +79,7 @@ public abstract class GraphSailTest extends SailTest {
 
         SailConnection sc = sail.getConnection();
         try {
+            sc.begin();
             edgesBefore = countEdges();
             verticesBefore = countVertices();
         } finally {
@@ -91,25 +92,29 @@ public abstract class GraphSailTest extends SailTest {
         sc = sail.getConnection();
         //showStatements(sc, null, null, null);
         try {
-            assertEquals(14, countStatements(sc, null, null, null));
+            sc.begin();
+            assertEquals(14, countStatements(sc, null, null, null, false));
             assertEquals(edgesBefore + 14, countEdges());
             assertEquals(verticesBefore + 10, countVertices());
 
             sc.removeStatements(ref, null, null);
             sc.commit();
+            sc.begin();
 
-            assertEquals(13, countStatements(sc, null, null, null));
+            assertEquals(13, countStatements(sc, null, null, null, false));
             assertEquals(edgesBefore + 13, countEdges());
             assertEquals(verticesBefore + 9, countVertices());
 
             sc.clear();
             sc.commit();
+            sc.begin();
 
-            assertEquals(0, countStatements(sc, null, null, null));
+            assertEquals(0, countStatements(sc, null, null, null, false));
             assertEquals(0, countEdges());
             // Namespaces vertex is still present.
             assertEquals(verticesBefore, countVertices());
         } finally {
+            sc.rollback();
             sc.close();
         }
     }
@@ -124,9 +129,11 @@ public abstract class GraphSailTest extends SailTest {
 
         SailConnection sc = sail.getConnection();
         try {
+            sc.begin();
             edgesBefore = countEdges();
             verticesBefore = countVertices();
         } finally {
+            sc.rollback();
             sc.close();
         }
 
@@ -135,10 +142,11 @@ public abstract class GraphSailTest extends SailTest {
 
         sc = sail.getConnection();
         try {
-            assertEquals(3, countStatements(sc, class1, RDFS.SUBCLASSOF, null));
+            assertEquals(3, countStatements(sc, class1, RDFS.SUBCLASSOF, null, false));
             assertEquals(edgesBefore + 14, countEdges());
             assertEquals(verticesBefore + 10, countVertices());
         } finally {
+            sc.rollback();
             sc.close();
         }
 
@@ -149,10 +157,11 @@ public abstract class GraphSailTest extends SailTest {
 
         sc = sail.getConnection();
         try {
-            assertEquals(5, countStatements(sc, class1, RDFS.SUBCLASSOF, null));
+            assertEquals(5, countStatements(sc, class1, RDFS.SUBCLASSOF, null, false));
             assertEquals(edgesBefore + 23, countEdges());
             assertEquals(verticesBefore + 12, countVertices());
         } finally {
+            sc.rollback();
             sc.close();
         }
     }
@@ -175,6 +184,7 @@ public abstract class GraphSailTest extends SailTest {
         try {
             SailConnection sc = sail.getConnection();
             try {
+                sc.begin();
                 ValueFactory vf = sail.getValueFactory();
                 sc.addStatement(vf.createURI("http://tinkerpop.com#1"), vf.createURI("http://tinkerpop.com#knows"), vf.createURI("http://tinkerpop.com#3"), vf.createURI("http://tinkerpop.com"));
                 sc.addStatement(vf.createURI("http://tinkerpop.com#1"), vf.createURI("http://tinkerpop.com#name"), vf.createLiteral("marko"), vf.createURI("http://tinkerpop.com"));
@@ -280,7 +290,7 @@ public abstract class GraphSailTest extends SailTest {
     }
 
     protected File computeTestDataRoot() {
-        final String clsUri = this.getClass().getName().replace('.','/') + ".class";
+        final String clsUri = this.getClass().getName().replace('.', '/') + ".class";
         final URL url = this.getClass().getClassLoader().getResource(clsUri);
         final String clsPath = url.getPath();
         final File root = new File(clsPath.substring(0, clsPath.length() - clsUri.length()));

@@ -2,9 +2,9 @@ package com.tinkerpop.blueprints.util.wrappers.wrapped;
 
 import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
-import com.tinkerpop.blueprints.Query;
 import com.tinkerpop.blueprints.Vertex;
-import com.tinkerpop.blueprints.util.wrappers.WrapperQuery;
+import com.tinkerpop.blueprints.VertexQuery;
+import com.tinkerpop.blueprints.util.wrappers.WrapperVertexQuery;
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
@@ -23,8 +23,8 @@ public class WrappedVertex extends WrappedElement implements Vertex {
         return new WrappedVertexIterable(((Vertex) this.baseElement).getVertices(direction, labels));
     }
 
-    public Query query() {
-        return new WrapperQuery(((Vertex) this.baseElement).query()) {
+    public VertexQuery query() {
+        return new WrapperVertexQuery(((Vertex) this.baseElement).query()) {
             @Override
             public Iterable<Vertex> vertices() {
                 return new WrappedVertexIterable(this.query.vertices());
@@ -35,6 +35,13 @@ public class WrappedVertex extends WrappedElement implements Vertex {
                 return new WrappedEdgeIterable(this.query.edges());
             }
         };
+    }
+
+    public Edge addEdge(final String label, final Vertex vertex) {
+        if (vertex instanceof WrappedVertex)
+            return new WrappedEdge(((Vertex) this.baseElement).addEdge(label, ((WrappedVertex) vertex).getBaseVertex()));
+        else
+            return new WrappedEdge(((Vertex) this.baseElement).addEdge(label, vertex));
     }
 
     public Vertex getBaseVertex() {

@@ -1,7 +1,6 @@
 package com.tinkerpop.blueprints;
 
 import com.tinkerpop.blueprints.impls.GraphTest;
-import com.tinkerpop.blueprints.util.PropertyFilteredIterable;
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
@@ -13,6 +12,39 @@ public class KeyIndexableGraphTestSuite extends TestSuite {
 
     public KeyIndexableGraphTestSuite(final GraphTest graphTest) {
         super(graphTest);
+    }
+
+    public void testGetIndexedKeysCannotAcceptNullArgumentForClass() {
+        KeyIndexableGraph graph = (KeyIndexableGraph) graphTest.generateGraph();
+        try {
+            graph.getIndexedKeys(null);
+        } catch (IllegalArgumentException iae) {
+            return;
+        }
+
+        fail();
+    }
+
+    public void testCreateKeyIndexCannotAcceptNullArgumentForClass() {
+        KeyIndexableGraph graph = (KeyIndexableGraph) graphTest.generateGraph();
+        try {
+            graph.createKeyIndex("test", null);
+        } catch (IllegalArgumentException iae) {
+            return;
+        }
+
+        fail();
+    }
+
+    public void testRemoveKeyIndexCannotAcceptNullArgumentForClass() {
+        KeyIndexableGraph graph = (KeyIndexableGraph) graphTest.generateGraph();
+        try {
+            graph.dropKeyIndex("test", null);
+        } catch (IllegalArgumentException iae) {
+            return;
+        }
+
+        fail();
     }
 
     public void testAutoIndexKeyManagementWithPersistence() {
@@ -108,51 +140,25 @@ public class KeyIndexableGraphTestSuite extends TestSuite {
             assertEquals(count(graph.getVertices("name", "stephen")), 1);
             assertEquals(graph.getVertices("name", "marko").iterator().next(), v1);
             assertEquals(graph.getVertices("name", "stephen").iterator().next(), v2);
-
-            if (!graph.getFeatures().isWrapper) {
-                assertTrue(graph.getVertices("location", "everywhere") instanceof PropertyFilteredIterable);
-                assertTrue(graph.getVertices("location", "united states") instanceof PropertyFilteredIterable);
-                assertTrue(graph.getVertices("location", 10) instanceof PropertyFilteredIterable);
-                assertTrue(graph.getVertices("blah", "gnar") instanceof PropertyFilteredIterable);
-                assertTrue(graph.getVertices("bloop", "ulapor states") instanceof PropertyFilteredIterable);
-                assertTrue(graph.getVertices("bleep", 50) instanceof PropertyFilteredIterable);
-            }
-
-            assertFalse(graph.getVertices("name", "marko") instanceof PropertyFilteredIterable);
-            assertFalse(graph.getVertices("name", "rodriguez") instanceof PropertyFilteredIterable);
-            assertFalse(graph.getVertices("name", 768) instanceof PropertyFilteredIterable);
         }
 
         if (graph.getFeatures().supportsEdgeIteration && graph.getFeatures().supportsEdgeKeyIndex) {
-            graph.createKeyIndex("location", Edge.class);
+            graph.createKeyIndex("place", Edge.class);
             assertEquals(graph.getIndexedKeys(Edge.class).size(), 1);
-            assertTrue(graph.getIndexedKeys(Edge.class).contains("location"));
+            assertTrue(graph.getIndexedKeys(Edge.class).contains("place"));
 
             Edge e1 = graph.addEdge(null, graph.addVertex(null), graph.addVertex(null), "knows");
             e1.setProperty("name", "marko");
-            e1.setProperty("location", "everywhere");
+            e1.setProperty("place", "everywhere");
             Edge e2 = graph.addEdge(null, graph.addVertex(null), graph.addVertex(null), "knows");
             e2.setProperty("name", "stephen");
-            e2.setProperty("location", "everywhere");
+            e2.setProperty("place", "everywhere");
 
-            assertEquals(count(graph.getEdges("location", "everywhere")), 2);
+            assertEquals(count(graph.getEdges("place", "everywhere")), 2);
             assertEquals(count(graph.getEdges("name", "marko")), 1);
             assertEquals(count(graph.getEdges("name", "stephen")), 1);
             assertEquals(graph.getEdges("name", "marko").iterator().next(), e1);
             assertEquals(graph.getEdges("name", "stephen").iterator().next(), e2);
-
-            assertFalse(graph.getEdges("location", "everywhere") instanceof PropertyFilteredIterable);
-            assertFalse(graph.getEdges("location", "united states") instanceof PropertyFilteredIterable);
-            assertFalse(graph.getEdges("location", 10) instanceof PropertyFilteredIterable);
-
-            if (!graph.getFeatures().isWrapper) {
-                assertTrue(graph.getEdges("blah", "gnar") instanceof PropertyFilteredIterable);
-                assertTrue(graph.getEdges("bloop", "ulapor states") instanceof PropertyFilteredIterable);
-                assertTrue(graph.getEdges("bleep", 50) instanceof PropertyFilteredIterable);
-                assertTrue(graph.getEdges("name", "marko") instanceof PropertyFilteredIterable);
-                assertTrue(graph.getEdges("name", "rodriguez") instanceof PropertyFilteredIterable);
-                assertTrue(graph.getEdges("name", 768) instanceof PropertyFilteredIterable);
-            }
         }
         graph.shutdown();
     }
@@ -162,12 +168,9 @@ public class KeyIndexableGraphTestSuite extends TestSuite {
         if (graph.getFeatures().supportsVertexKeyIndex) {
             Vertex vertex = graph.addVertex(null);
             vertex.setProperty("name", "marko");
-            if (!graph.getFeatures().isWrapper)
-                assertTrue(graph.getVertices("name", "marko") instanceof PropertyFilteredIterable);
             assertEquals(count(graph.getVertices("name", "marko")), 1);
             assertEquals(graph.getVertices("name", "marko").iterator().next(), vertex);
             graph.createKeyIndex("name", Vertex.class);
-            assertFalse(graph.getVertices("name", "marko") instanceof PropertyFilteredIterable);
             assertEquals(count(graph.getVertices("name", "marko")), 1);
             assertEquals(graph.getVertices("name", "marko").iterator().next(), vertex);
         }
@@ -175,12 +178,9 @@ public class KeyIndexableGraphTestSuite extends TestSuite {
         if (graph.getFeatures().supportsEdgeKeyIndex) {
             Edge edge = graph.addEdge(null, graph.addVertex(null), graph.addVertex(null), "knows");
             edge.setProperty("date", 2012);
-            if (!graph.getFeatures().isWrapper)
-                assertTrue(graph.getEdges("date", 2012) instanceof PropertyFilteredIterable);
             assertEquals(count(graph.getEdges("date", 2012)), 1);
             assertEquals(graph.getEdges("date", 2012).iterator().next(), edge);
             graph.createKeyIndex("date", Edge.class);
-            assertFalse(graph.getEdges("date", 2012) instanceof PropertyFilteredIterable);
             assertEquals(count(graph.getEdges("date", 2012)), 1);
             assertEquals(graph.getEdges("date", 2012).iterator().next(), edge);
         }
@@ -194,16 +194,16 @@ public class KeyIndexableGraphTestSuite extends TestSuite {
             for (int i = 0; i < 25; i++) {
                 graph.addEdge(null, graph.addVertex(null), graph.addVertex(null), "test").setProperty("key", "value");
             }
-            assertEquals(count(graph.getVertices()), 50);
-            assertEquals(count(graph.getEdges()), 25);
+            if (graph.getFeatures().supportsVertexIteration) assertEquals(count(graph.getVertices()), 50);
+            if (graph.getFeatures().supportsEdgeIteration) assertEquals(count(graph.getEdges()), 25);
             int counter = 0;
             for (final Edge edge : graph.getEdges("key", "value")) {
                 graph.removeEdge(edge);
                 counter++;
             }
             assertEquals(counter, 25);
-            assertEquals(count(graph.getVertices()), 50);
-            assertEquals(count(graph.getEdges()), 0);
+            if (graph.getFeatures().supportsVertexIteration) assertEquals(count(graph.getVertices()), 50);
+            if (graph.getFeatures().supportsEdgeIteration) assertEquals(count(graph.getEdges()), 0);
 
         }
         graph.shutdown();
@@ -221,6 +221,39 @@ public class KeyIndexableGraphTestSuite extends TestSuite {
         graph.removeVertex(v1);
         vertexCount(graph, 0);
         assertEquals(0, count(graph.getVertices("foo", 42)));
+
+        graph.shutdown();
+    }
+
+    public void testUpdateValuesInIndexKeys() throws Exception {
+        KeyIndexableGraph graph = (KeyIndexableGraph) graphTest.generateGraph();
+
+        graph.createKeyIndex("name", Vertex.class);
+        if (graph instanceof TransactionalGraph)
+            ((TransactionalGraph) graph).commit();
+
+        Vertex v1 = graph.addVertex(null);
+        v1.setProperty("name", "marko");
+        assertEquals(v1.getProperty("name"), "marko");
+        vertexCount(graph, 1);
+        if (graph instanceof TransactionalGraph)
+            ((TransactionalGraph) graph).commit();
+
+        v1 = graph.getVertices("name", "marko").iterator().next();
+        assertEquals(v1.getProperty("name"), "marko");
+        v1.setProperty("name", "marko a. rodriguez");
+        assertEquals(v1.getProperty("name"), "marko a. rodriguez");
+        vertexCount(graph, 1);
+        if (graph instanceof TransactionalGraph)
+            ((TransactionalGraph) graph).commit();
+
+
+        assertFalse(graph.getVertices("name", "marko").iterator().hasNext());
+        v1 = graph.getVertices("name", "marko a. rodriguez").iterator().next();
+        assertEquals(v1.getProperty("name"), "marko a. rodriguez");
+        vertexCount(graph, 1);
+        if (graph instanceof TransactionalGraph)
+            ((TransactionalGraph) graph).commit();
 
         graph.shutdown();
     }

@@ -74,6 +74,10 @@ public class PartitionGraphTest extends GraphTest {
     }
 
     public Graph generateGraph() {
+        return generateGraph("");
+    }
+
+    public Graph generateGraph(final String graphDirectoryName) {
         return new PartitionIndexableGraph<TinkerGraph>(new TinkerGraph(), "_writeGraph", "writeGraph", new HashSet<String>(Arrays.asList("writeGraph")));
     }
 
@@ -85,6 +89,34 @@ public class PartitionGraphTest extends GraphTest {
                 method.invoke(testSuite);
             }
         }
+    }
+
+    public void testVerticesSeparatedByEdgeInDifferentPartition() {
+        TinkerGraph rawGraph = new TinkerGraph();
+        PartitionIndexableGraph graph = new PartitionIndexableGraph(rawGraph, "_writeGraph", "p1");
+        Vertex inp1 = graph.addVertex("inp1");
+
+        graph.setWritePartition("p2");
+        Vertex inp2 = graph.addVertex("inp2");
+        inp2.setProperty("key","value");
+
+        graph.setWritePartition("p3");
+        graph.addEdge("inp3", inp1, inp2, "links");
+
+        assertNull(graph.getVertex("inp2"));
+        graph.addReadPartition("p2");
+        graph.addReadPartition("p3");
+
+        assertNotNull(graph.getVertex("inp1"));
+        assertNotNull(graph.getVertex("inp2"));
+        assertTrue(graph.getVertex("inp1").getEdges(Direction.OUT).iterator().hasNext());
+
+        graph.removeReadPartition("p2");
+        assertTrue(graph.getVertex("inp1").getEdges(Direction.OUT).iterator().hasNext());
+
+        // the vertex at the end of this traversal is in the p2 partition which was removed above.  it should return
+        // null, throw exception, something....
+        assertNull(graph.getVertex("inp1").getEdges(Direction.OUT).iterator().next().getVertex(Direction.IN));
     }
 
     public void testSpecificBehavior() {
@@ -167,8 +199,8 @@ public class PartitionGraphTest extends GraphTest {
         assertEquals(graph.getWritePartition(), "c");
         assertEquals(count(graph.getVertices()), 0);
         assertEquals(count(graph.getEdges()), 1);
-        assertEquals(knows.getVertex(Direction.IN), peter);
-        assertEquals(knows.getVertex(Direction.OUT), marko);
+        assertNull(knows.getVertex(Direction.IN));
+        assertNull(knows.getVertex(Direction.OUT));
 
         // testing indices
         /*marko.setProperty("name", "marko");

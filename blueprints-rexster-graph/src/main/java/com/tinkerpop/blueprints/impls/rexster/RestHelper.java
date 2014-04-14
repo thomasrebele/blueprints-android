@@ -1,6 +1,12 @@
 package com.tinkerpop.blueprints.impls.rexster;
 
+import com.tinkerpop.blueprints.util.io.graphson.GraphSONTokens;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONObject;
+import org.codehaus.jettison.json.JSONTokener;
+
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -15,80 +21,145 @@ import org.json.JSONTokener;
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
+ * @author Stephen Mallette (http://stephen.genoprime.com)
  */
-public class RestHelper {
+final class RestHelper {
 
     public static RexsterAuthentication Authentication;
     private static final String PUT = "PUT";
     private static final String DELETE = "DELETE";
 
-    public static JSONObject get(final String uri) {
+    static JSONObject get(final String uri) {
         try {
-            final URL url = new URL(safeUri(uri));
-            final URLConnection connection = url.openConnection();
-            connection.setRequestProperty(RexsterTokens.ACCEPT, RexsterTokens.APPLICATION_REXSTER_TYPED_JSON);
-            if (Authentication.isAuthenticationEnabled()) {
-                connection.setRequestProperty(RexsterTokens.AUTHORIZATION, Authentication.getAuthenticationHeaderValue());
-            }
+            final URLConnection connection = createConnection(uri, null, RexsterTokens.APPLICATION_REXSTER_TYPED_JSON);
             connection.connect();
-            final JSONTokener tokener = new JSONTokener(convertStreamToString(connection.getInputStream()));
-            final JSONObject object = new JSONObject(tokener);
-            return object;
+            return new JSONObject(new JSONTokener(convertStreamToString(connection.getInputStream())));
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e);
         }
     }
 
-    public static JSONArray getResultArray(final String uri) {
+    static JSONArray getResultArray(final String uri) {
         return RestHelper.get(safeUri(uri)).optJSONArray(RexsterTokens.RESULTS);
     }
 
-    public static JSONObject getResultObject(final String uri) {
+    static JSONObject getResultObject(final String uri) {
         return RestHelper.get(safeUri(uri)).optJSONObject(RexsterTokens.RESULTS);
     }
 
-    public static JSONObject postResultObject(final String uri) {
+    static JSONArray postResultArray(final String uri, final JSONObject json) {
+        return post(uri, json.toString(), RexsterTokens.APPLICATION_JSON,
+                RexsterTokens.APPLICATION_JSON, false).optJSONArray(RexsterTokens.RESULTS);
+    }
+
+    static JSONObject postResultObject(final String uri) {
+        return post(uri, postData(uri), null, RexsterTokens.APPLICATION_JSON, false).optJSONObject(RexsterTokens.RESULTS);
+    }
+
+    static JSONObject postResultObject(final String uri, final JSONObject json) {
+        return post(uri, json.toString(), RexsterTokens.APPLICATION_REXSTER_TYPED_JSON,
+                RexsterTokens.APPLICATION_REXSTER_TYPED_JSON, false).optJSONObject(RexsterTokens.RESULTS);
+    }
+
+    static void post(final String uri) {
+        post(uri, postData(uri), null, RexsterTokens.APPLICATION_REXSTER_TYPED_JSON, false);
+    }
+
+    static void delete(final String uri) {
+        act(uri, DELETE, null, RexsterTokens.APPLICATION_REXSTER_TYPED_JSON);
+    }
+
+    static void put(final String uri) {
+        act(uri, PUT, null, RexsterTokens.APPLICATION_REXSTER_TYPED_JSON);
+    }
+
+    static Object typeCast(final String type, final Object value) {
+        if (type.equals(GraphSONTokens.TYPE_STRING))
+            return value.toString();
+        else if (type.equals(GraphSONTokens.TYPE_BOOLEAN))
+            return Boolean.valueOf(value.toString());
+        else if (type.equals(GraphSONTokens.TYPE_INTEGER))
+            return Integer.valueOf(value.toString());
+        else if (type.equals(GraphSONTokens.TYPE_LONG))
+            return Long.valueOf(value.toString());
+        else if (type.equals(GraphSONTokens.TYPE_DOUBLE))
+            return Double.valueOf(value.toString());
+        else if (type.equals(GraphSONTokens.TYPE_FLOAT))
+            return Float.valueOf(value.toString());
+        else
+            return value;
+    }
+
+    static String uriCast(final Object value) {
+        if (value == null)
+            return "(null,\"\")";
+        if (value instanceof Boolean)
+            return "(" + GraphSONTokens.TYPE_BOOLEAN + "," + value + ")";
+        else if (value instanceof Integer)
+            return "(" + GraphSONTokens.TYPE_INTEGER + "," + value + ")";
+        else if (value instanceof Long)
+            return "(" + GraphSONTokens.TYPE_LONG + "," + value + ")";
+        else if (value instanceof Float)
+            return "(" + GraphSONTokens.TYPE_FLOAT + "," + value + ")";
+        else if (value instanceof Double)
+            return "(" + GraphSONTokens.TYPE_DOUBLE + "," + value + ")";
+        else
+            return "(s," + value.toString() + ")";
+
+    }
+
+    static String encode(final Object id) {
+        if (id instanceof String)
+            return URLEncoder.encode(id.toString());
+        else
+            return id.toString();
+    }
+
+    private static void act(final String uri, final String verb, final String contentType,
+                            final String accept) {
         try {
-            // convert querystring into POST form data
-            URL url = new URL(postUri(uri));
-            String data = postData(uri);
-            final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty(RexsterTokens.ACCEPT, RexsterTokens.APPLICATION_REXSTER_TYPED_JSON);
-            if (Authentication.isAuthenticationEnabled()) {
-                connection.setRequestProperty(RexsterTokens.AUTHORIZATION, Authentication.getAuthenticationHeaderValue());
-            }
-            connection.setDoOutput(true);
-            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-            writer.write(data); // post data with Content-Length automatically set
-            writer.close();
-
-            final JSONTokener tokener = new JSONTokener(convertStreamToString(connection.getInputStream()));
-            final JSONObject resultObject = new JSONObject(tokener);
-            final JSONObject retObject = resultObject.optJSONObject(RexsterTokens.RESULTS);
-
-            return retObject;
+            final HttpURLConnection connection = createConnection(uri, contentType, accept);
+            connection.setRequestMethod(verb);
+            new InputStreamReader(connection.getInputStream()).close();
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e);
         }
     }
 
-    public static void post(final String uri) {
+    private static HttpURLConnection createConnection(final String uri, final String contentType,
+                                                      final String accept) throws IOException {
+        final URL url = new URL(safeUri(uri));
+        final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        if (contentType != null) {
+            connection.setRequestProperty("Content-Type", contentType);
+        }
+
+        if (accept != null) {
+            connection.setRequestProperty(RexsterTokens.ACCEPT, accept);
+        }
+
+        if (Authentication.isAuthenticationEnabled()) {
+            connection.setRequestProperty(RexsterTokens.AUTHORIZATION, Authentication.getAuthenticationHeaderValue());
+        }
+        return connection;
+    }
+
+    private static JSONObject post(final String uri, final String postData, final String contentType,
+                                   final String accept, final boolean noResult) {
         try {
-            // convert querystring into POST form data
-            URL url = new URL(postUri(uri));
-            String data = postData(uri);
-            final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty(RexsterTokens.ACCEPT, RexsterTokens.APPLICATION_REXSTER_TYPED_JSON);
-            if (Authentication.isAuthenticationEnabled()) {
-                connection.setRequestProperty(RexsterTokens.AUTHORIZATION, Authentication.getAuthenticationHeaderValue());
-            }
+            final HttpURLConnection connection = createConnection(uri, contentType, accept);
             connection.setDoOutput(true);
-            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-            writer.write(data); // post data with Content-Length automatically set
+
+            final OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+            writer.write(postData); // post data with Content-Length automatically set
             writer.close();
 
-            InputStreamReader reader = new InputStreamReader(connection.getInputStream());
-            reader.close();
+            if (noResult) {
+                new InputStreamReader(connection.getInputStream()).close();
+                return null;
+            } else {
+                return new JSONObject(new JSONTokener(convertStreamToString(connection.getInputStream())));
+            }
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e);
         }
@@ -117,89 +188,19 @@ public class RestHelper {
         return data;
     }
 
-    public static void delete(final String uri) {
-        try {
-            final URL url = new URL(uri);
-            final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty(RexsterTokens.ACCEPT, RexsterTokens.APPLICATION_REXSTER_TYPED_JSON);
-            if (Authentication.isAuthenticationEnabled()) {
-                connection.setRequestProperty(RexsterTokens.AUTHORIZATION, Authentication.getAuthenticationHeaderValue());
-            }
-            connection.setRequestMethod(DELETE);
-            final InputStreamReader reader = new InputStreamReader(connection.getInputStream());
-            reader.close();
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage(), e);
-        }
-    }
-
-    public static void put(final String uri) {
-        try {
-            final URL url = new URL(uri);
-            final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty(RexsterTokens.ACCEPT, RexsterTokens.APPLICATION_REXSTER_TYPED_JSON);
-            if (Authentication.isAuthenticationEnabled()) {
-                connection.setRequestProperty(RexsterTokens.AUTHORIZATION, Authentication.getAuthenticationHeaderValue());
-            }
-            connection.setRequestMethod(PUT);
-            final InputStreamReader reader = new InputStreamReader(connection.getInputStream());
-            reader.close();
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage(), e);
-        }
-    }
-
-    public static Object typeCast(final String type, final Object value) {
-        if (type.equals(RexsterTokens.STRING))
-            return value.toString();
-        else if (type.equals(RexsterTokens.INTEGER))
-            return Integer.valueOf(value.toString());
-        else if (type.equals(RexsterTokens.LONG))
-            return Long.valueOf(value.toString());
-        else if (type.equals(RexsterTokens.DOUBLE))
-            return Double.valueOf(value.toString());
-        else if (type.equals(RexsterTokens.FLOAT))
-            return Float.valueOf(value.toString());
-        else
-            return value;
-    }
-
-    public static String uriCast(final Object value) {
-        if (value instanceof String)
-            return value.toString();
-        else if (value instanceof Integer)
-            return "(" + RexsterTokens.INTEGER + "," + value + ")";
-        else if (value instanceof Long)
-            return "(" + RexsterTokens.LONG + "," + value + ")";
-        else if (value instanceof Float)
-            return "(" + RexsterTokens.FLOAT + "," + value + ")";
-        else if (value instanceof Double)
-            return "(" + RexsterTokens.DOUBLE + "," + value + ")";
-        else
-            return value.toString();
-
-    }
-
     private static String safeUri(String uri) {
         // todo: make this way more safe
         return uri.replace(" ", "%20");
     }
 
     private static String convertStreamToString(final InputStream is) throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        final StringBuilder sb = new StringBuilder();
         String line = null;
         while ((line = reader.readLine()) != null) {
             sb.append(line + "\n");
         }
         is.close();
         return sb.toString();
-    }
-
-    public static String encode(final Object id) {
-        if (id instanceof String)
-            return URLEncoder.encode(id.toString());
-        else
-            return id.toString();
     }
 }

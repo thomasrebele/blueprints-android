@@ -3,9 +3,11 @@ package com.tinkerpop.blueprints.util.wrappers.event.listener;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 
+import java.util.Map;
+
 /**
  * Interface for a listener to EventGraph change events.
- * <p/>
+ *
  * Implementations of this interface should be added to the list of listeners on the addListener method on
  * the EventGraph.
  *
@@ -27,7 +29,7 @@ public interface GraphChangedListener {
      * @param key      the key of the property that changed
      * @param setValue the new value of the property
      */
-    public void vertexPropertyChanged(final Vertex vertex, final String key, final Object setValue);
+    public void vertexPropertyChanged(final Vertex vertex, final String key, final Object oldValue, final Object setValue);
 
     /**
      * Raised after a vertex property was removed.
@@ -42,8 +44,9 @@ public interface GraphChangedListener {
      * Raised after a vertex was removed from the graph.
      *
      * @param vertex the vertex that was removed
+     * @param props  the properties of the removed vertex
      */
-    public void vertexRemoved(final Vertex vertex);
+    public void vertexRemoved(final Vertex vertex, Map<String, Object> props);
 
     /**
      * Raised after a new edge is added.
@@ -59,7 +62,7 @@ public interface GraphChangedListener {
      * @param key      the key of the property that changed
      * @param setValue the new value of the property
      */
-    public void edgePropertyChanged(final Edge edge, final String key, final Object setValue);
+    public void edgePropertyChanged(final Edge edge, final String key, final Object oldValue, final Object setValue);
 
     /**
      * Raised after an edge property was removed.
@@ -73,7 +76,8 @@ public interface GraphChangedListener {
     /**
      * Raised after an edge was removed from the graph.
      *
-     * @param edge
+     * @param edge  the edge that was removed.
+     * @param props the properties of the removed vertex
      */
-    public void edgeRemoved(final Edge edge);
+    public void edgeRemoved(final Edge edge, Map<String, Object> props);
 }

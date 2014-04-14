@@ -6,11 +6,9 @@ import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.util.ElementHelper;
 import com.tinkerpop.blueprints.util.wrappers.event.listener.EdgePropertyChangedEvent;
 import com.tinkerpop.blueprints.util.wrappers.event.listener.EdgePropertyRemovedEvent;
-import com.tinkerpop.blueprints.util.wrappers.event.listener.GraphChangedListener;
 import com.tinkerpop.blueprints.util.wrappers.event.listener.VertexPropertyChangedEvent;
 import com.tinkerpop.blueprints.util.wrappers.event.listener.VertexPropertyRemovedEvent;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,32 +18,29 @@ import java.util.Set;
  * @author Stephen Mallette
  */
 public abstract class EventElement implements Element {
-    protected final EventTrigger trigger;
+    protected final EventGraph eventGraph;
 
     protected final Element baseElement;
-    protected final List<GraphChangedListener> graphChangedListeners;
 
-    protected EventElement(final Element baseElement, final List<GraphChangedListener> graphChangedListeners,
-                        final EventTrigger trigger) {
+    protected EventElement(final Element baseElement, final EventGraph eventGraph) {
         this.baseElement = baseElement;
-        this.graphChangedListeners = graphChangedListeners;
-        this.trigger = trigger;
+        this.eventGraph = eventGraph;
     }
 
-    protected void onVertexPropertyChanged(final Vertex vertex, final String key, final Object newValue) {
-        this.trigger.addEvent(new VertexPropertyChangedEvent(vertex, key, newValue));
+    protected void onVertexPropertyChanged(final Vertex vertex, final String key, final Object oldValue, final Object newValue) {
+        this.eventGraph.getTrigger().addEvent(new VertexPropertyChangedEvent(vertex, key, oldValue, newValue));
     }
 
-    protected void onEdgePropertyChanged(final Edge edge, final String key, final Object newValue) {
-        this.trigger.addEvent(new EdgePropertyChangedEvent(edge, key, newValue));
+    protected void onEdgePropertyChanged(final Edge edge, final String key, final Object oldValue, final Object newValue) {
+        this.eventGraph.getTrigger().addEvent(new EdgePropertyChangedEvent(edge, key, oldValue, newValue));
     }
 
-    protected void onVertexPropertyRemoved(final Vertex vertex, final String key, final Object newValue) {
-        this.trigger.addEvent(new VertexPropertyRemovedEvent(vertex, key, newValue));
+    protected void onVertexPropertyRemoved(final Vertex vertex, final String key, final Object removedValue) {
+        this.eventGraph.getTrigger().addEvent(new VertexPropertyRemovedEvent(vertex, key, removedValue));
     }
 
     protected void onEdgePropertyRemoved(final Edge edge, final String key, final Object removedValue) {
-        this.trigger.addEvent(new EdgePropertyRemovedEvent(edge, key, removedValue));
+        this.eventGraph.getTrigger().addEvent(new EdgePropertyRemovedEvent(edge, key, removedValue));
     }
 
     public Set<String> getPropertyKeys() {
@@ -59,8 +54,8 @@ public abstract class EventElement implements Element {
     /**
      * Raises a vertexPropertyRemoved or edgePropertyRemoved event.
      */
-    public Object removeProperty(final String key) {
-        Object propertyRemoved = baseElement.removeProperty(key);
+    public <T> T removeProperty(final String key) {
+        final Object propertyRemoved = baseElement.removeProperty(key);
 
         if (this instanceof Vertex) {
             this.onVertexPropertyRemoved((Vertex) this, key, propertyRemoved);
@@ -68,10 +63,10 @@ public abstract class EventElement implements Element {
             this.onEdgePropertyRemoved((Edge) this, key, propertyRemoved);
         }
 
-        return propertyRemoved;
+        return (T) propertyRemoved;
     }
 
-    public Object getProperty(final String key) {
+    public <T> T getProperty(final String key) {
         return this.baseElement.getProperty(key);
     }
 
@@ -79,12 +74,13 @@ public abstract class EventElement implements Element {
      * Raises a vertexPropertyRemoved or edgePropertyChanged event.
      */
     public void setProperty(final String key, final Object value) {
+        final Object oldValue = this.baseElement.getProperty(key);
         this.baseElement.setProperty(key, value);
 
         if (this instanceof Vertex) {
-            this.onVertexPropertyChanged((Vertex) this, key, value);
+            this.onVertexPropertyChanged((Vertex) this, key, oldValue, value);
         } else if (this instanceof Edge) {
-            this.onEdgePropertyChanged((Edge) this, key, value);
+            this.onEdgePropertyChanged((Edge) this, key, oldValue, value);
         }
     }
 
@@ -102,5 +98,12 @@ public abstract class EventElement implements Element {
 
     public Element getBaseElement() {
         return this.baseElement;
+    }
+
+    public void remove() {
+        if (this instanceof Vertex)
+            this.eventGraph.removeVertex((Vertex) this);
+        else
+            this.eventGraph.removeEdge((Edge) this);
     }
 }

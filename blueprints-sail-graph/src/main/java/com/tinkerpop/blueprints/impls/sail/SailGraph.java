@@ -3,9 +3,11 @@ package com.tinkerpop.blueprints.impls.sail;
 
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Features;
+import com.tinkerpop.blueprints.GraphQuery;
 import com.tinkerpop.blueprints.MetaGraph;
 import com.tinkerpop.blueprints.TransactionalGraph;
 import com.tinkerpop.blueprints.Vertex;
+import com.tinkerpop.blueprints.util.DefaultGraphQuery;
 import com.tinkerpop.blueprints.util.ExceptionFactory;
 import com.tinkerpop.blueprints.util.PropertyFilteredIterable;
 import com.tinkerpop.blueprints.util.StringFactory;
@@ -30,12 +32,14 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParser;
+import org.openrdf.rio.RDFWriter;
 import org.openrdf.rio.Rio;
 import org.openrdf.sail.Sail;
 import org.openrdf.sail.SailConnection;
 import org.openrdf.sail.SailException;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -43,6 +47,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 /**
  * A Blueprints implementation of the RDF-based Sail interfaces by Aduna (http://openrdf.org).
@@ -51,6 +56,7 @@ import java.util.UUID;
  * @author Joshua Shinavier (http://fortytwo.net)
  */
 public class SailGraph implements TransactionalGraph, MetaGraph<Sail> {
+    private static final Logger LOGGER = Logger.getLogger(SailGraph.class.getName());
 
     public static final Map<String, RDFFormat> formats = new HashMap<String, RDFFormat>();
 
@@ -60,7 +66,6 @@ public class SailGraph implements TransactionalGraph, MetaGraph<Sail> {
         FEATURES.supportsDuplicateEdges = false;
         FEATURES.supportsSelfLoops = true;
         FEATURES.isPersistent = false;
-        FEATURES.isRDFModel = true;
         FEATURES.supportsVertexIteration = false;
         FEATURES.supportsEdgeIteration = true;
         FEATURES.supportsVertexIndex = false;
@@ -92,13 +97,14 @@ public class SailGraph implements TransactionalGraph, MetaGraph<Sail> {
     }
 
     static {
-        formats.put("rdf-xml", RDFFormat.RDFXML);
-        formats.put("n-triples", RDFFormat.NTRIPLES);
-        formats.put("turtle", RDFFormat.TURTLE);
         formats.put("n3", RDFFormat.N3);
+        formats.put("n-quads", RDFFormat.NQUADS);
+        formats.put("n-triples", RDFFormat.NTRIPLES);
+        formats.put("rdf-json", RDFFormat.RDFJSON);
+        formats.put("rdf-xml", RDFFormat.RDFXML);
         formats.put("trix", RDFFormat.TRIX);
         formats.put("trig", RDFFormat.TRIG);
-        //formats.put("n-quads", NQuadsFormat.NQUADS); // TODO: fix missing NQUADS
+        formats.put("turtle", RDFFormat.TURTLE);
     }
 
     public static RDFFormat getFormat(final String format) {
@@ -137,8 +143,7 @@ public class SailGraph implements TransactionalGraph, MetaGraph<Sail> {
         try {
             PropertyConfigurator.configure(SailGraph.class.getResource(LOG4J_PROPERTIES));
         } catch (Throwable e) {
-            // TODO: uncomment this?
-            //e.printStackTrace(System.err);
+            LOGGER.warning("failed to configure Log4j: " + e.getMessage());
         }
         try {
             this.rawGraph = sail;
@@ -225,11 +230,14 @@ public class SailGraph implements TransactionalGraph, MetaGraph<Sail> {
             }
             this.sailConnection.get().removeStatements(null, null, vertexValue);
         } catch (SailException e) {
-            throw new RuntimeException(e.getMessage(), e);
+            throw ExceptionFactory.vertexWithIdDoesNotExist(vertex.getId());
         }
     }
 
     public Edge addEdge(final Object id, final Vertex outVertex, final Vertex inVertex, final String label) {
+        if (label == null)
+            throw ExceptionFactory.edgeLabelCanNotBeNull();
+
         Value outVertexValue = ((SailVertex) outVertex).getRawVertex();
         Value inVertexValue = ((SailVertex) inVertex).getRawVertex();
 
@@ -322,9 +330,10 @@ public class SailGraph implements TransactionalGraph, MetaGraph<Sail> {
      */
     public void loadRDF(final InputStream input, final String baseURI, final String format, final String baseGraph) {
         try {
-            this.stopTransaction(Conclusion.SUCCESS);
+            this.commit();
             final SailConnection c = this.rawGraph.getConnection();
             try {
+                c.begin();
                 RDFParser p = Rio.createParser(getFormat(format));
                 RDFHandler h = null == baseGraph
                         ? new SailAdder(c)
@@ -333,6 +342,42 @@ public class SailGraph implements TransactionalGraph, MetaGraph<Sail> {
                 p.parse(input, baseURI);
                 c.commit();
             } finally {
+                c.rollback();
+                c.close();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Save RDF data from the SailGraph.
+     * Supported formats include rdf-xml, n-triples, turtle, n3, trix, or trig.
+     *
+     * @param output the OutputStream to which to write RDF data
+     * @param format supported formats include rdf-xml, n-triples, turtle, n3, trix, or trig
+     */
+    public void saveRDF(final OutputStream output, final String format) {
+        try {
+            this.commit();
+            final SailConnection c = this.rawGraph.getConnection();
+            try {
+                c.begin();
+                RDFWriter w = Rio.createWriter(getFormat(format), output);
+                w.startRDF();
+
+                CloseableIteration<? extends Statement, SailException> iter = c.getStatements(null, null, null, false);
+                try {
+                    while (iter.hasNext()) {
+                        w.handleStatement(iter.next());
+                    }
+                } finally {
+                    iter.close();
+                }
+
+                w.endRDF();
+            } finally {
+                c.rollback();
                 c.close();
             }
         } catch (Exception e) {
@@ -343,6 +388,7 @@ public class SailGraph implements TransactionalGraph, MetaGraph<Sail> {
     private synchronized SailConnection createConnection() throws SailException {
         cleanupConnections();
         final SailConnection sc = rawGraph.getConnection();
+        sc.begin();
         connections.add(sc);
         return sc;
     }
@@ -374,7 +420,7 @@ public class SailGraph implements TransactionalGraph, MetaGraph<Sail> {
 
     public synchronized void shutdown() {
         try {
-            this.stopTransaction(Conclusion.SUCCESS);
+            this.commit();
             closeAllConnections();
             this.rawGraph.shutDown();
         } catch (Throwable e) {
@@ -422,13 +468,29 @@ public class SailGraph implements TransactionalGraph, MetaGraph<Sail> {
         return uri;
     }
 
-    public void stopTransaction(final Conclusion conclusion) {
+    public void stopTransaction(Conclusion conclusion) {
+        if (Conclusion.SUCCESS == conclusion) {
+            commit();
+        } else {
+            rollback();
+        }
+    }
+
+    public void commit() {
         try {
-            if (Conclusion.SUCCESS == conclusion) {
-                this.sailConnection.get().commit();
-            } else {
-                this.sailConnection.get().rollback();
-            }
+            SailConnection sc = this.sailConnection.get();
+            sc.commit();
+            sc.begin();
+        } catch (SailException e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
+    }
+
+    public void rollback() {
+        try {
+            SailConnection sc = this.sailConnection.get();
+            sc.rollback();
+            sc.begin();
         } catch (SailException e) {
             throw new RuntimeException(e.getMessage(), e);
         }
@@ -449,6 +511,10 @@ public class SailGraph implements TransactionalGraph, MetaGraph<Sail> {
 
     public Features getFeatures() {
         return FEATURES;
+    }
+
+    public GraphQuery query() {
+        return new DefaultGraphQuery(this);
     }
 
     /**

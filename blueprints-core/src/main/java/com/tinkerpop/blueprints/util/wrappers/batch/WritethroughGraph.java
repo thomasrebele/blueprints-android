@@ -3,6 +3,7 @@ package com.tinkerpop.blueprints.util.wrappers.batch;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Features;
 import com.tinkerpop.blueprints.Graph;
+import com.tinkerpop.blueprints.GraphQuery;
 import com.tinkerpop.blueprints.TransactionalGraph;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.util.StringFactory;
@@ -39,8 +40,19 @@ class WritethroughGraph<T extends Graph> implements WrapperGraph<T>, Transaction
      * @param conclusion whether or not the current transaction was successful or not
      */
     @Override
-    public void stopTransaction(final Conclusion conclusion) {
-        if (conclusion == Conclusion.FAILURE) throw new IllegalArgumentException("Failure not accepted");
+    public void stopTransaction(Conclusion conclusion) {
+        if (Conclusion.SUCCESS == conclusion)
+            commit();
+        else
+            rollback();
+    }
+
+    public void rollback() {
+        throw new IllegalStateException("Transactions can not be rolled back");
+    }
+
+    public void commit() {
+
     }
 
     /**
@@ -97,6 +109,11 @@ class WritethroughGraph<T extends Graph> implements WrapperGraph<T>, Transaction
     @Override
     public Iterable<Edge> getEdges() {
         return graph.getEdges();
+    }
+
+    @Override
+    public GraphQuery query() {
+        return graph.query();
     }
 
     @Override

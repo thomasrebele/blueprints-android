@@ -9,10 +9,15 @@ import com.tinkerpop.blueprints.util.wrappers.WrapperGraph;
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
 import org.openrdf.model.Resource;
+import org.openrdf.model.Statement;
 import org.openrdf.model.URI;
 import org.openrdf.model.Value;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.impl.ValueFactoryImpl;
+import org.openrdf.rio.RDFHandler;
+import org.openrdf.rio.RDFHandlerException;
+import org.openrdf.rio.RDFParser;
+import org.openrdf.rio.Rio;
 import org.openrdf.sail.NotifyingSailConnection;
 import org.openrdf.sail.SailException;
 import org.openrdf.sail.helpers.NotifyingSailBase;
@@ -23,19 +28,20 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
  * An RDF storage interface for any graph database with a Blueprints IndexableGraph implementation.  It models
  * RDF graphs as property graphs which can be easily traversed and manipulated with other Blueprints-compatible tools.
  * At the same time, it can be used with OpenRDF-based tools to power a SPARQL endpoint, an RDF reasoner, etc.
- * <p/>
+ *
  * RDF resources are stored as vertices, RDF statements as edges using the Blueprints default (automatic) indices.
  * Namespaces are stored at a special vertex with the id "urn:com.tinkerpop.blueprints.sail:namespaces".
- * <p/>
+ *
  * This Sail is as transactional as the underlying graph database: if the provided Graph implements TransactionalGraph
  * and is in manual transaction mode, then the SailConnection's commit and rollback methods will be used correspondingly.
- * <p/>
+ *
  * Retrieval of RDF statements from the store involves both "index-based" and "graph-based" matching, as follows.
  * For each new statement edge which is added to the store, "p" (predicate), "c" (context), and "pc" (predicate and context)
  * property values are added and indexed.  These allow the statement to be quickly retrieved in a query where only the
@@ -47,13 +53,16 @@ import java.util.regex.Pattern;
  * either the john or jane vertex as a starting point and filters on adjacent edges.  Graph-based matches are used for
  * all of the triple patterns s,o,sp,so,sc,po,oc,spo,spc,soc,poc,spoc which have not been explicitly flagged for
  * index-based matching.
- * <p/>
+ *
  * Note: this implementation attaches no semantics to Vertex and Edge IDs, so as to be compatible with Graph
  * implementations which do no not allow IDs to be chosen.
  *
  * @author Joshua Shinavier (http://fortytwo.net)
  */
 public class GraphSail<T extends KeyIndexableGraph> extends NotifyingSailBase implements WrapperGraph<T> {
+
+    private static final Logger LOGGER = Logger.getLogger(GraphSail.class.getName());
+
     public static final String SEPARATOR = " ";
 
     public static final String
@@ -80,7 +89,9 @@ public class GraphSail<T extends KeyIndexableGraph> extends NotifyingSailBase im
             URI = "uri",
             VALUE = "value";
 
-    public static final String NULL_CONTEXT_NATIVE = "" + GraphSail.NULL_CONTEXT_PREFIX;
+    public static final String DEFAULT_NAMESPACE_PREFIX_KEY = "default-namespace";
+
+    public static final String NULL_CONTEXT_NATIVE = "" + NULL_CONTEXT_PREFIX;
 
     private static final String[][] ALTERNATIVES = {{"s", ""}, {"p", ""}, {"o", ""}, {"c", ""}, {"sp", "s", "p"}, {"so", "s", "o"}, {"sc", "s", "c"}, {"po", "o", "p"}, {"pc", "p", "c"}, {"oc", "o", "c"}, {"spo", "so", "sp", "po"}, {"spc", "sc", "sp", "pc"}, {"soc", "so", "sc", "oc"}, {"poc", "po", "oc", "pc"}, {"spoc", "spo", "soc", "spc", "poc"},};
 
@@ -89,13 +100,25 @@ public class GraphSail<T extends KeyIndexableGraph> extends NotifyingSailBase im
     private final DataStore store = new DataStore();
 
     /**
-     * Create a new RDF store using the provided Blueprints graph.  Default edge indices will be used.
+     * Create a new RDF store using the provided Blueprints graph.  Default edge indices ("p,c,pc") will be used.
      *
      * @param graph the storage layer.  If the provided graph implements TransactionalGraph and is in manual transaction
      *              mode, then this Sail will also be transactional.
      */
     public GraphSail(final T graph) {
         this(graph, "p,c,pc");
+
+        RDFParser p = Rio.createParser(org.openrdf.rio.RDFFormat.NTRIPLES);
+        p.setRDFHandler(new RDFHandler() {
+            public void startRDF() throws RDFHandlerException {}
+            public void endRDF() throws RDFHandlerException {}
+            public void handleNamespace(String s, String s1) throws RDFHandlerException {}
+            public void handleStatement(Statement s) throws RDFHandlerException {
+
+            }
+            public void handleComment(String s) throws RDFHandlerException {}
+        });
+
         //this(graph, "s,p,o,c,sp,so,sc,po,pc,oc,spo,spc,soc,poc,spoc");
     }
 
@@ -106,68 +129,40 @@ public class GraphSail<T extends KeyIndexableGraph> extends NotifyingSailBase im
      * @param graph           the storage layer.  If the provided graph implements TransactionalGraph and is in manual transaction
      *                        mode, then this Sail will also be transactional.
      *                        Any vertices and edges in the graph should have been previously created with GraphSail.
-     * @param indexedPatterns a comma-delimited list of triple patterns for index-based statement matching.  Only p,c are required,
-     *                        while the default patterns are p,c,pc.
+     * @param indexedPatterns a comma-delimited list of triple patterns for index-based statement matching.
+     *                        The "p" and "c" patterns are necessary for efficient answering of certain queries, but are not required.
+     *                        The default list of patterns is "p,c,pc".
+     *                        To use GraphSail with a base Graph which does not support edge indices, provide "" as the argument.
      */
     public GraphSail(final T graph, final String indexedPatterns) {
-        //if (graph instanceof TransactionalGraph)
-        //    ((TransactionalGraph) graph).setTransactionMode(TransactionalGraph.Mode.AUTOMATIC);
-        //printGraphInfo(graph);
-
         store.sail = this;
         store.graph = graph;
 
-        createIndices();
-
         store.manualTransactions = store.graph instanceof TransactionalGraph;
 
-        store.namespaces = store.getReferenceVertex();
-        if (null == store.namespaces) {
-            try {
-                // FIXME: with FAKE_VERTEX_IDS, an extra "namespace" called "value" is present.  Perhaps namespaces
-                // should be given individual nodes, rather than being encapsulated in properties of the namespaces node.
-                store.namespaces = store.addVertex(NAMESPACES_VERTEX_ID);
-            } finally {
-                if (store.manualTransactions) {
-                    ((TransactionalGraph) graph).stopTransaction(TransactionalGraph.Conclusion.SUCCESS);
-                }
-            }
+        if (!store.graph.getIndexedKeys(Vertex.class).contains(VALUE)) {
+            store.graph.createKeyIndex(VALUE, Vertex.class);
         }
 
         store.matchers[0] = new TrivialMatcher(graph);
 
-        parseTripleIndices(indexedPatterns);
+        createTripleIndices(indexedPatterns);
         assignUnassignedTriplePatterns();
-    }
 
-    private void createIndices() {
-        String[] allKeys = {"s", "p", "o", "c",
-                "sp", "so", "sc", "po", "pc", "oc",
-                "spo", "spc", "soc", "poc",
-                "spoc"};
-
-        // TODO: indices for all keys are not required
-        for (String key : allKeys) {
-            if (!store.graph.getIndexedKeys(Edge.class).contains(key)) {
-                store.graph.createKeyIndex(key, Edge.class);
+        store.namespaces = store.getReferenceVertex();
+        if (null == store.namespaces) {
+            try {
+                store.namespaces = store.addVertex(NAMESPACES_VERTEX_ID);
+            } finally {
+                if (store.manualTransactions) {
+                    ((TransactionalGraph) graph).commit();
+                }
             }
-        }
-
-        if (!store.graph.getIndexedKeys(Vertex.class).contains(VALUE)) {
-            store.graph.createKeyIndex(VALUE, Vertex.class);
         }
     }
 
     public T getBaseGraph() {
         return this.store.getGraph();
-    }
-
-    public void setDataDir(final File file) {
-        throw new UnsupportedOperationException();
-    }
-
-    public File getDataDir() {
-        throw new UnsupportedOperationException();
     }
 
     public void initializeInternal() throws SailException {
@@ -206,11 +201,12 @@ public class GraphSail<T extends KeyIndexableGraph> extends NotifyingSailBase im
     }
 
     /**
-     * Enables or disables enforcement of a unique statements policy,
+     * Enables or disables enforcement of a unique statements policy (disabled by default),
      * which ensures that no new statement will be added which is identical
      * (in all of its subject, predicate, object and context) to an existing statement.
      * If enabled, this policy will first remove any existing statements identical to the to-be-added statement,
      * before adding the latter statement.
+     * This comes at the cost of significant querying overhead.
      *
      * @param flag whether this policy should be enforced
      */
@@ -242,7 +238,7 @@ public class GraphSail<T extends KeyIndexableGraph> extends NotifyingSailBase im
 
         public boolean manualTransactions;
         public boolean volatileStatements = false;
-        public boolean uniqueStatements = true;
+        public boolean uniqueStatements = false;
 
         public Vertex namespaces;
 
@@ -343,7 +339,9 @@ public class GraphSail<T extends KeyIndexableGraph> extends NotifyingSailBase im
         }
 
         public String valueToNative(final Value value) {
-            if (value instanceof Resource) {
+            if (null == value) {
+                return NULL_CONTEXT_NATIVE;
+            } else if (value instanceof Resource) {
                 return resourceToNative((Resource) value);
             } else if (value instanceof Literal) {
                 return literalToNative((Literal) value);
@@ -388,7 +386,7 @@ public class GraphSail<T extends KeyIndexableGraph> extends NotifyingSailBase im
         }
     }
 
-    private void parseTripleIndices(final String tripleIndexes) {
+    private void createTripleIndices(final String tripleIndexes) {
         if (null == tripleIndexes) {
             throw new IllegalArgumentException("index list, if supplied, must be non-null");
         }
@@ -396,19 +394,26 @@ public class GraphSail<T extends KeyIndexableGraph> extends NotifyingSailBase im
         Set<String> u = new HashSet<String>();
 
         String[] a = tripleIndexes.split(",");
-        if (0 == a.length) {
-            throw new IllegalArgumentException("index list, if supplied, must be non-empty");
-        }
         for (String s : a) {
-            u.add(s.trim());
+            String pattern = s.trim();
+            if (pattern.length() > 0) {
+                u.add(pattern);
+            }
         }
 
-        // These two patterns are required for efficient operation.
-        u.add("p");
-        u.add("c");
+        if (!u.contains("p")) {
+            LOGGER.warning("no (?s p ?o ?c) index. Certain query operations will be inefficient");
+        }
+        if (!u.contains("c")) {
+            LOGGER.warning("no (?s ?p ?o c) index. Certain query operations will be inefficient");
+        }
 
-        for (String s : u) {
-            createIndexingMatcher(s);
+        for (String key : u) {
+            if (!store.graph.getIndexedKeys(Edge.class).contains(key)) {
+                store.graph.createKeyIndex(key, Edge.class);
+            }
+
+            createIndexingMatcher(key);
         }
     }
 

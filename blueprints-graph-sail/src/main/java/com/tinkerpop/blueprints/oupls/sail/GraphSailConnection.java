@@ -4,9 +4,9 @@ import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.TransactionalGraph;
 import com.tinkerpop.blueprints.Vertex;
-import info.aduna.iteration.CloseableIteration;
 import net.fortytwo.sesametools.CompoundCloseableIteration;
 import net.fortytwo.sesametools.SailConnectionTripleSource;
+import info.aduna.iteration.CloseableIteration;
 import org.openrdf.model.Namespace;
 import org.openrdf.model.Resource;
 import org.openrdf.model.Statement;
@@ -16,9 +16,25 @@ import org.openrdf.model.impl.NamespaceImpl;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.Dataset;
 import org.openrdf.query.QueryEvaluationException;
+import org.openrdf.query.algebra.QueryRoot;
 import org.openrdf.query.algebra.TupleExpr;
+import org.openrdf.query.algebra.Var;
+import org.openrdf.query.algebra.evaluation.EvaluationStrategy;
 import org.openrdf.query.algebra.evaluation.TripleSource;
+import org.openrdf.query.algebra.evaluation.impl.BindingAssigner;
+import org.openrdf.query.algebra.evaluation.impl.CompareOptimizer;
+import org.openrdf.query.algebra.evaluation.impl.ConjunctiveConstraintSplitter;
+import org.openrdf.query.algebra.evaluation.impl.ConstantOptimizer;
+import org.openrdf.query.algebra.evaluation.impl.DisjunctiveConstraintOptimizer;
 import org.openrdf.query.algebra.evaluation.impl.EvaluationStrategyImpl;
+import org.openrdf.query.algebra.evaluation.impl.FilterOptimizer;
+import org.openrdf.query.algebra.evaluation.impl.IterativeEvaluationOptimizer;
+import org.openrdf.query.algebra.evaluation.impl.OrderLimitOptimizer;
+import org.openrdf.query.algebra.evaluation.impl.QueryJoinOptimizer;
+import org.openrdf.query.algebra.evaluation.impl.QueryModelNormalizer;
+import org.openrdf.query.algebra.evaluation.impl.SameTermFilterOptimizer;
+import org.openrdf.query.algebra.helpers.QueryModelVisitorBase;
+import org.openrdf.query.impl.EmptyBindingSet;
 import org.openrdf.sail.SailException;
 import org.openrdf.sail.helpers.DefaultSailChangedEvent;
 import org.openrdf.sail.helpers.NotifyingSailConnectionBase;
@@ -35,8 +51,6 @@ import java.util.LinkedList;
  */
 public class GraphSailConnection extends NotifyingSailConnectionBase implements InferencerConnection {
     private static final Resource[] NULL_CONTEXT_ARRAY = {null};
-
-    private static final String DEFAULT_NAMESPACE_PREFIX_KEY = "default.namespace";
 
     private final GraphSail.DataStore store;
 
@@ -57,7 +71,7 @@ public class GraphSailConnection extends NotifyingSailConnectionBase implements 
 
     public void commitInternal() throws SailException {
         if (store.manualTransactions) {
-            ((TransactionalGraph) store.graph).stopTransaction(TransactionalGraph.Conclusion.SUCCESS);
+            ((TransactionalGraph) store.graph).commit();
         }
 
         if (statementsAdded || statementsRemoved) {
@@ -81,17 +95,55 @@ public class GraphSailConnection extends NotifyingSailConnectionBase implements 
         }
     }
 
-    public CloseableIteration<? extends BindingSet, QueryEvaluationException> evaluateInternal(final TupleExpr query,
+    public CloseableIteration<? extends BindingSet, QueryEvaluationException> evaluateInternal(TupleExpr tupleExpr,
                                                                                                final Dataset dataset,
                                                                                                final BindingSet bindings,
                                                                                                final boolean includeInferred) throws SailException {
         try {
             TripleSource tripleSource = new SailConnectionTripleSource(this, store.valueFactory, includeInferred);
             EvaluationStrategyImpl strategy = new EvaluationStrategyImpl(tripleSource, dataset);
-            return strategy.evaluate(query, bindings);
+            return strategy.evaluate(tupleExpr, bindings);
         } catch (QueryEvaluationException e) {
             throw new SailException(e);
         }
+
+        /*
+        // Clone the tuple expression to allow for more aggressive optimizations
+        tupleExpr = tupleExpr.clone();
+
+        if (!(tupleExpr instanceof QueryRoot)) {
+            // Add a dummy root node to the tuple expressions to allow the
+            // optimizers to modify the actual root node
+            tupleExpr = new QueryRoot(tupleExpr);
+        }
+
+        try {
+            //replaceValues(tupleExpr);
+
+            TripleSource tripleSource = new SailConnectionTripleSource(this, store.valueFactory, includeInferred);
+            EvaluationStrategy strategy = new EvaluationStrategyImpl(tripleSource, dataset);
+
+            new BindingAssigner().optimize(tupleExpr, dataset, bindings);
+            new ConstantOptimizer(strategy).optimize(tupleExpr, dataset, bindings);
+            new CompareOptimizer().optimize(tupleExpr, dataset, bindings);
+            new ConjunctiveConstraintSplitter().optimize(tupleExpr, dataset, bindings);
+            new DisjunctiveConstraintOptimizer().optimize(tupleExpr, dataset, bindings);
+            new SameTermFilterOptimizer().optimize(tupleExpr, dataset, bindings);
+            new QueryModelNormalizer().optimize(tupleExpr, dataset, bindings);
+            // new SubSelectJoinOptimizer().optimize(tupleExpr, dataset, bindings);
+            //new QueryJoinOptimizer(new NativeEvaluationStatistics(nativeStore)).optimize(tupleExpr, dataset, bindings);
+            new IterativeEvaluationOptimizer().optimize(tupleExpr, dataset, bindings);
+            new FilterOptimizer().optimize(tupleExpr, dataset, bindings);
+            new OrderLimitOptimizer().optimize(tupleExpr, dataset, bindings);
+
+            logger.trace("Optimized query model:\n{}", tupleExpr);
+
+            return strategy.evaluate(tupleExpr, EmptyBindingSet.getInstance());
+        }
+        catch (QueryEvaluationException e) {
+            throw new SailException(e);
+        }
+        */
     }
 
     public CloseableIteration<? extends Resource, SailException> getContextIDsInternal() throws SailException {
@@ -119,7 +171,7 @@ public class GraphSailConnection extends NotifyingSailConnectionBase implements 
         }
 
         if (0 == contexts.length) {
-            return createIteration(store.matchers[index].match(subject, predicate, object, null));
+            return createIteration(store.matchers[index].match(subject, predicate, object, null, includeInferred));
         } else {
             Collection<CloseableIteration<Statement, SailException>> iterations = new LinkedList<CloseableIteration<Statement, SailException>>();
 
@@ -128,21 +180,22 @@ public class GraphSailConnection extends NotifyingSailConnectionBase implements 
                 index |= 0x8;
 
                 Matcher m = store.matchers[index];
-                iterations.add(createIteration(m.match(subject, predicate, object, context)));
+                iterations.add(createIteration(m.match(subject, predicate, object, context, includeInferred)));
             }
 
             return new CompoundCloseableIteration<Statement, SailException>(iterations);
         }
     }
 
+    // Note: inferred statements are not counted
     public long sizeInternal(final Resource... contexts) throws SailException {
         if (0 == contexts.length) {
-            return countIterator(store.matchers[0x0].match(null, null, null, null));
+            return countIterator(store.matchers[0x0].match(null, null, null, null, false));
         } else {
             int count = 0;
 
             for (Resource context : contexts) {
-                count += countIterator(store.matchers[0x8].match(null, null, null, context));
+                count += countIterator(store.matchers[0x8].match(null, null, null, context, false));
             }
 
             return count;
@@ -210,12 +263,18 @@ public class GraphSailConnection extends NotifyingSailConnectionBase implements 
             Vertex in = getOrCreateVertex(object);
             Edge edge = store.graph.addEdge(null, out, in, predicate.stringValue());
             if (inferred) {
-                edge.setProperty(GraphSail.INFERRED, inferred);
+                //System.out.println("inferred!");
+                edge.setProperty(GraphSail.INFERRED, true);
             }
 
             for (IndexingMatcher m : (Collection<IndexingMatcher>) store.indexers) {
                 //System.out.println("\t\tindexing with: " + m);
                 m.indexStatement(edge, subject, predicate, object, c);
+            }
+
+            // Hack to encode graph context even if the "c" index is disabled
+            if (null == edge.getProperty(GraphSail.CONTEXT_PROP)) {
+                edge.setProperty(GraphSail.CONTEXT_PROP, store.valueToNative(context));
             }
 
             if (hasConnectionListeners()) {
@@ -280,7 +339,7 @@ public class GraphSailConnection extends NotifyingSailConnectionBase implements 
         }
 
         if (0 == contexts.length) {
-            Iterable<Edge> i = store.matchers[index].match(subject, predicate, object, null);
+            Iterable<Edge> i = store.matchers[index].match(subject, predicate, object, null, inferred);
             for (Edge anI : i) {
                 edgesToRemove.add(anI);
             }
@@ -290,7 +349,7 @@ public class GraphSailConnection extends NotifyingSailConnectionBase implements 
                 index |= 0x8;
 
                 //System.out.println("matcher: " + indexes.matchers[index]);
-                Iterable<Edge> i = store.matchers[index].match(subject, predicate, object, context);
+                Iterable<Edge> i = store.matchers[index].match(subject, predicate, object, context, inferred);
                 for (Edge e : i) {
                     Boolean b = (Boolean) e.getProperty(GraphSail.INFERRED);
                     if ((!inferred && null == b)
@@ -343,11 +402,11 @@ public class GraphSailConnection extends NotifyingSailConnectionBase implements 
         }
 
         if (0 == contexts.length) {
-            deleteEdgesInIterator(inferred, store.matchers[0x0].match(null, null, null, null));
+            deleteEdgesInIterator(inferred, store.matchers[0x0].match(null, null, null, null, inferred));
         } else {
             for (Resource context : contexts) {
                 // Note: order of operands to the "or" is important here
-                deleteEdgesInIterator(inferred, store.matchers[0x8].match(null, null, null, context));
+                deleteEdgesInIterator(inferred, store.matchers[0x8].match(null, null, null, context, inferred));
             }
         }
     }
@@ -587,13 +646,11 @@ public class GraphSailConnection extends NotifyingSailConnectionBase implements 
     }
 
     private class StableStatementIteration implements CloseableIteration<Statement, SailException> {
-        private final Iterable<Edge> iterator;
         private final Iterator<Edge> iter;
         private boolean closed = false;
 
         public StableStatementIteration(final Iterable<Edge> iterator) {
             writeSemaphoreUp();
-            this.iterator = iterator;
             iter = iterator.iterator();
         }
 
@@ -609,7 +666,7 @@ public class GraphSailConnection extends NotifyingSailConnectionBase implements 
             // but such is not the behavior of Aduna's LookAheadIteration, which simply does not provide any more
             // elements if the iteration has already been closed.
             // The CloseableIteration API says nothing about what to expect from a closed iteration,
-            // so the behavior of LookAheadIteration will be taken as normative.
+            // so the behavior of LookAheadIteration will be taken as definitive.
             return !closed && iter.hasNext();
         }
 
@@ -634,18 +691,16 @@ public class GraphSailConnection extends NotifyingSailConnectionBase implements 
     private void fillStatement(final SimpleStatement s,
                                final Edge e) {
         s.subject = (Resource) toSesame(e.getVertex(Direction.OUT));
-        s.predicate = (URI) toSesame(((String) e.getProperty(GraphSail.PREDICATE_PROP)));
+        s.predicate = store.valueFactory.createURI(e.getLabel());
         s.object = toSesame(e.getVertex(Direction.IN));
-        s.context = (Resource) toSesame(((String) e.getProperty(GraphSail.CONTEXT_PROP)));
+        s.context = (Resource) toSesame((String) e.getProperty(GraphSail.CONTEXT_PROP));
     }
 
     private class VolatileStatementIteration implements CloseableIteration<Statement, SailException> {
         private final SimpleStatement s = new SimpleStatement();
-        private final Iterable<Edge> iterator;
         private final Iterator<Edge> iter;
 
         public VolatileStatementIteration(final Iterable<Edge> iterator) {
-            this.iterator = iterator;
             iter = iterator.iterator();
         }
 
@@ -718,11 +773,11 @@ public class GraphSailConnection extends NotifyingSailConnectionBase implements 
     // value conversion ////////////////////////////////////////////////////////
 
     private String toNativePrefixKey(final String prefix) {
-        return 0 == prefix.length() ? DEFAULT_NAMESPACE_PREFIX_KEY : prefix;
+        return 0 == prefix.length() ? GraphSail.DEFAULT_NAMESPACE_PREFIX_KEY : prefix;
     }
 
     private String fromNativePrefixKey(final String prefix) {
-        return prefix.equals(DEFAULT_NAMESPACE_PREFIX_KEY) ? "" : prefix;
+        return prefix.equals(GraphSail.DEFAULT_NAMESPACE_PREFIX_KEY) ? "" : prefix;
     }
 
     private Value toSesame(final Vertex v) {

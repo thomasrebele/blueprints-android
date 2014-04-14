@@ -3,8 +3,11 @@ package com.tinkerpop.blueprints.util.wrappers.event;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Features;
 import com.tinkerpop.blueprints.Graph;
+import com.tinkerpop.blueprints.GraphQuery;
 import com.tinkerpop.blueprints.Vertex;
+import com.tinkerpop.blueprints.util.ElementHelper;
 import com.tinkerpop.blueprints.util.StringFactory;
+import com.tinkerpop.blueprints.util.wrappers.WrappedGraphQuery;
 import com.tinkerpop.blueprints.util.wrappers.WrapperGraph;
 import com.tinkerpop.blueprints.util.wrappers.event.listener.EdgeAddedEvent;
 import com.tinkerpop.blueprints.util.wrappers.event.listener.EdgeRemovedEvent;
@@ -15,15 +18,16 @@ import com.tinkerpop.blueprints.util.wrappers.event.listener.VertexRemovedEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * An EventGraph is a wrapper to existing Graph implementations and provides for graph events to be raised
  * to one or more listeners on changes to the Graph.  Notifications to the listeners occur for the
  * following events: new vertex/edge, vertex/edge property changed, vertex/edge property removed,
  * vertex/edge removed.
- * <p/>
+ *
  * The limiting factor to events being raised is related to out-of-process functions changing graph elements.
- * <p/>
+ *
  * To gather events from EventGraph, simply provide an implementation of the {@link GraphChangedListener} to
  * the EventGraph by utilizing the addListener method.  EventGraph allows the addition of multiple GraphChangedListener
  * implementations.  Each listener will be notified in the order that it was added.
@@ -60,6 +64,10 @@ public class EventGraph<T extends Graph> implements Graph, WrapperGraph<T> {
         return this.graphChangedListeners.iterator();
     }
 
+    public EventTrigger getTrigger() {
+        return this.trigger;
+    }
+
     public void removeListener(final GraphChangedListener listener) {
         this.graphChangedListeners.remove(listener);
     }
@@ -68,16 +76,16 @@ public class EventGraph<T extends Graph> implements Graph, WrapperGraph<T> {
         this.trigger.addEvent(new VertexAddedEvent(vertex));
     }
 
-    protected void onVertexRemoved(final Vertex vertex) {
-        this.trigger.addEvent(new VertexRemovedEvent(vertex));
+    protected void onVertexRemoved(final Vertex vertex, Map<String, Object> props) {
+        this.trigger.addEvent(new VertexRemovedEvent(vertex, props));
     }
 
     protected void onEdgeAdded(Edge edge) {
         this.trigger.addEvent(new EdgeAddedEvent(edge));
     }
 
-    protected void onEdgeRemoved(final Edge edge) {
-        this.trigger.addEvent(new EdgeRemovedEvent(edge));
+    protected void onEdgeRemoved(final Edge edge, Map<String, Object> props) {
+        this.trigger.addEvent(new EdgeRemovedEvent(edge, props));
     }
 
     /**
@@ -89,7 +97,7 @@ public class EventGraph<T extends Graph> implements Graph, WrapperGraph<T> {
             return null;
         } else {
             this.onVertexAdded(vertex);
-            return new EventVertex(vertex, this.graphChangedListeners, this.trigger);
+            return new EventVertex(vertex, this);
         }
     }
 
@@ -98,7 +106,7 @@ public class EventGraph<T extends Graph> implements Graph, WrapperGraph<T> {
         if (vertex == null) {
             return null;
         } else {
-            return new EventVertex(vertex, this.graphChangedListeners, this.trigger);
+            return new EventVertex(vertex, this);
         }
     }
 
@@ -111,16 +119,17 @@ public class EventGraph<T extends Graph> implements Graph, WrapperGraph<T> {
             vertexToRemove = ((EventVertex) vertex).getBaseVertex();
         }
 
+        Map<String, Object> props = ElementHelper.getProperties(vertex);
         this.baseGraph.removeVertex(vertexToRemove);
-        this.onVertexRemoved(vertex);
+        this.onVertexRemoved(vertex, props);
     }
 
     public Iterable<Vertex> getVertices() {
-        return new EventVertexIterable(this.baseGraph.getVertices(), this.graphChangedListeners, this.trigger);
+        return new EventVertexIterable(this.baseGraph.getVertices(), this);
     }
 
     public Iterable<Vertex> getVertices(final String key, final Object value) {
-        return new EventVertexIterable(this.baseGraph.getVertices(key, value), this.graphChangedListeners, this.trigger);
+        return new EventVertexIterable(this.baseGraph.getVertices(key, value), this);
     }
 
     /**
@@ -142,7 +151,7 @@ public class EventGraph<T extends Graph> implements Graph, WrapperGraph<T> {
             return null;
         } else {
             this.onEdgeAdded(edge);
-            return new EventEdge(edge, this.graphChangedListeners, this.trigger);
+            return new EventEdge(edge, this);
         }
     }
 
@@ -151,7 +160,7 @@ public class EventGraph<T extends Graph> implements Graph, WrapperGraph<T> {
         if (edge == null) {
             return null;
         } else {
-            return new EventEdge(edge, this.graphChangedListeners, this.trigger);
+            return new EventEdge(edge, this);
         }
     }
 
@@ -164,16 +173,32 @@ public class EventGraph<T extends Graph> implements Graph, WrapperGraph<T> {
             edgeToRemove = ((EventEdge) edge).getBaseEdge();
         }
 
+        Map<String, Object> props = ElementHelper.getProperties(edge);
         this.baseGraph.removeEdge(edgeToRemove);
-        this.onEdgeRemoved(edge);
+        this.onEdgeRemoved(edge, props);
     }
 
     public Iterable<Edge> getEdges() {
-        return new EventEdgeIterable(this.baseGraph.getEdges(), this.graphChangedListeners, this.trigger);
+        return new EventEdgeIterable(this.baseGraph.getEdges(), this);
     }
 
     public Iterable<Edge> getEdges(final String key, final Object value) {
-        return new EventEdgeIterable(this.baseGraph.getEdges(key, value), this.graphChangedListeners, this.trigger);
+        return new EventEdgeIterable(this.baseGraph.getEdges(key, value), this);
+    }
+
+    public GraphQuery query() {
+        final EventGraph eventGraph = this;
+        return new WrappedGraphQuery(this.baseGraph.query()) {
+            @Override
+            public Iterable<Edge> edges() {
+                return new EventEdgeIterable(this.query.edges(), eventGraph);
+            }
+
+            @Override
+            public Iterable<Vertex> vertices() {
+                return new EventVertexIterable(this.query.vertices(), eventGraph);
+            }
+        };
     }
 
     public void shutdown() {

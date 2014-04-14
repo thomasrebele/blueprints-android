@@ -30,7 +30,15 @@ public class ExceptionFactory {
         return new IllegalArgumentException("A direction of BOTH is not supported");
     }
 
+    public static IllegalStateException vertexWithIdDoesNotExist(final Object id) {
+        return new IllegalStateException("Vertex with id does not exist: " + id);
+    }
+
     // Element related exceptions
+
+    public static IllegalArgumentException propertyKeyIsReserved(final String key) {
+        return new IllegalArgumentException("Property key is reserved for all elements: " + key);
+    }
 
     public static IllegalArgumentException propertyKeyIdIsReserved() {
         return new IllegalArgumentException("Property key is reserved for all elements: id");
@@ -40,8 +48,20 @@ public class ExceptionFactory {
         return new IllegalArgumentException("Property key is reserved for all edges: label");
     }
 
-    public static IllegalArgumentException elementKeyCanNotBeEmpty() {
+    public static IllegalArgumentException propertyKeyCanNotBeEmpty() {
         return new IllegalArgumentException("Property key can not be the empty string");
+    }
+
+    public static IllegalArgumentException propertyKeyCanNotBeNull() {
+        return new IllegalArgumentException("Property key can not be null");
+    }
+
+    public static IllegalArgumentException propertyValueCanNotBeNull() {
+        return new IllegalArgumentException("Property value can not be null");
+    }
+
+    public static IllegalArgumentException edgeLabelCanNotBeNull() {
+        return new IllegalArgumentException("Edge label can not be null");
     }
 
     // IndexableGraph related exceptions
@@ -58,6 +78,10 @@ public class ExceptionFactory {
 
     public static IllegalArgumentException classIsNotIndexable(final Class clazz) {
         return new IllegalArgumentException("Class is not indexable: " + clazz);
+    }
+
+    public static IllegalArgumentException classForElementCannotBeNull() {
+        return new IllegalArgumentException("elementClass argument cannot be null.");
     }
 
     // TransactionalGraph related exceptions

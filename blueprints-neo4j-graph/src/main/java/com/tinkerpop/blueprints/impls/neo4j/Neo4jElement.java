@@ -3,14 +3,14 @@ package com.tinkerpop.blueprints.impls.neo4j;
 
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Element;
+import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.util.ElementHelper;
-import com.tinkerpop.blueprints.util.ExceptionFactory;
-import com.tinkerpop.blueprints.util.StringFactory;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.PropertyContainer;
 import org.neo4j.graphdb.Relationship;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -28,32 +28,26 @@ abstract class Neo4jElement implements Element {
         this.graph = graph;
     }
 
-    public Object getProperty(final String key) {
+    public <T> T getProperty(final String key) {
         if (this.rawElement.hasProperty(key))
-            return this.rawElement.getProperty(key);
+            return (T) tryConvertCollectionToArrayList(this.rawElement.getProperty(key));
         else
             return null;
     }
 
     public void setProperty(final String key, final Object value) {
-        if (key.equals(StringFactory.ID))
-            throw ExceptionFactory.propertyKeyIdIsReserved();
-        if (key.equals(StringFactory.LABEL) && this instanceof Edge)
-            throw ExceptionFactory.propertyKeyLabelIsReservedForEdges();
-        if (key.equals(StringFactory.EMPTY_STRING))
-            throw ExceptionFactory.elementKeyCanNotBeEmpty();
-
+        ElementHelper.validateProperty(this, key, value);
         this.graph.autoStartTransaction();
         // attempts to take a collection and convert it to an array so that Neo4j can consume it
         this.rawElement.setProperty(key, tryConvertCollectionToArray(value));
     }
 
-    public Object removeProperty(final String key) {
+    public <T> T removeProperty(final String key) {
         if (!this.rawElement.hasProperty(key))
             return null;
         else {
             this.graph.autoStartTransaction();
-            return this.rawElement.removeProperty(key);
+            return (T) this.rawElement.removeProperty(key);
         }
     }
 
@@ -81,6 +75,13 @@ abstract class Neo4jElement implements Element {
         }
     }
 
+    public void remove() {
+        if (this instanceof Vertex)
+            this.graph.removeVertex((Vertex) this);
+        else
+            this.graph.removeEdge((Edge) this);
+    }
+
     public boolean equals(final Object object) {
         return ElementHelper.areEqual(this, object);
     }
@@ -104,6 +105,26 @@ abstract class Neo4jElement implements Element {
                 return array;
             } catch (final ArrayStoreException ase) {
                 // this fires off if the collection is not all of the same type
+                return value;
+            }
+        } else {
+            return value;
+        }
+    }
+
+    private Object tryConvertCollectionToArrayList(final Object value) {
+        if (value.getClass().isArray()) {
+            // convert primitive array to an ArrayList.  
+            try {
+                ArrayList<Object> list = new ArrayList<Object>();
+                int arrlength = Array.getLength(value);
+                for (int i = 0; i < arrlength; i++) {
+                    Object object = Array.get(value, i);
+                    list.add(object);
+                }
+                return list;
+            } catch (final Exception e) {
+                // this fires off if the collection is not an array
                 return value;
             }
         } else {

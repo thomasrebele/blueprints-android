@@ -4,7 +4,9 @@ import com.tinkerpop.blueprints.Graph;
 import com.tinkerpop.blueprints.Vertex;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * (c) Matthias Broecheler (me@matthiasb.com)
@@ -13,42 +15,56 @@ import java.util.Map;
 public class StringIDVertexCache implements VertexCache {
 
     private static final int INITIAL_CAPACITY = 1000;
+    private static final int INITIAL_TX_CAPACITY = 100;
 
-    private final Graph graph;
     private final Map<String, Object> map;
+    private final Set<String> mapKeysInCurrentTx;
     private final StringCompression compression;
 
-    public StringIDVertexCache(final Graph graph, final StringCompression compression) {
-        if (graph == null) throw new IllegalArgumentException("Graph expected.");
+    public StringIDVertexCache(final StringCompression compression) {
         if (compression == null) throw new IllegalArgumentException("Compression expected.");
-        this.graph = graph;
         this.compression = compression;
         map = new HashMap<String, Object>(INITIAL_CAPACITY);
+        mapKeysInCurrentTx = new HashSet<String>(INITIAL_TX_CAPACITY);
     }
 
-    public StringIDVertexCache(final Graph graph) {
-        this(graph, StringCompression.NO_COMPRESSION);
+    public StringIDVertexCache() {
+        this(StringCompression.NO_COMPRESSION);
     }
 
     @Override
-    public Object getEntry(Object externalID) {
-        String id = compression.compress((String) externalID);
+    public Object getEntry(Object externalId) {
+        String id = compression.compress(externalId.toString());
         return map.get(id);
     }
 
     @Override
-    public void set(Vertex vertex, Object externalID) {
-        String id = compression.compress((String) externalID);
-        map.put(id, vertex);
+    public void set(Vertex vertex, Object externalId) {
+        setId(vertex,externalId);
+    }
+
+    @Override
+    public void setId(Object vertexId, Object externalId) {
+        String id = compression.compress(externalId.toString());
+        map.put(id, vertexId);
+        mapKeysInCurrentTx.add(id);
+    }
+
+    @Override
+    public boolean contains(Object externalId) {
+        return map.containsKey(compression.compress(externalId.toString()));
     }
 
     @Override
     public void newTransaction() {
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-            if (entry.getValue() instanceof Vertex) {
-                Vertex v = (Vertex) entry.getValue();
-                entry.setValue(v.getId());
+        for (String id : mapKeysInCurrentTx) {
+            Object o = map.get(id);
+            assert null != o;
+            if (o instanceof Vertex) {
+                Vertex v = (Vertex)o;
+                map.put(id, v.getId());
             }
         }
+        mapKeysInCurrentTx.clear();
     }
 }

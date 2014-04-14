@@ -2,28 +2,22 @@ package com.tinkerpop.blueprints.util.wrappers.event;
 
 import com.tinkerpop.blueprints.CloseableIterable;
 import com.tinkerpop.blueprints.Edge;
-import com.tinkerpop.blueprints.util.wrappers.event.listener.GraphChangedListener;
 
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * A sequence of edges that applies the list of listeners into each edge.
  *
  * @author Stephen Mallette
  */
-class EventEdgeIterable implements CloseableIterable<Edge> {
+public class EventEdgeIterable implements CloseableIterable<Edge> {
 
     private final Iterable<Edge> iterable;
-    private final List<GraphChangedListener> graphChangedListeners;
+    private final EventGraph eventGraph;
 
-    private final EventTrigger trigger;
-
-    public EventEdgeIterable(final Iterable<Edge> iterable, final List<GraphChangedListener> graphChangedListeners,
-                             final EventTrigger trigger) {
+    public EventEdgeIterable(final Iterable<Edge> iterable, final EventGraph eventGraph) {
         this.iterable = iterable;
-        this.graphChangedListeners = graphChangedListeners;
-        this.trigger = trigger;
+        this.eventGraph = eventGraph;
     }
 
     public Iterator<Edge> iterator() {
@@ -35,7 +29,7 @@ class EventEdgeIterable implements CloseableIterable<Edge> {
             }
 
             public Edge next() {
-                return new EventEdge(this.itty.next(), graphChangedListeners, trigger);
+                return new EventEdge(this.itty.next(), eventGraph);
             }
 
             public boolean hasNext() {

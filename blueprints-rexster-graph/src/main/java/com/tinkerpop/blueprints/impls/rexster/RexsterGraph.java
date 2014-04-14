@@ -11,14 +11,28 @@ import org.json.JSONObject;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Element;
 import com.tinkerpop.blueprints.Features;
+import com.tinkerpop.blueprints.GraphQuery;
 import com.tinkerpop.blueprints.Index;
 import com.tinkerpop.blueprints.IndexableGraph;
 import com.tinkerpop.blueprints.KeyIndexableGraph;
 import com.tinkerpop.blueprints.MetaGraph;
 import com.tinkerpop.blueprints.Parameter;
 import com.tinkerpop.blueprints.Vertex;
+import com.tinkerpop.blueprints.util.DefaultGraphQuery;
 import com.tinkerpop.blueprints.util.ExceptionFactory;
 import com.tinkerpop.blueprints.util.StringFactory;
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.ConfigurationConverter;
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * A Blueprints implementation of the RESTful API of Rexster (http://rexster.tinkerpop.com).
@@ -39,7 +53,6 @@ public class RexsterGraph implements IndexableGraph, KeyIndexableGraph, MetaGrap
         FEATURES.supportsSelfLoops = true;
         FEATURES.ignoresSuppliedIds = false;
         FEATURES.isPersistent = false;
-        FEATURES.isRDFModel = false;
         FEATURES.supportsVertexIteration = true;
         FEATURES.supportsEdgeIteration = true;
         FEATURES.supportsVertexIndex = true;
@@ -90,6 +103,13 @@ public class RexsterGraph implements IndexableGraph, KeyIndexableGraph, MetaGrap
      */
     public RexsterGraph(final String graphURI, final int bufferSize) {
         this(graphURI, bufferSize, null, null);
+    }
+
+    public RexsterGraph(final Configuration configuration) {
+        this(configuration.getString("blueprints.rexster.url", null),
+             configuration.getInt("blueprints.rexster.buffer-size", DEFAULT_BUFFER_SIZE),
+             configuration.getString("blueprints.rexster.username", null),
+             configuration.getString("blueprints.rexster.password", null));
     }
 
     /**
@@ -177,10 +197,19 @@ public class RexsterGraph implements IndexableGraph, KeyIndexableGraph, MetaGrap
     }
 
     public Edge addEdge(final Object id, final Vertex outVertex, final Vertex inVertex, final String label) {
+        if (label == null)
+            throw ExceptionFactory.edgeLabelCanNotBeNull();
+
+        final Map<String, Object> data = new HashMap<String, Object>();
+        data.put(RexsterTokens._OUTV, outVertex.getId());
+        data.put(RexsterTokens._INV, inVertex.getId());
+        data.put(RexsterTokens._LABEL, label);
+        final JSONObject json = new JSONObject(data);
+
         if (null == id)
-            return new RexsterEdge(RestHelper.postResultObject(this.graphURI + RexsterTokens.SLASH_EDGES + RexsterTokens.QUESTION + RexsterTokens._OUTV + RexsterTokens.EQUALS + RestHelper.encode(outVertex.getId()) + RexsterTokens.AND + RexsterTokens._INV + RexsterTokens.EQUALS + RestHelper.encode(inVertex.getId()) + RexsterTokens.AND + RexsterTokens._LABEL + RexsterTokens.EQUALS + RestHelper.encode(label)), this);
+            return new RexsterEdge(RestHelper.postResultObject(this.graphURI + RexsterTokens.SLASH_EDGES, json), this);
         else
-            return new RexsterEdge(RestHelper.postResultObject(this.graphURI + RexsterTokens.SLASH_EDGES_SLASH + RestHelper.encode(id) + RexsterTokens.QUESTION + RexsterTokens._OUTV + RexsterTokens.EQUALS + RestHelper.encode(outVertex.getId()) + RexsterTokens.AND + RexsterTokens._INV + RexsterTokens.EQUALS + RestHelper.encode(inVertex.getId()) + RexsterTokens.AND + RexsterTokens._LABEL + RexsterTokens.EQUALS + RestHelper.encode(label)), this);
+            return new RexsterEdge(RestHelper.postResultObject(this.graphURI + RexsterTokens.SLASH_EDGES_SLASH + RestHelper.encode(id), json), this);
     }
 
     public void removeEdge(final Edge edge) {
@@ -232,7 +261,11 @@ public class RexsterGraph implements IndexableGraph, KeyIndexableGraph, MetaGrap
     public <T extends Element> Index<T> createIndex(final String indexName, final Class<T> indexClass, final Parameter... indexParameters) {
         final String c = getKeyIndexClass(indexClass);
 
-        JSONObject index = RestHelper.postResultObject(this.graphURI + RexsterTokens.SLASH_INDICES_SLASH + RestHelper.encode(indexName) + RexsterTokens.QUESTION + RexsterTokens.AND + RexsterTokens.CLASS_EQUALS + c);
+        final Map<String, Object> data = new HashMap<String, Object>();
+        data.put(RexsterTokens.CLASS, c);
+        final JSONObject json = new JSONObject(data);
+
+        final JSONObject index = RestHelper.postResultObject(this.graphURI + RexsterTokens.SLASH_INDICES_SLASH + RestHelper.encode(indexName), json);
         if (!index.opt(RexsterTokens.NAME).equals(indexName))
             throw new RuntimeException("Could not create index: " + index.optString(RexsterTokens.MESSAGE));
 
@@ -263,7 +296,7 @@ public class RexsterGraph implements IndexableGraph, KeyIndexableGraph, MetaGrap
         RestHelper.delete(this.graphURI + RexsterTokens.SLASH_KEY_INDICES_SLASH + c + RexsterTokens.SLASH + key);
     }
 
-    public <T extends Element> void createKeyIndex(String key, Class<T> elementClass) {
+    public <T extends Element> void createKeyIndex(String key, Class<T> elementClass, final Parameter... indexParameters) {
         final String c = getKeyIndexClass(elementClass);
         RestHelper.post(this.graphURI + RexsterTokens.SLASH_KEY_INDICES_SLASH + c + RexsterTokens.SLASH + key);
     }
@@ -280,6 +313,34 @@ public class RexsterGraph implements IndexableGraph, KeyIndexableGraph, MetaGrap
         return keys;
     }
 
+    public JSONArray execute(final String gremlinScript) {
+        return execute(gremlinScript, (JSONObject) null);
+    }
+
+    public JSONArray execute(final String gremlinScript, final Map<String, Object> scriptParams) {
+        JSONObject json = null;
+        if (scriptParams != null && scriptParams.size() > 0) {
+            json = new JSONObject(scriptParams);
+        }
+
+        return execute(gremlinScript, json);
+    }
+
+    public JSONArray execute(final String gremlinScript, final String scriptParams) throws JSONException {
+        return execute(gremlinScript, new JSONObject(scriptParams));
+    }
+
+    public JSONArray execute(final String gremlinScript, final JSONObject scriptParams) {
+        final Map<String, Object> scriptArgs = new HashMap<String, Object>();
+        scriptArgs.put("script", gremlinScript);
+
+        if (scriptParams != null) {
+            scriptArgs.put("params", scriptParams);
+        }
+
+        return RestHelper.postResultArray(this.graphURI + RexsterTokens.SLASH_GREMLIN, new JSONObject(scriptArgs));
+    }
+
     private static <T extends Element> String getKeyIndexClass(Class<T> elementClass) {
         String c;
         if (Vertex.class.isAssignableFrom(elementClass))
@@ -287,6 +348,10 @@ public class RexsterGraph implements IndexableGraph, KeyIndexableGraph, MetaGrap
         else
             c = RexsterTokens.EDGE;
         return c;
+    }
+
+    public GraphQuery query() {
+        return new DefaultGraphQuery(this);
     }
 
 }

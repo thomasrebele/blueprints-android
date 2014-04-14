@@ -23,9 +23,11 @@ public class GraphSONTokens {
     public static final String TYPE_MAP = "map";
     public static final String TYPE_BOOLEAN = "boolean";
     public static final String TYPE_LONG = "long";
+    public static final String TYPE_SHORT = "short";
+    public static final String TYPE_BYTE = "byte";
     public static final String TYPE_UNKNOWN = "unknown";
 
     public static final String VERTICES = "vertices";
     public static final String EDGES = "edges";
-    public static final String EMBEDDED_TYPES = "embeddedTypes";
+    public static final String MODE = "mode";
 }

@@ -31,7 +31,7 @@ abstract class ReadOnlyElement implements Element {
         throw new UnsupportedOperationException(ReadOnlyTokens.MUTATE_ERROR_MESSAGE);
     }
 
-    public Object getProperty(final String key) {
+    public <T> T getProperty(final String key) {
         return this.baseElement.getProperty(key);
     }
 
@@ -48,6 +48,10 @@ abstract class ReadOnlyElement implements Element {
 
     public int hashCode() {
         return this.baseElement.hashCode();
+    }
+
+    public void remove() {
+        throw new UnsupportedOperationException(ReadOnlyTokens.MUTATE_ERROR_MESSAGE);
     }
 
     public boolean equals(final Object object) {

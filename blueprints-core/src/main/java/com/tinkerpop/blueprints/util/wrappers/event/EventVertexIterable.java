@@ -2,28 +2,22 @@ package com.tinkerpop.blueprints.util.wrappers.event;
 
 import com.tinkerpop.blueprints.CloseableIterable;
 import com.tinkerpop.blueprints.Vertex;
-import com.tinkerpop.blueprints.util.wrappers.event.listener.GraphChangedListener;
 
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * A sequence of vertices that applies the list of listeners into each vertex.
  *
  * @author Stephen Mallette
  */
-class EventVertexIterable implements CloseableIterable<Vertex> {
+public class EventVertexIterable implements CloseableIterable<Vertex> {
 
     private final Iterable<Vertex> iterable;
-    private final List<GraphChangedListener> graphChangedListeners;
+    private final EventGraph eventGraph;
 
-    private final EventTrigger trigger;
-
-    public EventVertexIterable(final Iterable<Vertex> iterable, final List<GraphChangedListener> graphChangedListeners,
-                               final EventTrigger trigger) {
+    public EventVertexIterable(final Iterable<Vertex> iterable, final EventGraph eventGraph) {
         this.iterable = iterable;
-        this.graphChangedListeners = graphChangedListeners;
-        this.trigger = trigger;
+        this.eventGraph = eventGraph;
     }
 
     public void close() {
@@ -41,7 +35,7 @@ class EventVertexIterable implements CloseableIterable<Vertex> {
             }
 
             public Vertex next() {
-                return new EventVertex(this.itty.next(), graphChangedListeners, trigger);
+                return new EventVertex(this.itty.next(), eventGraph);
             }
 
             public boolean hasNext() {

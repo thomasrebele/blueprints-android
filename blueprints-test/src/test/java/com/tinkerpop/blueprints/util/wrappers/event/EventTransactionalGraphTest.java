@@ -8,7 +8,6 @@ import com.tinkerpop.blueprints.GraphTestSuite;
 import com.tinkerpop.blueprints.IndexTestSuite;
 import com.tinkerpop.blueprints.IndexableGraphTestSuite;
 import com.tinkerpop.blueprints.TestSuite;
-import com.tinkerpop.blueprints.TransactionalGraph;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.VertexTestSuite;
 import com.tinkerpop.blueprints.impls.GraphTest;
@@ -79,6 +78,10 @@ public class EventTransactionalGraphTest extends GraphTest {
     }
 
     public Graph generateGraph() {
+        return generateGraph("");
+    }
+
+    public Graph generateGraph(final String graphDirectoryName) {
         return new EventTransactionalIndexableGraph<TinkerTransactionalGraph>(new TinkerTransactionalGraph());
     }
 
@@ -199,7 +202,7 @@ public class EventTransactionalGraphTest extends GraphTest {
         Vertex vertex = createVertex();
 
         assertEquals(0, graphChangedListener.addVertexEventRecorded());
-        ((EventTransactionalGraph) graph).stopTransaction(TransactionalGraph.Conclusion.SUCCESS);
+        ((EventTransactionalGraph) graph).commit();
 
         assertEquals(1, graphChangedListener.addVertexEventRecorded());
 
@@ -217,7 +220,7 @@ public class EventTransactionalGraphTest extends GraphTest {
         vertex.setProperty("name", "marko");
 
         assertEquals(0, graphChangedListener.vertexPropertyChangedEventRecorded());
-        ((EventTransactionalGraph) graph).stopTransaction(TransactionalGraph.Conclusion.SUCCESS);
+        ((EventTransactionalGraph) graph).commit();
         assertEquals(1, graphChangedListener.vertexPropertyChangedEventRecorded());
 
         graphChangedListener.reset();
@@ -235,7 +238,7 @@ public class EventTransactionalGraphTest extends GraphTest {
         vertex.removeProperty("name");
 
         assertEquals(0, graphChangedListener.vertexPropertyRemovedEventRecorded());
-        ((EventTransactionalGraph) graph).stopTransaction(TransactionalGraph.Conclusion.SUCCESS);
+        ((EventTransactionalGraph) graph).commit();
         assertEquals(1, graphChangedListener.vertexPropertyRemovedEventRecorded());
     }
 
@@ -246,7 +249,7 @@ public class EventTransactionalGraphTest extends GraphTest {
         graph.removeVertex(vertex);
 
         assertEquals(0, graphChangedListener.vertexRemovedEventRecorded());
-        ((EventTransactionalGraph) graph).stopTransaction(TransactionalGraph.Conclusion.SUCCESS);
+        ((EventTransactionalGraph) graph).commit();
         assertEquals(1, graphChangedListener.vertexRemovedEventRecorded());
     }
 
@@ -256,7 +259,7 @@ public class EventTransactionalGraphTest extends GraphTest {
         Edge edge = createEdge();
 
         assertEquals(0, graphChangedListener.addEdgeEventRecorded());
-        ((EventTransactionalGraph) graph).stopTransaction(TransactionalGraph.Conclusion.SUCCESS);
+        ((EventTransactionalGraph) graph).commit();
         assertEquals(1, graphChangedListener.addEdgeEventRecorded());
 
         graphChangedListener.reset();
@@ -275,7 +278,7 @@ public class EventTransactionalGraphTest extends GraphTest {
         edge.setProperty("weight", System.currentTimeMillis());
 
         assertEquals(0, graphChangedListener.edgePropertyChangedEventRecorded());
-        ((EventTransactionalGraph) graph).stopTransaction(TransactionalGraph.Conclusion.SUCCESS);
+        ((EventTransactionalGraph) graph).commit();
         assertEquals(1, graphChangedListener.edgePropertyChangedEventRecorded());
 
         graphChangedListener.reset();
@@ -295,7 +298,7 @@ public class EventTransactionalGraphTest extends GraphTest {
         edge.removeProperty("weight");
 
         assertEquals(0, graphChangedListener.edgePropertyRemovedEventRecorded());
-        ((EventTransactionalGraph) graph).stopTransaction(TransactionalGraph.Conclusion.SUCCESS);
+        ((EventTransactionalGraph) graph).commit();
         assertEquals(1, graphChangedListener.edgePropertyRemovedEventRecorded());
     }
 
@@ -307,7 +310,7 @@ public class EventTransactionalGraphTest extends GraphTest {
         graph.removeEdge(edge);
 
         assertEquals(0, graphChangedListener.edgeRemovedEventRecorded());
-        ((EventTransactionalGraph) graph).stopTransaction(TransactionalGraph.Conclusion.SUCCESS);
+        ((EventTransactionalGraph) graph).commit();
         assertEquals(1, graphChangedListener.edgeRemovedEventRecorded());
     }
 
@@ -327,7 +330,7 @@ public class EventTransactionalGraphTest extends GraphTest {
         assertEquals(0, graphChangedListener.edgePropertyChangedEventRecorded());
         assertEquals(0, graphChangedListener.vertexPropertyChangedEventRecorded());
 
-        ((EventTransactionalGraph) graph).stopTransaction(TransactionalGraph.Conclusion.SUCCESS);
+        ((EventTransactionalGraph) graph).commit();
 
         assertEquals(2, graphChangedListener.addEdgeEventRecorded());
         assertEquals(5, graphChangedListener.addVertexEventRecorded());
@@ -351,7 +354,7 @@ public class EventTransactionalGraphTest extends GraphTest {
         assertEquals(0, graphChangedListener.edgePropertyChangedEventRecorded());
         assertEquals(0, graphChangedListener.vertexPropertyChangedEventRecorded());
 
-        ((EventTransactionalGraph) graph).stopTransaction(TransactionalGraph.Conclusion.FAILURE);
+        ((EventTransactionalGraph) graph).rollback();
 
         assertEquals(0, graphChangedListener.addEdgeEventRecorded());
         assertEquals(0, graphChangedListener.addVertexEventRecorded());
@@ -374,6 +377,7 @@ public class EventTransactionalGraphTest extends GraphTest {
         Edge e1 = graph.addEdge(100, v1, v2, "friend");
         e1.setProperty("eee", "fff");
         e1.setProperty("ggg", "hhh");
+        e1.setProperty("ggg", "hhhh");
         e1.removeProperty("eee");
 
         Edge e2 = graph.addEdge(101, v1, v2, "enemy");
@@ -383,22 +387,23 @@ public class EventTransactionalGraphTest extends GraphTest {
 
         assertEquals(0, graphChangedListener.getOrder().size());
 
-        ((EventTransactionalGraph) graph).stopTransaction(TransactionalGraph.Conclusion.SUCCESS);
+        ((EventTransactionalGraph) graph).commit();
 
         List<String> order = graphChangedListener.getOrder();
         assertEquals("v-added-10", order.get(0));
-        assertEquals("v-property-changed-10-aaa:bbb", order.get(1));
-        assertEquals("v-property-changed-10-ccc:ddd", order.get(2));
+        assertEquals("v-property-changed-10-aaa:null->bbb", order.get(1));
+        assertEquals("v-property-changed-10-ccc:null->ddd", order.get(2));
         assertEquals("v-property-removed-10-aaa:bbb", order.get(3));
         assertEquals("v-added-20", order.get(4));
         assertEquals("v-added-30", order.get(5));
         assertEquals("e-added-100", order.get(6));
-        assertEquals("e-property-changed-100-eee:fff", order.get(7));
-        assertEquals("e-property-changed-100-ggg:hhh", order.get(8));
-        assertEquals("e-property-removed-100-eee:fff", order.get(9));
-        assertEquals("e-added-101", order.get(10));
-        assertEquals("e-removed-101", order.get(11));
-        assertEquals("v-removed-30", order.get(12));
+        assertEquals("e-property-changed-100-eee:null->fff", order.get(7));
+        assertEquals("e-property-changed-100-ggg:null->hhh", order.get(8));
+        assertEquals("e-property-changed-100-ggg:hhh->hhhh", order.get(9));
+        assertEquals("e-property-removed-100-eee:fff", order.get(10));
+        assertEquals("e-added-101", order.get(11));
+        assertEquals("e-removed-101", order.get(12));
+        assertEquals("v-removed-30", order.get(13));
 
     }
 
@@ -410,6 +415,25 @@ public class EventTransactionalGraphTest extends GraphTest {
         return graph.addVertex(null);
     }
 
+
+    public void testMutateInListener() {
+        StubGraphChangedListener listener = new StubGraphChangedListener() {
+
+            @Override
+            public void vertexPropertyChanged(Vertex vertex, String key, Object oldValue, Object setValue) {
+                if (!"setInListener".equals(key)) {
+                    vertex.setProperty("setInListener", 12345);
+                }
+                super.vertexPropertyChanged(vertex, key, oldValue, setValue);
+            }
+        };
+        graph.addListener(listener);
+        Vertex vertex = createVertex();
+        vertex.setProperty("test", 123);
+        graph.commit();
+        assertEquals(12345, vertex.getProperty("setInListener"));
+        assertEquals(2, listener.vertexPropertyChangedEventRecorded());
+    }
 
 }
 

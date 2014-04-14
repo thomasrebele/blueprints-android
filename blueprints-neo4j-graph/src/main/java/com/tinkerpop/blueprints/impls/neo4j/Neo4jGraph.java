@@ -3,6 +3,7 @@ package com.tinkerpop.blueprints.impls.neo4j;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Element;
 import com.tinkerpop.blueprints.Features;
+import com.tinkerpop.blueprints.GraphQuery;
 import com.tinkerpop.blueprints.Index;
 import com.tinkerpop.blueprints.IndexableGraph;
 import com.tinkerpop.blueprints.KeyIndexableGraph;
@@ -10,10 +11,13 @@ import com.tinkerpop.blueprints.MetaGraph;
 import com.tinkerpop.blueprints.Parameter;
 import com.tinkerpop.blueprints.TransactionalGraph;
 import com.tinkerpop.blueprints.Vertex;
+import com.tinkerpop.blueprints.util.DefaultGraphQuery;
 import com.tinkerpop.blueprints.util.ExceptionFactory;
 import com.tinkerpop.blueprints.util.KeyIndexableGraphHelper;
 import com.tinkerpop.blueprints.util.PropertyFilteredIterable;
 import com.tinkerpop.blueprints.util.StringFactory;
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.ConfigurationConverter;
 import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
@@ -26,9 +30,11 @@ import org.neo4j.graphdb.index.AutoIndexer;
 import org.neo4j.graphdb.index.RelationshipIndex;
 import org.neo4j.kernel.EmbeddedGraphDatabase;
 import org.neo4j.kernel.GraphDatabaseAPI;
-import org.neo4j.kernel.HighlyAvailableGraphDatabase;
 import org.neo4j.tooling.GlobalGraphOperations;
 
+import javax.transaction.Status;
+import javax.transaction.SystemException;
+import javax.transaction.TransactionManager;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,6 +43,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A Blueprints implementation of the graph database Neo4j (http://neo4j.org)
@@ -44,6 +52,7 @@ import java.util.Set;
  * @author Marko A. Rodriguez (http://markorodriguez.com)
  */
 public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexableGraph, MetaGraph<GraphDatabaseService> {
+    private static final Logger logger = Logger.getLogger(Neo4jGraph.class.getName());
 
     private GraphDatabaseService rawGraph;
     private static final String INDEXED_KEYS_POSTFIX = ":indexed_keys";
@@ -79,7 +88,6 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
         FEATURES.supportsDuplicateEdges = true;
         FEATURES.supportsSelfLoops = true;
         FEATURES.isPersistent = true;
-        FEATURES.isRDFModel = false;
         FEATURES.isWrapper = false;
         FEATURES.supportsVertexIteration = true;
         FEATURES.supportsEdgeIteration = true;
@@ -106,14 +114,18 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
     }
 
     /**
-     * Neo4j's transactions are not consistent between the graph and the graph indices.
-     * Moreover, global graph operations are not consistent.
-     * For example, if a vertex is removed and then an index is queried in the same transaction, the removed vertex can be returned.
-     * This method allows the developer to turn on/off a Neo4jGraph 'hack' that ensures transactional consistency.
-     * The default behavior for Neo4jGraph is to use Neo4j's native behavior which ensures speed at the expensive of consistency.
-     * Note that this boolean switch is local to the current thread (i.e. a ThreadLocal variable).
+     * Neo4j's transactions are not consistent between the graph and the graph
+     * indices. Moreover, global graph operations are not consistent. For
+     * example, if a vertex is removed and then an index is queried in the same
+     * transaction, the removed vertex can be returned. This method allows the
+     * developer to turn on/off a Neo4jGraph 'hack' that ensures transactional
+     * consistency. The default behavior for Neo4jGraph is to use Neo4j's native
+     * behavior which ensures speed at the expensive of consistency. Note that
+     * this boolean switch is local to the current thread (i.e. a ThreadLocal
+     * variable).
      *
-     * @param checkElementsInTransaction check whether an element is in the transaction between returning it
+     * @param checkElementsInTransaction check whether an element is in the transaction between
+     *                                   returning it
      */
     public void setCheckElementsInTransaction(final boolean checkElementsInTransaction) {
         this.checkElementsInTransaction.set(checkElementsInTransaction);
@@ -121,10 +133,6 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
 
     public Neo4jGraph(final String directory) {
         this(directory, null);
-    }
-
-    public Neo4jGraph(final String directory, final Map<String, String> configuration) {
-        this(directory, configuration, false);
     }
 
     public Neo4jGraph(final GraphDatabaseService rawGraph) {
@@ -138,17 +146,11 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
             this.freshLoad();
     }
 
-    protected Neo4jGraph(final String directory, final Map<String, String> configuration, boolean highAvailabilityMode) {
-        if (highAvailabilityMode && configuration == null) {
-            throw new IllegalArgumentException("Configuration parameters must be supplied when using HA mode.");
-        }
+    public Neo4jGraph(final String directory, final Map<String, String> configuration) {
         boolean fresh = !new File(directory).exists();
         try {
             if (null != configuration)
-                if (highAvailabilityMode)
-                    this.rawGraph = new HighlyAvailableGraphDatabase(directory, configuration);
-                else
-                    this.rawGraph = new EmbeddedGraphDatabase(directory, configuration);
+                this.rawGraph = new EmbeddedGraphDatabase(directory, configuration);
             else
                 this.rawGraph = new EmbeddedGraphDatabase(directory);
 
@@ -164,6 +166,11 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
         }
     }
 
+    public Neo4jGraph(final Configuration configuration) {
+        this(configuration.getString("blueprints.neo4j.directory", null),
+                ConfigurationConverter.getMap(configuration.subset("blueprints.neo4j.conf")));
+    }
+
     private void loadKeyIndices() {
         for (final String key : this.getInternalIndexKeys(Vertex.class)) {
             this.createKeyIndex(key, Vertex.class);
@@ -171,6 +178,7 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
         for (final String key : this.getInternalIndexKeys(Edge.class)) {
             this.createKeyIndex(key, Edge.class);
         }
+        this.commit();
     }
 
     private void freshLoad() {
@@ -178,48 +186,69 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
         try {
             this.autoStartTransaction();
             this.removeVertex(this.getVertex(0));
-            this.stopTransaction(Conclusion.SUCCESS);
+            this.commit();
         } catch (Exception e) {
-            this.stopTransaction(Conclusion.FAILURE);
+            this.rollback();
         }
     }
 
     private <T extends Element> void createInternalIndexKey(final String key, final Class<T> elementClass) {
         final String propertyName = elementClass.getSimpleName() + INDEXED_KEYS_POSTFIX;
-        final PropertyContainer pc = ((GraphDatabaseAPI) this.rawGraph).getKernelData().properties();
-        try {
-            final String[] keys = (String[]) pc.getProperty(propertyName);
-            final Set<String> temp = new HashSet<String>(Arrays.asList(keys));
-            temp.add(key);
-            pc.setProperty(propertyName, temp.toArray(new String[temp.size()]));
-        } catch (Exception e) {
-            // no indexed_keys kernel data property
-            pc.setProperty(propertyName, new String[]{key});
+        if (rawGraph instanceof GraphDatabaseAPI) {
+            final PropertyContainer pc = ((GraphDatabaseAPI) this.rawGraph).getNodeManager().getGraphProperties();
+            try {
+                final String[] keys = (String[]) pc.getProperty(propertyName);
+                final Set<String> temp = new HashSet<String>(Arrays.asList(keys));
+                temp.add(key);
+                pc.setProperty(propertyName, temp.toArray(new String[temp.size()]));
+            } catch (Exception e) {
+                // no indexed_keys kernel data property
+                pc.setProperty(propertyName, new String[]{key});
 
+            }
+        } else {
+            throw new UnsupportedOperationException(
+                    "Unable to create an index on a non-GraphDatabaseAPI graph");
         }
     }
 
     private <T extends Element> void dropInternalIndexKey(final String key, final Class<T> elementClass) {
         final String propertyName = elementClass.getSimpleName() + INDEXED_KEYS_POSTFIX;
-        final PropertyContainer pc = ((GraphDatabaseAPI) this.rawGraph).getKernelData().properties();
-        try {
-            final String[] keys = (String[]) pc.getProperty(propertyName);
-            final Set<String> temp = new HashSet<String>(Arrays.asList(keys));
-            temp.remove(key);
-            pc.setProperty(propertyName, temp.toArray(new String[temp.size()]));
-        } catch (Exception e) {
-            // no indexed_keys kernel data property
+        if (rawGraph instanceof GraphDatabaseAPI) {
+            final PropertyContainer pc = ((GraphDatabaseAPI) this.rawGraph).getNodeManager().getGraphProperties();
+            try {
+                final String[] keys = (String[]) pc.getProperty(propertyName);
+                final Set<String> temp = new HashSet<String>(Arrays.asList(keys));
+                temp.remove(key);
+                pc.setProperty(propertyName, temp.toArray(new String[temp.size()]));
+            } catch (Exception e) {
+                // no indexed_keys kernel data property
+            }
+        } else {
+            logNotGraphDatabaseAPI();
         }
     }
 
     public <T extends Element> Set<String> getInternalIndexKeys(final Class<T> elementClass) {
         final String propertyName = elementClass.getSimpleName() + INDEXED_KEYS_POSTFIX;
-        final PropertyContainer pc = ((GraphDatabaseAPI) this.rawGraph).getKernelData().properties();
-        try {
-            final String[] keys = (String[]) pc.getProperty(propertyName);
-            return new HashSet<String>(Arrays.asList(keys));
-        } catch (Exception e) {
-            return Collections.emptySet();
+        if (rawGraph instanceof GraphDatabaseAPI) {
+            final PropertyContainer pc = ((GraphDatabaseAPI) this.rawGraph).getNodeManager().getGraphProperties();
+            try {
+                final String[] keys = (String[]) pc.getProperty(propertyName);
+                return new HashSet<String>(Arrays.asList(keys));
+            } catch (Exception e) {
+                // no indexed_keys kernel data property
+            }
+        } else {
+            logNotGraphDatabaseAPI();
+        }
+        return Collections.emptySet();
+    }
+
+    private void logNotGraphDatabaseAPI() {
+        if (logger.isLoggable(Level.WARNING)) {
+            logger.log(Level.WARNING, "Indices are not available on non-GraphDatabaseAPI instances" +
+                    " Current graph class is " + rawGraph.getClass().getName());
         }
     }
 
@@ -256,8 +285,9 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
     /**
      * {@inheritDoc}
      * <p/>
-     * Note that this method will force a successful closing of the current thread's transaction.
-     * As such, once the index is dropped, the operation is committed.
+     * Note that this method will force a successful closing of the current
+     * thread's transaction. As such, once the index is dropped, the operation
+     * is committed.
      *
      * @param indexName the name of the index to drop
      */
@@ -274,9 +304,8 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
                 relationshipIndex.delete();
             }
         }
-        this.stopTransaction(Conclusion.SUCCESS);
+        this.commit();
     }
-
 
     public Iterable<Index<? extends Element>> getIndices() {
         final List<Index<? extends Element>> indices = new ArrayList<Index<? extends Element>>();
@@ -290,7 +319,6 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
         }
         return indices;
     }
-
 
     public Vertex addVertex(final Object id) {
         this.autoStartTransaction();
@@ -320,10 +348,12 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
     /**
      * {@inheritDoc}
      * <p/>
-     * The underlying Neo4j graph does not natively support this method within a transaction.
-     * If the graph is not currently in a transaction, then the operation runs efficiently and correctly.
-     * If the graph is currently in a transaction, please use setCheckElementsInTransaction() if it is necessary to ensure proper transactional semantics.
-     * Note that it is costly to check if an element is in the transaction.
+     * The underlying Neo4j graph does not natively support this method within a
+     * transaction. If the graph is not currently in a transaction, then the
+     * operation runs efficiently and correctly. If the graph is currently in a
+     * transaction, please use setCheckElementsInTransaction() if it is
+     * necessary to ensure proper transactional semantics. Note that it is
+     * costly to check if an element is in the transaction.
      *
      * @return all the vertices in the graph
      */
@@ -342,10 +372,12 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
     /**
      * {@inheritDoc}
      * <p/>
-     * The underlying Neo4j graph does not natively support this method within a transaction.
-     * If the graph is not currently in a transaction, then the operation runs efficiently and correctly.
-     * If the graph is currently in a transaction, please use setCheckElementsInTransaction() if it is necessary to ensure proper transactional semantics.
-     * Note that it is costly to check if an element is in the transaction.
+     * The underlying Neo4j graph does not natively support this method within a
+     * transaction. If the graph is not currently in a transaction, then the
+     * operation runs efficiently and correctly. If the graph is currently in a
+     * transaction, please use setCheckElementsInTransaction() if it is
+     * necessary to ensure proper transactional semantics. Note that it is
+     * costly to check if an element is in the transaction.
      *
      * @return all the edges in the graph
      */
@@ -356,12 +388,16 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
     public Iterable<Edge> getEdges(final String key, final Object value) {
         final AutoIndexer indexer = this.rawGraph.index().getRelationshipAutoIndexer();
         if (indexer.isEnabled() && indexer.getAutoIndexedProperties().contains(key))
-            return new Neo4jEdgeIterable(this.rawGraph.index().getRelationshipAutoIndexer().getAutoIndex().get(key, value), this, this.checkElementsInTransaction());
+            return new Neo4jEdgeIterable(this.rawGraph.index().getRelationshipAutoIndexer().getAutoIndex().get(key, value), this,
+                    this.checkElementsInTransaction());
         else
             return new PropertyFilteredIterable<Edge>(key, value, this.getEdges());
     }
 
     public <T extends Element> void dropKeyIndex(final String key, final Class<T> elementClass) {
+        if (elementClass == null)
+            throw ExceptionFactory.classForElementCannotBeNull();
+
         this.autoStartTransaction();
         if (Vertex.class.isAssignableFrom(elementClass)) {
             if (!this.rawGraph.index().getNodeAutoIndexer().isEnabled())
@@ -377,24 +413,31 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
         this.dropInternalIndexKey(key, elementClass);
     }
 
-    public <T extends Element> void createKeyIndex(final String key, final Class<T> elementClass) {
-        this.autoStartTransaction();
+    public <T extends Element> void createKeyIndex(final String key, final Class<T> elementClass, final Parameter... indexParameters) {
+        if (elementClass == null)
+            throw ExceptionFactory.classForElementCannotBeNull();
+
         if (Vertex.class.isAssignableFrom(elementClass)) {
+            this.autoStartTransaction();
             if (!this.rawGraph.index().getNodeAutoIndexer().isEnabled())
                 this.rawGraph.index().getNodeAutoIndexer().setEnabled(true);
 
             this.rawGraph.index().getNodeAutoIndexer().startAutoIndexingProperty(key);
             if (!this.getInternalIndexKeys(Vertex.class).contains(key)) {
+
                 KeyIndexableGraphHelper.reIndexElements(this, this.getVertices(), new HashSet<String>(Arrays.asList(key)));
+                this.autoStartTransaction();
                 this.createInternalIndexKey(key, elementClass);
             }
         } else if (Edge.class.isAssignableFrom(elementClass)) {
+            this.autoStartTransaction();
             if (!this.rawGraph.index().getRelationshipAutoIndexer().isEnabled())
                 this.rawGraph.index().getRelationshipAutoIndexer().setEnabled(true);
 
             this.rawGraph.index().getRelationshipAutoIndexer().startAutoIndexingProperty(key);
             if (!this.getInternalIndexKeys(Edge.class).contains(key)) {
                 KeyIndexableGraphHelper.reIndexElements(this, this.getEdges(), new HashSet<String>(Arrays.asList(key)));
+                this.autoStartTransaction();
                 this.createInternalIndexKey(key, elementClass);
             }
         } else {
@@ -403,6 +446,9 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
     }
 
     public <T extends Element> Set<String> getIndexedKeys(final Class<T> elementClass) {
+        if (elementClass == null)
+            throw ExceptionFactory.classForElementCannotBeNull();
+
         if (Vertex.class.isAssignableFrom(elementClass)) {
             if (!this.rawGraph.index().getNodeAutoIndexer().isEnabled())
                 return Collections.emptySet();
@@ -418,16 +464,28 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
 
     public void removeVertex(final Vertex vertex) {
         this.autoStartTransaction();
-        final Node node = ((Neo4jVertex) vertex).getRawVertex();
-        for (final Relationship relationship : node.getRelationships(org.neo4j.graphdb.Direction.BOTH)) {
-            relationship.delete();
+
+        try {
+            final Node node = ((Neo4jVertex) vertex).getRawVertex();
+            for (final Relationship relationship : node.getRelationships(org.neo4j.graphdb.Direction.BOTH)) {
+                relationship.delete();
+            }
+            node.delete();
+        } catch (NotFoundException nfe) {
+            throw ExceptionFactory.vertexWithIdDoesNotExist(vertex.getId());
+        } catch (IllegalStateException ise) {
+            // wrap the neo4j exception so that the message is consistent in blueprints.
+            throw ExceptionFactory.vertexWithIdDoesNotExist(vertex.getId());
         }
-        node.delete();
     }
 
     public Edge addEdge(final Object id, final Vertex outVertex, final Vertex inVertex, final String label) {
+        if (label == null)
+            throw ExceptionFactory.edgeLabelCanNotBeNull();
+
         this.autoStartTransaction();
-        return new Neo4jEdge(((Neo4jVertex) outVertex).getRawVertex().createRelationshipTo(((Neo4jVertex) inVertex).getRawVertex(), DynamicRelationshipType.withName(label)), this);
+        return new Neo4jEdge(((Neo4jVertex) outVertex).getRawVertex().createRelationshipTo(((Neo4jVertex) inVertex).getRawVertex(),
+                DynamicRelationshipType.withName(label)), this);
     }
 
     public Edge getEdge(final Object id) {
@@ -448,22 +506,46 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
         }
     }
 
-
     public void removeEdge(final Edge edge) {
         this.autoStartTransaction();
         ((Relationship) ((Neo4jEdge) edge).getRawElement()).delete();
     }
 
-    public void stopTransaction(final Conclusion conclusion) {
+    public void stopTransaction(Conclusion conclusion) {
+        if (Conclusion.SUCCESS == conclusion)
+            commit();
+        else
+            rollback();
+    }
+
+    public void commit() {
         if (null == tx.get()) {
             return;
         }
 
         try {
-            if (conclusion.equals(Conclusion.SUCCESS))
-                tx.get().success();
-            else
-                tx.get().failure();
+            tx.get().success();
+        } finally {
+            tx.get().finish();
+            tx.remove();
+        }
+    }
+
+    public void rollback() {
+        if (null == tx.get()) {
+            return;
+        }
+
+        GraphDatabaseAPI graphDatabaseAPI = (GraphDatabaseAPI) getRawGraph();
+        TransactionManager transactionManager = graphDatabaseAPI.getTxManager();
+        try {
+            javax.transaction.Transaction t = transactionManager.getTransaction();
+            if (t == null || t.getStatus() == Status.STATUS_ROLLEDBACK) {
+                return;
+            }
+            tx.get().failure();
+        } catch (SystemException e) {
+            throw new RuntimeException(e);
         } finally {
             tx.get().finish();
             tx.remove();
@@ -472,9 +554,9 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
 
     public void shutdown() {
         try {
-            this.stopTransaction(Conclusion.SUCCESS);
+            this.commit();
         } catch (TransactionFailureException e) {
-            //TODO: inspect why certain transactions fail
+            // TODO: inspect why certain transactions fail
         }
         this.rawGraph.shutdown();
     }
@@ -494,5 +576,9 @@ public class Neo4jGraph implements TransactionalGraph, IndexableGraph, KeyIndexa
 
     public String toString() {
         return StringFactory.graphString(this, this.rawGraph.toString());
+    }
+
+    public GraphQuery query() {
+        return new DefaultGraphQuery(this);
     }
 }

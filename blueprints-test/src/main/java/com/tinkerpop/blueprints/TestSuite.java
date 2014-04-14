@@ -18,28 +18,21 @@ public abstract class TestSuite extends BaseTest {
         this.graphTest = graphTest;
     }
 
-    protected String convertId(final Graph graph, final String id) {
-        if (graph.getFeatures().isRDFModel) {
-            return "blueprints:" + id;
-        } else {
-            return id;
-        }
-    }
-
     protected void vertexCount(final Graph graph, int expectedCount) {
         if (graph.getFeatures().supportsVertexIteration) assertEquals(count(graph.getVertices()), expectedCount);
     }
-    
+
     protected void containsVertices(final Graph graph, final Collection<Vertex> vertices) {
         for (Vertex v : vertices) {
             Vertex vp = graph.getVertex(v.getId());
-            if (vp==null || !vp.getId().equals(v.getId())) fail();
+            if (vp == null || !vp.getId().equals(v.getId()))
+                fail("Graph does not contain vertex: '" + v + "'");
         }
     }
 
     protected void edgeCount(final Graph graph, int expectedCount) {
-        if (graph.getFeatures().supportsEdgeIteration) assertEquals(count(graph.getEdges()),expectedCount);
+        if (graph.getFeatures().supportsEdgeIteration) assertEquals(count(graph.getEdges()), expectedCount);
     }
-    
-    
+
+
 }

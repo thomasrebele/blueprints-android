@@ -3,9 +3,6 @@ package com.tinkerpop.blueprints.util.wrappers.event;
 import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
-import com.tinkerpop.blueprints.util.wrappers.event.listener.GraphChangedListener;
-
-import java.util.List;
 
 /**
  * An edge with a GraphChangedListener attached.  Those listeners are notified when changes occur to
@@ -15,13 +12,12 @@ import java.util.List;
  */
 public class EventEdge extends EventElement implements Edge {
 
-    protected EventEdge(final Edge rawEdge, final List<GraphChangedListener> graphChangedListeners,
-                     final EventTrigger trigger) {
-        super(rawEdge, graphChangedListeners, trigger);
+    public EventEdge(final Edge rawEdge, final EventGraph eventGraph) {
+        super(rawEdge, eventGraph);
     }
 
     public Vertex getVertex(final Direction direction) throws IllegalArgumentException {
-        return new EventVertex(this.getBaseEdge().getVertex(direction), this.graphChangedListeners, this.trigger);
+        return new EventVertex(this.getBaseEdge().getVertex(direction), this.eventGraph);
     }
 
     public String getLabel() {

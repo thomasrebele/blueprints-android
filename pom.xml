@@ -6,9 +6,9 @@
         <artifactId>oss-parent</artifactId>
         <version>7</version>
     </parent>
-    <groupId>com.wu-man</groupId>
-    <artifactId>blueprints-android</artifactId>
-    <version>2.1.0.3-SNAPSHOT</version>
+    <groupId>com.tinkerpop.blueprints</groupId>
+    <artifactId>blueprints</artifactId>
+    <version>2.5.0</version>
     <packaging>pom</packaging>
     <url>http://wuman.github.com/blueprints-android/</url>
     <name>Blueprints-Android: Android Port of A Property Graph Model Interface</name>
@@ -21,6 +21,20 @@
             <artifactId>android</artifactId>
             <version>4.1.1.4</version>
             <scope>provided</scope>
+            <exclusions>
+	            <exclusion>
+	                <groupId>org.json</groupId>
+	                <artifactId>json</artifactId>
+	            </exclusion>
+	            <exclusion>
+	                <groupId>commons-codec</groupId>
+	                <artifactId>commons-codec</artifactId>
+	            </exclusion>
+	            <exclusion>
+	                <groupId>org.apache.httpcomponents</groupId>
+	                <artifactId>httpclient</artifactId>
+	            </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
     <inceptionYear>2010</inceptionYear>
@@ -40,73 +54,57 @@
         <developerConnection>scm:git:git@github.com:wuman/blueprints-android.git</developerConnection>
       <tag>HEAD</tag>
     </scm>
-    <organization>
-        <name>David Wu</name>
-        <url>http://blog.wu-man.com</url>
-    </organization>
     <developers>
         <developer>
-            <name>David Wu</name>
-            <email>david@wu-man.com</email>
-            <id>wuman</id>
-            <url>http://blog.wu-man.com</url>
-            <timezone>+8</timezone>
-            <roles>
-                <role>developer</role>
-            </roles>
-        </developer>
-    </developers>
-    <contributors>
-        <contributor>
             <name>Marko A. Rodriguez</name>
             <email>marko@markorodriguez.com</email>
             <url>http://markorodriguez.com</url>
-        </contributor>
-        <contributor>
+        </developer>
+        <developer>
             <name>Stephen Mallette</name>
             <email>spmva@genoprime.com</email>
             <url>http://stephen.genoprime.com</url>
-        </contributor>
-        <contributor>
+        </developer>
+        <developer>
             <name>Joshua Shinavier</name>
             <email>josh@fortytwo.net</email>
             <url>http://fortytwo.net</url>
-        </contributor>
-        <contributor>
+        </developer>
+        <developer>
             <name>Luca Garulli</name>
             <email>l.garulli@orientechnologies.com</email>
             <url>http://zion-city.blogspot.com</url>
-        </contributor>
-        <contributor>
+        </developer>
+        <developer>
             <name>Darrick Wiebe</name>
             <email>darrick@innatesoftware.com</email>
             <url>http://github.com/pangloss</url>
-        </contributor>
-        <contributor>
+        </developer>
+        <developer>
             <name>Matthias Broecheler</name>
             <email>me@matthiasb.com</email>
             <url>http://matthiasb.com</url>
-        </contributor>
-    </contributors>
+        </developer>
+    </developers>
 
     <modules>
         <module>blueprints-core</module>
         <module>blueprints-test</module>
         <module>blueprints-graph-jung</module>
         <module>blueprints-rexster-graph</module>
-        <module>blueprints-dex-graph</module>
+        <module>blueprints-sparksee-graph</module>
         <module>blueprints-neo4j-graph</module>
-        <module>blueprints-neo4jbatch-graph</module>
-        <module>blueprints-orient-graph</module>
+        <!-- <module>blueprints-neo4j2-graph</module> -->
         <module>blueprints-graph-sail</module>
         <module>blueprints-sail-graph</module>
     </modules>
 
     <properties>
-        <blueprints.version>2.1.0</blueprints.version>
-        <sesame.version>2.7.11</sesame.version>
+        <blueprints.version>2.5.0</blueprints.version>
+        <junit.version>4.11</junit.version>
+        <ripple.version>1.1</ripple.version>
+        <sesame.version>2.7.10</sesame.version>
         <sesametools.version>1.8</sesametools.version>
-        <junit.version>4.5</junit.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <github.global.server>github</github.global.server>
@@ -133,6 +131,23 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.3.1</version>
+                <executions>
+                    <execution>
+                        <id>enforce-dependency-convergence</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <DependencyConvergence />
+                            </rules>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -177,18 +192,6 @@
                         <phase>deploy</phase>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <downloadJavadocs>true</downloadJavadocs>
-                    <additionalProjectnatures>
-                        <projectnature>com.android.ide.eclipse.adt.AndroidNature</projectnature>
-                        <projectnature>org.eclipse.jdt.core.javanature</projectnature>
-                    </additionalProjectnatures>
-                </configuration>
             </plugin>
         </plugins>
         <pluginManagement>

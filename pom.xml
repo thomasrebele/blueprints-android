@@ -6,8 +6,8 @@
         <artifactId>oss-parent</artifactId>
         <version>7</version>
     </parent>
-    <groupId>com.tinkerpop.blueprints</groupId>
-    <artifactId>blueprints</artifactId>
+    <groupId>com.tinkerpop.blueprints.android</groupId>
+    <artifactId>blueprints-android</artifactId>
     <version>2.5.0</version>
     <packaging>pom</packaging>
     <url>http://wuman.github.com/blueprints-android/</url>
@@ -91,7 +91,7 @@
         <module>blueprints-core</module>
         <module>blueprints-test</module>
         <module>blueprints-graph-jung</module>
-        <module>blueprints-rexster-graph</module>
+        <!--<module>blueprints-rexster-graph</module>-->
         <module>blueprints-sparksee-graph</module>
         <module>blueprints-neo4j-graph</module>
         <!-- <module>blueprints-neo4j2-graph</module> -->

@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.tinkerpop.blueprints</groupId>
+        <groupId>com.tinkerpop.blueprints.android</groupId>
         <artifactId>blueprints</artifactId>
         <version>2.5.0</version>
         <relativePath>../pom.xml</relativePath>
@@ -12,7 +12,7 @@
     <description>Blueprints property graph implementation for the Sparksee graph database</description>
     <dependencies>
         <dependency>
-            <groupId>com.wu-man</groupId>
+            <groupId>com.tinkerpop.blueprints.android</groupId>
             <artifactId>blueprints-android-core</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -22,7 +22,7 @@
             <version>5.0.0</version>
         </dependency>
         <dependency>
-            <groupId>com.wu-man</groupId>
+            <groupId>com.tinkerpop.blueprints.android</groupId>
             <artifactId>blueprints-android-test</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>

@@ -7,13 +7,13 @@
         <version>2.5.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>blueprints-android-sail-graph</artifactId>
+    <artifactId>blueprints-sail-graph</artifactId>
     <name>Blueprints-SailGraph</name>
     <description>Blueprints property graph implementation for Sesame RDF Sail</description>
     <dependencies>
         <dependency>
             <groupId>com.tinkerpop.blueprints.android</groupId>
-            <artifactId>blueprints-android-core</artifactId>
+            <artifactId>blueprints-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!-- SESAME SUPPORT -->
@@ -88,7 +88,7 @@
         <!-- TESTING -->
         <dependency>
             <groupId>com.tinkerpop.blueprints.android</groupId>
-            <artifactId>blueprints-android-test</artifactId>
+            <artifactId>blueprints-test</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>

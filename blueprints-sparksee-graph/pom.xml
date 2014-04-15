@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>com.tinkerpop.blueprints.android</groupId>
-            <artifactId>blueprints-android-core</artifactId>
+            <artifactId>blueprints-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -23,7 +23,7 @@
         </dependency>
         <dependency>
             <groupId>com.tinkerpop.blueprints.android</groupId>
-            <artifactId>blueprints-android-test</artifactId>
+            <artifactId>blueprints-test</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>

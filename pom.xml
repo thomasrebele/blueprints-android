@@ -7,7 +7,7 @@
         <version>7</version>
     </parent>
     <groupId>com.tinkerpop.blueprints.android</groupId>
-    <artifactId>blueprints-android</artifactId>
+    <artifactId>blueprints</artifactId>
     <version>2.5.0</version>
     <packaging>pom</packaging>
     <url>http://wuman.github.com/blueprints-android/</url>

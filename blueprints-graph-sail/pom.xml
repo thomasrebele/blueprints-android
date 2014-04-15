@@ -2,18 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.tinkerpop.blueprints</groupId>
+        <groupId>com.tinkerpop.blueprints.android</groupId>
         <artifactId>blueprints</artifactId>
         <version>2.5.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>blueprints-android-graph-sail</artifactId>
+    <artifactId>blueprints-graph-sail</artifactId>
     <name>Blueprints-GraphSail</name>
     <description>Blueprints property graph ouplementation for Sesame RDF Sail</description>
     <dependencies>
         <dependency>
-            <groupId>com.wu-man</groupId>
-            <artifactId>blueprints-android-core</artifactId>
+            <groupId>com.tinkerpop.blueprints.android</groupId>
+            <artifactId>blueprints-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

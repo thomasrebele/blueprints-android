@@ -7,8 +7,8 @@
         <version>2.5.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>com.tinkerpop.blueprints.android</groupId>
-    <artifactId>blueprints-android-core</artifactId>
+    
+    <artifactId>blueprints-core</artifactId>
     <url>http://blueprints.tinkerpop.com</url>
     <name>Blueprints-Core</name>
     <description>Core interfaces and utilities for Blueprints</description>

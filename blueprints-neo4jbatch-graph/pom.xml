@@ -7,13 +7,13 @@
         <version>2.5.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>blueprints-android-neo4jbatch-graph</artifactId>
+    <artifactId>blueprints-neo4jbatch-graph</artifactId>
     <name>Blueprints-Neo4jBatchGraph</name>
     <description>Blueprints property graph implementation for the Neo4j batch inserter</description>
     <dependencies>
         <dependency>
             <groupId>com.tinkerpop.blueprints.android</groupId>
-            <artifactId>blueprints-android-core</artifactId>
+            <artifactId>blueprints-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -25,13 +25,13 @@
         <!-- TESTING -->
         <dependency>
             <groupId>com.tinkerpop.blueprints.android</groupId>
-            <artifactId>blueprints-android-neo4j-graph</artifactId>
+            <artifactId>blueprints-neo4j-graph</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.tinkerpop.blueprints.android</groupId>
-            <artifactId>blueprints-android-test</artifactId>
+            <artifactId>blueprints-test</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>

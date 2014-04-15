@@ -30,7 +30,7 @@ There are two ways to include the library in your projects:
 
         <dependency>
             <groupId>com.wu-man</groupId>
-            <artifactId>blueprints-android-*</artifactId>
+            <artifactId>blueprints-*</artifactId>
             <version>2.1.0.2</version>
         </dependency>
 

@@ -7,14 +7,14 @@
         <version>2.5.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>blueprints-android-graph-jung</artifactId>
+    <artifactId>blueprints-graph-jung</artifactId>
     <name>Blueprints-GraphJung</name>
     <description>Blueprints property graphs outplementation for the JUNG (Java Universal Network/Graph Framework)
     </description>
     <dependencies>
         <dependency>
             <groupId>com.tinkerpop.blueprints.android</groupId>
-            <artifactId>blueprints-android-core</artifactId>
+            <artifactId>blueprints-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -34,7 +34,7 @@
         </dependency>
         <dependency>
             <groupId>com.tinkerpop.blueprints.android</groupId>
-            <artifactId>blueprints-android-test</artifactId>
+            <artifactId>blueprints-test</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>

@@ -17,6 +17,12 @@
             <groupId>org.codehaus.jettison</groupId>
             <artifactId>jettison</artifactId>
             <version>1.3.3</version>
+            <exclusions>
+		    	<exclusion>
+                  <groupId>stax</groupId>
+                  <artifactId>stax-api</artifactId>
+		    	</exclusion>
+		    </exclusions>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
@@ -26,7 +32,7 @@
         <dependency>
             <groupId>colt</groupId>
             <artifactId>colt</artifactId>
-            <version>1.2.0-recompiled</version>
+            <version>1.2.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

@@ -3,6 +3,9 @@ BLUEPRINTS-ANDROID
 
 ![Feature Image](https://github.com/wuman/blueprints-android/raw/master/doc/images/blueprints-android-logo.png)
 
+NOTICE: this readme was not updated
+NOTICE: add colt/colt-1.2.1.jar to maven with mvn install:install-file -Dfile=colt/colt-1.2.1.jar
+
 Blueprints-android is an Android port/fork of 
 [Blueprints](https://github.com/tinkerpop/blueprints/wiki). It replaces the 
 [Jettison](http://jettison.codehaus.org/) and [StAX](http://stax.codehaus.org/) 
